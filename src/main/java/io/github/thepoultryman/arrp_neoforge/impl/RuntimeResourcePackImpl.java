@@ -3,6 +3,13 @@ package io.github.thepoultryman.arrp_neoforge.impl;
 import com.google.gson.JsonObject;
 import io.github.thepoultryman.arrp_neoforge.ARRPForNeoForge;
 import io.github.thepoultryman.arrp_neoforge.api.RuntimeResourcePack;
+import io.github.thepoultryman.arrp_neoforge.json.JLang;
+import io.github.thepoultryman.arrp_neoforge.json.JTag;
+import io.github.thepoultryman.arrp_neoforge.json.animation.JAnimation;
+import io.github.thepoultryman.arrp_neoforge.json.loot.JLootTable;
+import io.github.thepoultryman.arrp_neoforge.json.model.JModel;
+import io.github.thepoultryman.arrp_neoforge.json.recipe.JRecipe;
+import io.github.thepoultryman.arrp_neoforge.json.state.JState;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.AbstractPackResources;
@@ -14,13 +21,17 @@ import net.minecraft.server.packs.resources.IoSupplier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.BiFunction;
+import java.util.function.IntUnaryOperator;
 import java.util.function.Supplier;
 
 public class RuntimeResourcePackImpl implements RuntimeResourcePack {
@@ -142,5 +153,85 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
         if (!this.lock.tryLock()) {
             this.lock.lock();
         }
+    }
+
+    @Override
+    public void addRecoloredImage(ResourceLocation resourceLocation, InputStream inputStream, IntUnaryOperator pixel) {
+
+    }
+
+    @Override
+    public void mergeLang(ResourceLocation resourceLocation, JLang lang) {
+
+    }
+
+    @Override
+    public byte[] addLang(ResourceLocation resourceLocation, JLang lang) {
+        return new byte[0];
+    }
+
+    @Override
+    public byte[] addLootTable(ResourceLocation resourceLocation, JLootTable lootTable) {
+        return new byte[0];
+    }
+
+    @Override
+    public void addLazyResource(PackType packType, ResourceLocation path, BiFunction<RuntimeResourcePack, ResourceLocation, byte[]> data) {
+
+    }
+
+    @Override
+    public byte[] addResource(PackType packType, ResourceLocation path, byte[] data) {
+        return new byte[0];
+    }
+
+    @Override
+    public byte[] addRootResource(String path, byte[] data) {
+        return new byte[0];
+    }
+
+    @Override
+    public byte[] addAsset(ResourceLocation path, byte[] data) {
+        return new byte[0];
+    }
+
+    @Override
+    public byte[] addData(ResourceLocation path, byte[] data) {
+        return new byte[0];
+    }
+
+    @Override
+    public byte[] addModel(ResourceLocation path, JModel model) {
+        return new byte[0];
+    }
+
+    @Override
+    public byte[] addBlockSate(ResourceLocation path, JState state) {
+        return new byte[0];
+    }
+
+    @Override
+    public byte[] addTexture(ResourceLocation path, BufferedImage image) {
+        return new byte[0];
+    }
+
+    @Override
+    public byte[] addAnimation(ResourceLocation path, JAnimation animation) {
+        return new byte[0];
+    }
+
+    @Override
+    public byte[] addTag(ResourceLocation path, JTag tag) {
+        return new byte[0];
+    }
+
+    @Override
+    public byte[] addRecipe(ResourceLocation path, JRecipe recipe) {
+        return new byte[0];
+    }
+
+    @Override
+    public void load(Path path) throws IOException {
+
     }
 }
