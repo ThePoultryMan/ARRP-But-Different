@@ -10,6 +10,8 @@ import io.github.thepoultryman.arrp_neoforge.json.loot.JLootTable;
 import io.github.thepoultryman.arrp_neoforge.json.model.JModel;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JRecipe;
 import io.github.thepoultryman.arrp_neoforge.json.state.JState;
+import io.github.thepoultryman.arrp_neoforge.util.CountingInputStream;
+import io.github.thepoultryman.arrp_neoforge.util.UnsafeByteArrayOutputStream;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.AbstractPackResources;
@@ -21,6 +23,7 @@ import net.minecraft.server.packs.resources.IoSupplier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -156,8 +159,29 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
     }
 
     @Override
-    public void addRecoloredImage(ResourceLocation resourceLocation, InputStream inputStream, IntUnaryOperator pixel) {
+    public void addRecoloredImage(ResourceLocation resourceLocation, InputStream original, IntUnaryOperator pixel) {
+        this.addLazyResource(
+                PackType.CLIENT_RESOURCES,
+                formatResourceLocation(resourceLocation, "textures", "png"),
+                (runtimeResourcePack, resourceLocation1) -> {
+                    try {
+                        CountingInputStream countingInputStream = new CountingInputStream(original);
+                        BufferedImage base = ImageIO.read(original);
+                        BufferedImage recolored = new BufferedImage(base.getWidth(), base.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                        for (int y = 0; y < base.getHeight(); y++) {
+                            for (int x = 0; x < base.getWidth(); x++) {
+                                recolored.setRGB(x, y, pixel.applyAsInt(base.getRGB(x, y)));
+                            }
+                        }
 
+                        UnsafeByteArrayOutputStream arrayOutputStream = new UnsafeByteArrayOutputStream(countingInputStream.bytes());
+                        ImageIO.write(recolored, "png", arrayOutputStream);
+                        return arrayOutputStream.getBytes();
+                    } catch (Throwable e) {
+                        e.printStackTrace();
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 
     @Override
@@ -233,5 +257,9 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
     @Override
     public void load(Path path) throws IOException {
 
+    }
+
+    private static ResourceLocation formatResourceLocation(ResourceLocation resourceLocation, String prefix, String append) {
+        return ResourceLocation.fromNamespaceAndPath(resourceLocation.getNamespace(), prefix + "/" + resourceLocation.getPath() + "." + append);
     }
 }
