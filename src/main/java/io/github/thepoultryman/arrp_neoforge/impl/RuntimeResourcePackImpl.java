@@ -1,5 +1,7 @@
 package io.github.thepoultryman.arrp_neoforge.impl;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import io.github.thepoultryman.arrp_neoforge.ARRPForNeoForge;
 import io.github.thepoultryman.arrp_neoforge.api.RuntimeResourcePack;
@@ -9,7 +11,10 @@ import io.github.thepoultryman.arrp_neoforge.json.animation.JAnimation;
 import io.github.thepoultryman.arrp_neoforge.json.loot.JLootTable;
 import io.github.thepoultryman.arrp_neoforge.json.model.JModel;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JRecipe;
+import io.github.thepoultryman.arrp_neoforge.json.state.JMultipart;
 import io.github.thepoultryman.arrp_neoforge.json.state.JState;
+import io.github.thepoultryman.arrp_neoforge.json.state.JVariant;
+import io.github.thepoultryman.arrp_neoforge.json.state.JWhen;
 import io.github.thepoultryman.arrp_neoforge.util.CountingInputStream;
 import io.github.thepoultryman.arrp_neoforge.util.UnsafeByteArrayOutputStream;
 import net.minecraft.network.chat.Component;
@@ -28,6 +33,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -40,6 +47,14 @@ import java.util.function.Supplier;
 public class RuntimeResourcePackImpl implements RuntimeResourcePack {
     private static final int RESOURCE_PACK_VERSION = 34;
 
+    private static final Gson GSON = new GsonBuilder()
+            .registerTypeAdapter(JMultipart.class, new JMultipart.Serializer())
+            .registerTypeAdapter(JWhen.class, new JWhen.Serializer())
+            .registerTypeAdapter(JState.class, new JState.Serializer())
+            .registerTypeAdapter(JVariant.class, new JVariant.Serializer())
+            .setPrettyPrinting()
+            .disableHtmlEscaping()
+            .create();
     private final Set<String> KEY_WARNINGS = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
     private final ResourceLocation id;
@@ -178,20 +193,20 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
                         ImageIO.write(recolored, "png", arrayOutputStream);
                         return arrayOutputStream.getBytes();
                     } catch (Throwable e) {
-                        e.printStackTrace();
+                        ARRPForNeoForge.LOGGER.error("Error adding recolored image to runtime resource pack", e);
                         throw new RuntimeException(e);
                     }
                 });
     }
 
     @Override
-    public void mergeLang(ResourceLocation resourceLocation, JLang lang) {
-
+    public byte[] addLang(ResourceLocation resourceLocation, JLang lang) {
+        return this.addAsset(formatResourceLocation(resourceLocation, "lang", "json"), serialize(lang.getLang()));
     }
 
     @Override
-    public byte[] addLang(ResourceLocation resourceLocation, JLang lang) {
-        return new byte[0];
+    public void mergeLang(ResourceLocation resourceLocation, JLang lang) {
+
     }
 
     @Override
@@ -257,6 +272,18 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
     @Override
     public void load(Path path) throws IOException {
 
+    }
+
+    private static byte[] serialize(Object object) {
+        UnsafeByteArrayOutputStream byteArrayOutputStream = new UnsafeByteArrayOutputStream();
+        OutputStreamWriter writer = new OutputStreamWriter(byteArrayOutputStream, StandardCharsets.UTF_8);
+        GSON.toJson(object, writer);
+        try {
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return byteArrayOutputStream.getBytes();
     }
 
     private static ResourceLocation formatResourceLocation(ResourceLocation resourceLocation, String prefix, String append) {

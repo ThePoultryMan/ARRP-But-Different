@@ -7,9 +7,13 @@ public class UnsafeByteArrayOutputStream extends OutputStream implements AutoClo
     private byte[] buf;
     private int index;
 
-    public UnsafeByteArrayOutputStream(int size) throws IllegalAccessException {
+    public UnsafeByteArrayOutputStream() {
+        new UnsafeByteArrayOutputStream(128);
+    }
+
+    public UnsafeByteArrayOutputStream(int size) {
         if (size < 0) {
-            throw new IllegalAccessException("Negative initial size: " + size);
+            throw new IllegalArgumentException("Negative initial size: " + size);
         }
         this.buf = new byte[size];
     }
