@@ -54,6 +54,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JState.class, new JState.Serializer())
             .registerTypeAdapter(JVariant.class, new JVariant.Serializer())
             .registerTypeAdapter(JTextures.class, new JTextures.Serializer())
+            .registerTypeAdapter(JAnimation.class, new JAnimation.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
