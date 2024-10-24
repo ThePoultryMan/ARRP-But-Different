@@ -63,7 +63,7 @@ public class JCondition extends BaseCloneable<JCondition> {
         return this;
     }
 
-    public static class Serialize implements JsonSerializer<JCondition> {
+    public static class Serializer implements JsonSerializer<JCondition> {
         @Override
         public JsonElement serialize(JCondition src, Type typeOfSrc, JsonSerializationContext context) {
             return src.parameters;

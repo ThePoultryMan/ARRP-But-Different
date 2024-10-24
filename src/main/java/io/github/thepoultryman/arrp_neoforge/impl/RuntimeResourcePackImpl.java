@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import io.github.thepoultryman.arrp_neoforge.ARRPForNeoForge;
 import io.github.thepoultryman.arrp_neoforge.api.RuntimeResourcePack;
+import io.github.thepoultryman.arrp_neoforge.json.JCondition;
 import io.github.thepoultryman.arrp_neoforge.json.JLang;
 import io.github.thepoultryman.arrp_neoforge.json.JTag;
 import io.github.thepoultryman.arrp_neoforge.json.animation.JAnimation;
@@ -67,6 +68,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JKeys.class, new JKeys.Serializer())
             .registerTypeAdapter(JIngredient.class, new JIngredient.Serializer())
             .registerTypeAdapter(JIngredients.class, new JIngredients.Serializer())
+            .registerTypeAdapter(JCondition.class, new JCondition.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
