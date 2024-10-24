@@ -8,7 +8,9 @@ import io.github.thepoultryman.arrp_neoforge.api.RuntimeResourcePack;
 import io.github.thepoultryman.arrp_neoforge.json.JLang;
 import io.github.thepoultryman.arrp_neoforge.json.JTag;
 import io.github.thepoultryman.arrp_neoforge.json.animation.JAnimation;
+import io.github.thepoultryman.arrp_neoforge.json.loot.JFunction;
 import io.github.thepoultryman.arrp_neoforge.json.loot.JLootTable;
+import io.github.thepoultryman.arrp_neoforge.json.loot.JPool;
 import io.github.thepoultryman.arrp_neoforge.json.model.JModel;
 import io.github.thepoultryman.arrp_neoforge.json.model.JTextures;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JRecipe;
@@ -55,6 +57,8 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JVariant.class, new JVariant.Serializer())
             .registerTypeAdapter(JTextures.class, new JTextures.Serializer())
             .registerTypeAdapter(JAnimation.class, new JAnimation.Serializer())
+            .registerTypeAdapter(JFunction.class, new JFunction.Serializer())
+            .registerTypeAdapter(JPool.class, new JPool.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
