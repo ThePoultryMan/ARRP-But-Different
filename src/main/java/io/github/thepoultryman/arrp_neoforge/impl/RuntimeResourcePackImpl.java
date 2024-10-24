@@ -10,6 +10,7 @@ import io.github.thepoultryman.arrp_neoforge.json.JTag;
 import io.github.thepoultryman.arrp_neoforge.json.animation.JAnimation;
 import io.github.thepoultryman.arrp_neoforge.json.loot.JLootTable;
 import io.github.thepoultryman.arrp_neoforge.json.model.JModel;
+import io.github.thepoultryman.arrp_neoforge.json.model.JTextures;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JRecipe;
 import io.github.thepoultryman.arrp_neoforge.json.state.JMultipart;
 import io.github.thepoultryman.arrp_neoforge.json.state.JState;
@@ -47,11 +48,12 @@ import java.util.function.Supplier;
 public class RuntimeResourcePackImpl implements RuntimeResourcePack {
     private static final int RESOURCE_PACK_VERSION = 34;
 
-    private static final Gson GSON = new GsonBuilder()
+    public static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(JMultipart.class, new JMultipart.Serializer())
             .registerTypeAdapter(JWhen.class, new JWhen.Serializer())
             .registerTypeAdapter(JState.class, new JState.Serializer())
             .registerTypeAdapter(JVariant.class, new JVariant.Serializer())
+            .registerTypeAdapter(JTextures.class, new JTextures.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
