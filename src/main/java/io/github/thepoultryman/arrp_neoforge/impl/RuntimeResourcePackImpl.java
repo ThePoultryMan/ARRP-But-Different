@@ -68,6 +68,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JKeys.class, new JKeys.Serializer())
             .registerTypeAdapter(JIngredient.class, new JIngredient.Serializer())
             .registerTypeAdapter(JIngredients.class, new JIngredients.Serializer())
+            .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
             .registerTypeAdapter(JCondition.class, new JCondition.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
