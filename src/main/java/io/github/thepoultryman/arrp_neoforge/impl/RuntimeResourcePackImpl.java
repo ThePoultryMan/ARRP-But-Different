@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -51,6 +52,9 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.BiFunction;
 import java.util.function.IntUnaryOperator;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class RuntimeResourcePackImpl implements RuntimeResourcePack {
     private static final int RESOURCE_PACK_VERSION = 34;
@@ -81,6 +85,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
     private final Map<ResourceLocation, Supplier<byte[]>> assets = new ConcurrentHashMap<>();
     private final Map<ResourceLocation, Supplier<byte[]>> data = new ConcurrentHashMap<>();
     private final Map<List<String>, Supplier<byte[]>> root = new ConcurrentHashMap<>();
+    private final Map<ResourceLocation, JLang> langMergeable = new ConcurrentHashMap<>();
 
     public RuntimeResourcePackImpl(ResourceLocation resourceLocation) {
         this.id = resourceLocation;
@@ -224,72 +229,137 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
 
     @Override
     public void mergeLang(ResourceLocation resourceLocation, JLang lang) {
-
+        this.langMergeable.compute(resourceLocation, (location, language) -> {
+            if (language == null) {
+                language = new JLang();
+                JLang result = language;
+                this.addLazyResource(
+                        PackType.CLIENT_RESOURCES,
+                        resourceLocation,
+                        (resourcePack, packLocation) -> resourcePack.addLang(resourceLocation, result));
+            }
+            language.getLang().putAll(lang.getLang());
+            return language;
+        });
     }
 
     @Override
     public byte[] addLootTable(ResourceLocation resourceLocation, JLootTable lootTable) {
-        return new byte[0];
+        return this.addData(formatResourceLocation(resourceLocation, "loot_tables", "json"), serialize(lootTable));
     }
 
     @Override
     public void addLazyResource(PackType packType, ResourceLocation path, BiFunction<RuntimeResourcePack, ResourceLocation, byte[]> data) {
-
+        this.getSys(packType).put(path, new Memoized<>(data, path));
     }
 
     @Override
     public byte[] addResource(PackType packType, ResourceLocation path, byte[] data) {
-        return new byte[0];
+        this.getSys(packType).put(path, () -> data);
+        return data;
     }
 
     @Override
     public byte[] addRootResource(String path, byte[] data) {
-        return new byte[0];
+        this.root.put(List.of(path.split("/")), () -> data);
+        return data;
     }
 
     @Override
     public byte[] addAsset(ResourceLocation path, byte[] data) {
-        return new byte[0];
+        return this.addResource(PackType.CLIENT_RESOURCES, path, data);
     }
 
     @Override
     public byte[] addData(ResourceLocation path, byte[] data) {
-        return new byte[0];
+        return this.addResource(PackType.SERVER_DATA, path, data);
     }
 
     @Override
     public byte[] addModel(ResourceLocation path, JModel model) {
-        return new byte[0];
+        return this.addAsset(formatResourceLocation(path, "models", "json"), serialize(model));
     }
 
     @Override
     public byte[] addBlockSate(ResourceLocation path, JState state) {
-        return new byte[0];
+        return this.addAsset(formatResourceLocation(path, "blockstates", "json"), serialize(state));
     }
 
     @Override
     public byte[] addTexture(ResourceLocation path, BufferedImage image) {
-        return new byte[0];
+        UnsafeByteArrayOutputStream byteArrayOutputStream = new UnsafeByteArrayOutputStream();
+        try {
+            ImageIO.write(image, "png", byteArrayOutputStream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return this.addAsset(formatResourceLocation(path, "textures", "png"), byteArrayOutputStream.getBytes());
     }
 
     @Override
     public byte[] addAnimation(ResourceLocation path, JAnimation animation) {
-        return new byte[0];
+        return this.addAsset(formatResourceLocation(path, "textures", "png.mcmeta"), serialize(animation));
     }
 
     @Override
     public byte[] addTag(ResourceLocation path, JTag tag) {
-        return new byte[0];
+        return this.addData(formatResourceLocation(path, "tag", "json"), serialize(tag));
     }
 
     @Override
     public byte[] addRecipe(ResourceLocation path, JRecipe recipe) {
-        return new byte[0];
+        return this.addData(formatResourceLocation(path, "recipes", "json"), serialize(recipe));
     }
 
     @Override
-    public void load(Path path) throws IOException {
+    public void load(Path directory) throws IOException {
+        Stream<Path> stream = Files.walk(directory);
+        for (Path file : (Iterable<Path>) () -> stream.filter(Files::isRegularFile).map(directory::relativize).iterator()) {
+            String string = file.toString();
+            if (string.startsWith("assets")) {
+                String path = string.substring("assets".length() + 1);
+                this.load(path, this.assets, Files.readAllBytes(file));
+            } else if (string.startsWith("data")) {
+                String path = string.substring("data".length() + 1);
+                this.load(path, this.data, Files.readAllBytes(file));
+            } else {
+                byte[] data = Files.readAllBytes(file);
+                this.root.put(List.of(string.split("/")), () -> data);
+            }
+        }
+    }
 
+    @Override
+    public void load(ZipInputStream zipStream) throws IOException {
+        ZipEntry entry;
+        while ((entry = zipStream.getNextEntry()) != null) {
+            String string = entry.toString();
+            if(string.startsWith("assets")) {
+                String path = string.substring("assets".length() + 1);
+                this.load(path, this.assets, this.read(entry, zipStream));
+            } else if(string.startsWith("data")) {
+                String path = string.substring("data".length() + 1);
+                this.load(path, this.data, this.read(entry, zipStream));
+            } else {
+                byte[] data = this.read(entry, zipStream);
+                this.root.put(Arrays.asList(string.split("/")), () -> data);
+            }
+        }
+    }
+
+    private void load(String fullPath, Map<ResourceLocation, Supplier<byte[]>> map, byte[] data) {
+        int separatorIndex = fullPath.indexOf("/");
+        String namespace = fullPath.substring(0, separatorIndex);
+        String path = fullPath.substring(separatorIndex + 1);
+        map.put(ResourceLocation.fromNamespaceAndPath(namespace, path), () -> data);
+    }
+
+    private byte[] read(ZipEntry entry, InputStream inputStream) throws IOException {
+        byte[] data = new byte[Math.toIntExact(entry.getSize())];
+        if (inputStream.read(data) != data.length) {
+            throw new IOException("Zip stream was cut off.");
+        }
+        return data;
     }
 
     private static byte[] serialize(Object object) {
@@ -306,5 +376,24 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
 
     private static ResourceLocation formatResourceLocation(ResourceLocation resourceLocation, String prefix, String append) {
         return ResourceLocation.fromNamespaceAndPath(resourceLocation.getNamespace(), prefix + "/" + resourceLocation.getPath() + "." + append);
+    }
+
+    private class Memoized<T> implements Supplier<byte[]> {
+        private final BiFunction<RuntimeResourcePack, T, byte[]> function;
+        private final T path;
+        private byte[] data;
+
+        public Memoized(BiFunction<RuntimeResourcePack, T, byte[]> function, T path) {
+            this.function = function;
+            this.path = path;
+        }
+
+        @Override
+        public byte[] get() {
+            if (this.data == null) {
+                this.data = this.function.apply(RuntimeResourcePackImpl.this, path);
+            }
+            return this.data;
+        }
     }
 }

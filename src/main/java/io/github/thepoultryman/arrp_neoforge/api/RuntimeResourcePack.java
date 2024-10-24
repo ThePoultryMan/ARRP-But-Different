@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.function.BiFunction;
 import java.util.function.IntUnaryOperator;
+import java.util.zip.ZipInputStream;
 
 public interface RuntimeResourcePack extends PackResources {
     /**
@@ -168,4 +169,6 @@ public interface RuntimeResourcePack extends PackResources {
     byte[] addRecipe(ResourceLocation path, JRecipe recipe);
 
     void load(Path path) throws IOException;
+
+    void load(ZipInputStream zipStream) throws IOException;
 }
