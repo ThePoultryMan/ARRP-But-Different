@@ -10,4 +10,5 @@ plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
 
-rootProject.name = "arrp_neoforge"
+include ":arrp_neoforge"
+project(":arrp_neoforge").projectDir = file("../")
