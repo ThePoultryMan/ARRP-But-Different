@@ -1,19 +1,19 @@
 package io.github.thepoultryman.arrp_neoforge.api.event;
 
-import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.PackResources;
 import net.neoforged.bus.api.Event;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ARRPEvent extends Event {
-    private final List<Pack> packs = new ArrayList<>();
+    private final List<PackResources> packs = new ArrayList<>();
 
-    public void addPack(Pack pack) {
+    public void addPack(PackResources pack) {
         this.packs.add(pack);
     }
 
-    public List<Pack> getPacks() {
+    public List<PackResources> getPacks() {
         return this.packs;
     }
 

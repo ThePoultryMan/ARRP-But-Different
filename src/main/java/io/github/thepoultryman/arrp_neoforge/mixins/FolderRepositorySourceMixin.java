@@ -27,16 +27,16 @@ public class FolderRepositorySourceMixin {
         ARRPEvent.BeforeUserEvent event = new ARRPEvent.BeforeUserEvent();
         ARRPForNeoForge.ARRP_EVENT_BUS.post(event);
 
-        for (Pack pack : event.getPacks()) {
+        for (PackResources pack : event.getPacks()) {
             pOnLoad.accept(Pack.readMetaAndCreate(pack.location(), new Pack.ResourcesSupplier() {
                         @Override
                         public @NotNull PackResources openPrimary(@NotNull PackLocationInfo pLocation) {
-                            return pack.open();
+                            return pack;
                         }
 
                         @Override
                         public @NotNull PackResources openFull(@NotNull PackLocationInfo pLocation, Pack.@NotNull Metadata pMetadata) {
-                            return pack.open();
+                            return pack;
                         }
                     },
                 this.packType,

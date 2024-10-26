@@ -1,5 +1,8 @@
 package io.github.thepoultryman.arrp_neoforge.util;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 
@@ -8,7 +11,7 @@ public class UnsafeByteArrayOutputStream extends OutputStream implements AutoClo
     private int index;
 
     public UnsafeByteArrayOutputStream() {
-        new UnsafeByteArrayOutputStream(128);
+        this(128);
     }
 
     public UnsafeByteArrayOutputStream(int size) {
@@ -34,5 +37,15 @@ public class UnsafeByteArrayOutputStream extends OutputStream implements AutoClo
     public void write(int i) {
         this.ensureCapacity(this.index + 1);
         this.buf[this.index++] = (byte) i;
+    }
+
+    @Override
+    public void write(@NotNull byte[] b, int off, int len) throws IOException {
+        if (off < 0 || off > b.length || len < 0 || off + len - b.length > 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        this.ensureCapacity(this.index + len);;
+        System.arraycopy(b, off, this.buf, this.index, len);
+        this.index += len;
     }
 }

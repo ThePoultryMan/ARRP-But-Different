@@ -183,7 +183,6 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
     @Override
     public void close() {
         ARRPForNeoForge.LOGGER.info("Closing Runtime Resource Pack {}", this.id);
-        this.lock.unlock();
     }
 
     private Map<ResourceLocation, Supplier<byte[]>> getSys(PackType packType) {
