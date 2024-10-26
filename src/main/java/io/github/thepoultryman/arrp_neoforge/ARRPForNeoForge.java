@@ -1,7 +1,7 @@
 package io.github.thepoultryman.arrp_neoforge;
 
 import com.mojang.logging.LogUtils;
-import io.github.thepoultryman.arrp_neoforge.api.event.ARRPNeoForgeEvent;
+import io.github.thepoultryman.arrp_neoforge.api.event.ARRPEvent;
 import net.neoforged.bus.api.BusBuilder;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -14,7 +14,7 @@ public class ARRPForNeoForge {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final IEventBus ARRP_EVENT_BUS = BusBuilder.builder().classChecker(eventClass -> {
-        if (!ARRPNeoForgeEvent.class.isAssignableFrom(eventClass)) {
+        if (eventClass.equals(ARRPEvent.class)) {
             throw new IllegalArgumentException("Only ARRP events are allowed on the ARRP_EVENT_BUS.");
         }
     }).startShutdown().build();
