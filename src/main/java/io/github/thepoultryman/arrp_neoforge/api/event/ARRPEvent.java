@@ -17,9 +17,11 @@ public abstract class ARRPEvent extends Event {
         return this.packs;
     }
 
-    public static class BeforeVanillaEvent extends ARRPEvent {}
-    public static class BetweenVanillaAndModsEvent extends ARRPEvent {}
-    public static class BetweenModsAndUserEvent extends ARRPEvent {}
+    // I can't figure out how to run anything before game launch, so these first
+    // three are not implemented yet.
+//    public static class BeforeVanillaEvent extends ARRPEvent {}
+//    public static class BetweenVanillaAndModsEvent extends ARRPEvent {}
+//    public static class BetweenModsAndUserEvent extends ARRPEvent {}
     public static class BeforeUserEvent extends ARRPEvent {}
     public static class AfterVanillaEvent extends ARRPEvent {}
 }
