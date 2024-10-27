@@ -33,6 +33,12 @@ public class JLang implements Cloneable {
         return this;
     }
 
+    /**
+     * Adds a translation entry, where the full translation key must be specified.
+     * @param entry The full translation key
+     * @param name The translation
+     * @return The current {@link JLang} instance
+     */
     public JLang addEntry(String entry, String name) {
         this.lang.put(entry, name);
         return this;
@@ -291,6 +297,10 @@ public class JLang implements Cloneable {
         return this.addObject("biome", resourceLocation, name);
     }
 
+    /**
+     * @return Returns the language data in a {@link Map}, where the key is the
+     * translation key and the value is the translation.
+     */
     public Map<String, String> getLang() {
         return this.lang;
     }
