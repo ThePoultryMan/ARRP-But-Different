@@ -26,6 +26,12 @@ public class JState {
         state.addAll(parts);
     }
 
+    /**
+     * Adds a variant to the blockstate.
+     * @param variant The variant added to the blockstate
+     * @return The current {@link JState} instance
+     * @throws IllegalStateException If multiparts have already been added to the blockstate.
+     */
     public JState add(JVariant variant) {
         if (!this.multiparts.isEmpty()) {
             throw new IllegalStateException("BlockStates are not allowed to have both multiparts and variants.");
@@ -34,6 +40,13 @@ public class JState {
         return this;
     }
 
+    /**
+     * Adds a multipart to the blockstate.
+     * @param part The multipart added to the blockstate.
+     * @return The current {@link JState} instance
+     * @throws IllegalStateException If variants have already been added to the
+     * blockstate.
+     */
     public JState add(JMultipart part) {
         if (!this.variants.isEmpty()) {
             throw new IllegalStateException("BlockStates are not allowed to have both multiparts and variants.");
@@ -42,6 +55,13 @@ public class JState {
         return this;
     }
 
+    /**
+     * Adds all variants to the blockstate
+     * @param variants The variants added to the blockstate
+     * @return The current {@link JState} instance
+     * @throws IllegalStateException If multiparts have already been added to
+     * the blockstate
+     */
     public JState addAll(JVariant... variants) {
         if (!this.multiparts.isEmpty()) {
             throw new IllegalStateException("BlockStates are not allowed to have both multiparts and variants.");
@@ -50,20 +70,19 @@ public class JState {
         return this;
     }
 
+    /**
+     * Adds all multiparts to the blockstate.
+     * @param parts The parts added to the blockstate
+     * @return The current {@link JState} instance
+     * @throws IllegalStateException If variants have already been added to the
+     * blockstate
+     */
     public JState addAll(JMultipart... parts) {
         if (!this.variants.isEmpty()) {
             throw new IllegalStateException("BlockStates are not allowed to have both multiparts and variants.");
         }
         this.multiparts.addAll(List.of(parts));
         return this;
-    }
-
-    public static JVariant variant() {
-        return new JVariant();
-    }
-
-    public static JVariant variant(JBlockModel model) {
-        return new JVariant().put("", model);
     }
 
     public static JBlockModel model(String model) {
