@@ -312,18 +312,19 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
 
     @Override
     public void load(Path directory) throws IOException {
-        Stream<Path> stream = Files.walk(directory);
-        for (Path file : (Iterable<Path>) () -> stream.filter(Files::isRegularFile).map(directory::relativize).iterator()) {
-            String string = file.toString();
-            if (string.startsWith("assets")) {
-                String path = string.substring("assets".length() + 1);
-                this.load(path, this.assets, Files.readAllBytes(file));
-            } else if (string.startsWith("data")) {
-                String path = string.substring("data".length() + 1);
-                this.load(path, this.data, Files.readAllBytes(file));
-            } else {
-                byte[] data = Files.readAllBytes(file);
-                this.root.put(List.of(string.split("/")), () -> data);
+        try (Stream<Path> stream = Files.walk(directory)) {
+            for (Path file : (Iterable<Path>) () -> stream.filter(Files::isRegularFile).map(directory::relativize).iterator()) {
+                String string = file.toString();
+                if (string.startsWith("assets")) {
+                    String path = string.substring("assets".length() + 1);
+                    this.load(path, this.assets, Files.readAllBytes(file));
+                } else if (string.startsWith("data")) {
+                    String path = string.substring("data".length() + 1);
+                    this.load(path, this.data, Files.readAllBytes(file));
+                } else {
+                    byte[] data = Files.readAllBytes(file);
+                    this.root.put(List.of(string.split("/")), () -> data);
+                }
             }
         }
     }
