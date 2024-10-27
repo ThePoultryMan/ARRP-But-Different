@@ -14,16 +14,16 @@ public class JState {
     private final List<JVariant> variants = new ArrayList<>();
     private final List<JMultipart> multiparts = new ArrayList<>();
 
-    public static JState state(JVariant... variants) {
+    public JState() {}
+
+    public JState(JVariant... variants) {
         JState state = new JState();
         state.addAll(variants);
-        return state;
     }
 
-    public static JState state(JMultipart... parts) {
+    public JState(JMultipart... parts) {
         JState state = new JState();
         state.addAll(parts);
-        return state;
     }
 
     public JState add(JVariant variant) {
