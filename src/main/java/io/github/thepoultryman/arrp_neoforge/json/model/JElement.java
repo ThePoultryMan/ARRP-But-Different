@@ -26,6 +26,11 @@ public class JElement implements Cloneable {
         return this;
     }
 
+    public JElement noShade() {
+        this.shade = false;
+        return this;
+    }
+
     public JElement faces(JFaces faces) {
         this.faces = faces;
         return this;
