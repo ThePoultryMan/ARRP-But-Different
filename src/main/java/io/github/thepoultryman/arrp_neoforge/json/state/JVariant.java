@@ -1,24 +1,17 @@
 package io.github.thepoultryman.arrp_neoforge.json.state;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 import net.minecraft.util.StringRepresentable;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class JVariant implements Cloneable {
-    private final Map<String, List<JBlockModel>> models = new HashMap<>();
+    final List<String> conditions = new ArrayList<>();
+    final List<JBlockModel> models = new ArrayList<>();
 
     public JVariant put(String key, JBlockModel model) {
-        List<JBlockModel> models = this.models.getOrDefault(key, new ArrayList<>());
-        models.add(model);
-        this.models.put(key, models);
+        this.conditions.add(key);
+        this.models.add(model);
         return this;
     }
 
@@ -49,18 +42,6 @@ public class JVariant implements Cloneable {
             return (JVariant) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new InternalError(e);
-        }
-    }
-
-    public static class Serializer implements JsonSerializer<JVariant> {
-        @Override
-        public JsonElement serialize(JVariant src, Type typeOfSrc, JsonSerializationContext context) {
-            JsonObject jsonObject = new JsonObject();
-            src.models.forEach((key, model) -> jsonObject.add(
-                    key,
-                    context.serialize(model.size() == 1 ? model.getFirst() : model))
-            );
-            return jsonObject;
         }
     }
 }

@@ -63,7 +63,6 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JMultipart.class, new JMultipart.Serializer())
             .registerTypeAdapter(JWhen.class, new JWhen.Serializer())
             .registerTypeAdapter(JState.class, new JState.Serializer())
-            .registerTypeAdapter(JVariant.class, new JVariant.Serializer())
             .registerTypeAdapter(JTextures.class, new JTextures.Serializer())
             .registerTypeAdapter(JAnimation.class, new JAnimation.Serializer())
             .registerTypeAdapter(JFunction.class, new JFunction.Serializer())

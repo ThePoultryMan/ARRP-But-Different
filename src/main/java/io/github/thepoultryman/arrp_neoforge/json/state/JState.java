@@ -8,6 +8,7 @@ import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class JState {
     private final List<JVariant> variants = new ArrayList<>();
@@ -97,11 +98,15 @@ public class JState {
         public JsonElement serialize(JState src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject jsonObject = new JsonObject();
             if (!src.variants.isEmpty()) {
-                if (src.variants.size() == 1) {
-                    jsonObject.add("variants", context.serialize(src.variants.getFirst()));
-                } else {
-                    jsonObject.add("variants", context.serialize(src.variants));
-                }
+                JsonObject variants = new JsonObject();
+                src.variants.forEach(variant -> {
+                    variants.add(
+                            variant.conditions.stream().collect(Collectors.joining(",")),
+                            context.serialize(variant.models.size() > 1 ? variant.models : variant.models.getFirst())
+                    );
+                });
+                jsonObject.add("variants", variants);
+
             }
             if (!src.multiparts.isEmpty()) {
                 jsonObject.add("multipart", context.serialize(src.multiparts));
