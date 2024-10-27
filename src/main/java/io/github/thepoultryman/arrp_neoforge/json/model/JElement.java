@@ -9,15 +9,15 @@ public class JElement implements Cloneable {
 
     public JElement from(float x, float y, float z) {
         this.from[0] = x;
-        this.from[1] = x;
-        this.from[2] = x;
+        this.from[1] = y;
+        this.from[2] = z;
         return this;
     }
 
     public JElement to(float x, float y, float z) {
         this.to[0] = x;
-        this.to[1] = x;
-        this.to[2] = x;
+        this.to[1] = y;
+        this.to[2] = z;
         return this;
     }
 
