@@ -6,6 +6,7 @@ import net.neoforged.bus.api.BusBuilder;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import org.slf4j.Logger;
 
 @Mod(ARRPForNeoForge.MODID)
@@ -19,5 +20,7 @@ public class ARRPForNeoForge {
         }
     }).startShutdown().build();
 
-    public ARRPForNeoForge(IEventBus modEventBus, ModContainer modContainer) {}
+    public ARRPForNeoForge(ModContainer modContainer) {
+        modContainer.registerConfig(ModConfig.Type.COMMON, ARRPForNeoForgeConfig.CONFIG);
+    }
 }

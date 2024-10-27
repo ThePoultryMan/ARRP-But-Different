@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import io.github.thepoultryman.arrp_neoforge.ARRPForNeoForge;
+import io.github.thepoultryman.arrp_neoforge.ARRPForNeoForgeConfig;
 import io.github.thepoultryman.arrp_neoforge.api.RuntimeResourcePack;
 import io.github.thepoultryman.arrp_neoforge.json.JCondition;
 import io.github.thepoultryman.arrp_neoforge.json.JLang;
@@ -21,7 +22,6 @@ import io.github.thepoultryman.arrp_neoforge.json.recipe.crafting.JKeys;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.crafting.JPattern;
 import io.github.thepoultryman.arrp_neoforge.json.state.JMultipart;
 import io.github.thepoultryman.arrp_neoforge.json.state.JState;
-import io.github.thepoultryman.arrp_neoforge.json.state.JVariant;
 import io.github.thepoultryman.arrp_neoforge.json.state.JWhen;
 import io.github.thepoultryman.arrp_neoforge.util.CountingInputStream;
 import io.github.thepoultryman.arrp_neoforge.util.UnsafeByteArrayOutputStream;
@@ -38,10 +38,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -182,6 +179,64 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
     @Override
     public void close() {
         ARRPForNeoForge.LOGGER.info("Closing Runtime Resource Pack {}", this.id);
+
+        if (ARRPForNeoForgeConfig.dump) {
+            this.lock();
+            this.dump();
+            this.lock.unlock();
+        }
+    }
+
+    private void write(Path dir, ResourceLocation identifier, byte[] data) {
+        try {
+            String namespace = identifier.getNamespace();
+            String path = identifier.getPath();
+            Path file = dir.resolve(namespace).resolve(path);
+            if(file.toAbsolutePath().startsWith(dir.toAbsolutePath())) {
+                Files.createDirectories(file.getParent());
+                try(OutputStream output = Files.newOutputStream(file)) {
+                    output.write(data);
+                }
+            } else {
+                ARRPForNeoForge.LOGGER.error("RRP contains out-of-directory location! \"{}/{}\"", namespace, path);
+            }
+
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void dump() {
+        ARRPForNeoForge.LOGGER.info("Dumping generated resources for \"{}\"", this.id);
+
+        Path output = Path.of(ARRPForNeoForgeConfig.dumpDirectory);
+        try {
+            for (Map.Entry<List<String>, Supplier<byte[]>> e : this.root.entrySet()) {
+                String pathStr = String.join("/", e.getKey());
+                Path path = output.resolve(pathStr);
+                if (path.toAbsolutePath().startsWith(output.toAbsolutePath())) {
+                    Files.createDirectories(path.getParent());
+                    Files.write(path, e.getValue().get());
+                } else {
+                    ARRPForNeoForge.LOGGER.error("RRP contains out-of-directory path! \"{}\"", pathStr);
+                }
+            }
+
+            Path assets = output.resolve("assets");
+            Files.createDirectories(assets);
+            for (Map.Entry<ResourceLocation, Supplier<byte[]>> entry : this.assets.entrySet()) {
+                this.write(assets, entry.getKey(), entry.getValue().get());
+            }
+
+            Path data = output.resolve("data");
+            Files.createDirectories(data);
+            for (Map.Entry<ResourceLocation, Supplier<byte[]>> entry : this.data.entrySet()) {
+                this.write(data, entry.getKey(), entry.getValue().get());
+            }
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+
+        }
     }
 
     private Map<ResourceLocation, Supplier<byte[]>> getSys(PackType packType) {
