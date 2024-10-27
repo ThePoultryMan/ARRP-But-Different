@@ -13,6 +13,12 @@ public class JMultipart implements Cloneable {
     private final List<JBlockModel> apply = new ArrayList<>();
     private JWhen when;
 
+    public JMultipart() {}
+
+    public JMultipart(JBlockModel... models) {
+        new JMultipart().addAllModels(models);
+    }
+
     public JMultipart when(JWhen when) {
         this.when = when;
         return this;

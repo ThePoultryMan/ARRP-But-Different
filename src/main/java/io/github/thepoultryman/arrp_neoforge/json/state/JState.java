@@ -4,7 +4,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import net.minecraft.resources.ResourceLocation;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -83,26 +82,6 @@ public class JState {
         }
         this.multiparts.addAll(List.of(parts));
         return this;
-    }
-
-    public static JBlockModel model(String model) {
-        return new JBlockModel(model);
-    }
-
-    public static JBlockModel model(ResourceLocation model) {
-        return new JBlockModel(model);
-    }
-
-    public static JMultipart multipart(JBlockModel... models) {
-        return new JMultipart().addAllModels(models);
-    }
-
-    public static JWhen when() {
-        return new JWhen();
-    }
-
-    public static JWhen.StateBuilder whenStateBuilder() {
-        return new JWhen.StateBuilder();
     }
 
     public JState clone() {
