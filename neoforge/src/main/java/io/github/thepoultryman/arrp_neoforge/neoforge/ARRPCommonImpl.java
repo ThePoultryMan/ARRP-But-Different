@@ -1,13 +1,14 @@
 package io.github.thepoultryman.arrp_neoforge.neoforge;
 
+import io.github.thepoultryman.arrp_neoforge.ARRPCommon;
 import io.github.thepoultryman.arrp_neoforge.api.ARRPEvent;
 import net.minecraft.server.packs.PackResources;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ARRPCommonImpl {
     public static void startEventBus() {
+        ARRPCommon.LOGGER.info("Starting event bus");
         ARRPForNeoForge.ARRP_EVENT_BUS.start();
     }
 
@@ -17,11 +18,7 @@ public class ARRPCommonImpl {
             case BeforeUser -> neoForgeEvent = new ARRPNeoForgeEvent.BeforeUserNeoForgeEvent();
             case AfterVanilla -> neoForgeEvent = new ARRPNeoForgeEvent.AfterVanillaNeoForgeEvent();
         }
-        if (neoForgeEvent != null) {
-            ARRPForNeoForge.ARRP_EVENT_BUS.post(neoForgeEvent);
-            return  neoForgeEvent.getPacks();
-        } else {
-            return new ArrayList<>(0);
-        }
+        ARRPForNeoForge.ARRP_EVENT_BUS.post(neoForgeEvent);
+        return neoForgeEvent.getPacks();
     }
 }

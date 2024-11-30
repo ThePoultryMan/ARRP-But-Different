@@ -25,6 +25,7 @@ public class FolderRepositorySourceMixin {
 
     @Inject(at = @At("HEAD"), method = "loadPacks")
     private void arrp_neoforge$loadPacks(Consumer<Pack> pOnLoad, CallbackInfo ci) {
+        ARRPCommon.LOGGER.info("Getting 'BeforeUser' packs");
         List<PackResources> packs = ARRPCommon.sendEvent(ARRPEvent.BeforeUser);
 
         for (PackResources pack : packs) {
