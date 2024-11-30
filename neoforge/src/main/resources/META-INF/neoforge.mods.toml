@@ -1,0 +1,32 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+#issueTrackerURL = ""
+license = "GNU LGPL 3.0"
+
+[[mods]]
+modId = "advanced_runtime_resource_pack_for_neoforge"
+version = "${version}"
+displayName = "Advanced Runtime Resource Pack but it's for NeoForge"
+authors = "ThePoultryMan"
+description = '''
+A mod that allows mods to generate assets/data on the fly, but it's for NeoForge
+'''
+logoFile = "icon.png"
+
+[[dependencies.advanced_runtime_resource_pack_for_neoforge]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.advanced_runtime_resource_pack_for_neoforge]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.3,)"
+ordering = "NONE"
+side = "BOTH"
+
+
+[[mixins]]
+config = "advanced_runtime_resource_pack_for_neoforge.mixins.json"

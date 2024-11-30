@@ -1,1 +1,0 @@
-# Advanced Runtime Resource Pack but it's for NeoForge

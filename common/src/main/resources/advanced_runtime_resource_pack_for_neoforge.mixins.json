@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "io.github.thepoultryman.arrp_neoforge.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "BootstrapMixin",
+    "FolderRepositorySourceMixin"
+  ]
+}
