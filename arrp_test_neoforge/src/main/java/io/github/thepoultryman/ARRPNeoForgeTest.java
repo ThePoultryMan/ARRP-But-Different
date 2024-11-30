@@ -23,7 +23,11 @@ public class ARRPNeoForgeTest {
             pack.addBlockSate(ResourceLocation.withDefaultNamespace("acacia_door"),
                     new JState().add(
                             new JVariant()
-                                    .put("facing", "east", new JBlockModel(ResourceLocation.withDefaultNamespace("block/spruce_door_bottom_left")))
+                                    .condition("facing", "east")
+                                    .condition("half", "lower")
+                                    .condition("hinge", "left")
+                                    .condition("open", "false")
+                                    .model(new JBlockModel(ResourceLocation.withDefaultNamespace("block/spruce_door_bottom_left")))
                     )
             );
             event.addPack(pack);
