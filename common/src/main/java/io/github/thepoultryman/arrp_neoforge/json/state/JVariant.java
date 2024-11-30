@@ -7,33 +7,39 @@ import java.util.List;
 
 public class JVariant implements Cloneable {
     final List<String> conditions = new ArrayList<>();
-    final List<JBlockModel> models = new ArrayList<>();
+    JBlockModel model;
 
     public JVariant put(String key, JBlockModel model) {
         this.conditions.add(key);
-        this.models.add(model);
+        this.model = model;
         return this;
     }
 
-    private <T> JVariant putFormatted(String property, T value, JBlockModel model) {
-        return this.put(property + "=" + value, model);
+    private <T> JVariant putFormatted(String property, T value) {
+        this.conditions.add(property + "=" + value);
+        return this;
     }
 
-    public JVariant put(String property, boolean value, JBlockModel model) {
-        return this.putFormatted(property, value, model);
+    public JVariant condition(String property, boolean value) {
+        return this.putFormatted(property, value);
     }
 
 
-    public JVariant put(String property, int value, JBlockModel model) {
-        return this.putFormatted(property, value, model);
+    public JVariant condition(String property, int value) {
+        return this.putFormatted(property, value);
     }
 
-    public JVariant put(String property, StringRepresentable value, JBlockModel model) {
-        return this.putFormatted(property, value.getSerializedName(), model);
+    public JVariant condition(String property, StringRepresentable value) {
+        return this.putFormatted(property, value.getSerializedName());
     }
 
-    public JVariant put(String property, String value, JBlockModel model) {
-        return this.putFormatted(property, value, model);
+    public JVariant condition(String property, String value) {
+        return this.putFormatted(property, value);
+    }
+
+    public JVariant model(JBlockModel model) {
+        this.model = model;
+        return this;
     }
 
     @Override

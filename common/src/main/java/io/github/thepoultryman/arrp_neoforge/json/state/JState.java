@@ -101,8 +101,8 @@ public class JState {
                 JsonObject variants = new JsonObject();
                 src.variants.forEach(variant -> {
                     variants.add(
-                            variant.conditions.stream().collect(Collectors.joining(",")),
-                            context.serialize(variant.models.size() > 1 ? variant.models : variant.models.getFirst())
+                            String.join(",", variant.conditions),
+                            context.serialize(variant.model)
                     );
                 });
                 jsonObject.add("variants", variants);
