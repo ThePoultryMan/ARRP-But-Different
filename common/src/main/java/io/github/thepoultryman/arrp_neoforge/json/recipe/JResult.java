@@ -1,29 +1,47 @@
 package io.github.thepoultryman.arrp_neoforge.json.recipe;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import io.github.thepoultryman.arrp_neoforge.util.BaseCloneable;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class JResult extends BaseCloneable<JResult> {
-    public final String item;
+    private ResourceLocation id;
+    private int count;
+    // TODO: Add builders for all vanilla components
+    private final Map<String, JsonElement> components = new HashMap<>();
 
-    JResult(String item) {
-        this.item = item;
+    public JResult id(ResourceLocation location) {
+        this.id = location;
+        return this;
     }
 
-    public JResult(Item item) {
-        this.item = BuiltInRegistries.ITEM.getKey(item).toString();
+    public JResult count(int count) {
+        this.count = count;
+        return this;
     }
 
-    public JStackedResult stackedResult(String item, int count) {
-        JStackedResult result = new JStackedResult(item);
-        result.count = count;
-        return result;
+    public JResult component(String name, JsonObject value) {
+        this.components.put(name, value);
+        return this;
     }
 
-    public JStackedResult stackedResult(Item item, int count) {
-        JStackedResult result = new JStackedResult(BuiltInRegistries.ITEM.getKey(item).toString());
-        result.count = count;
-        return result;
+    public JResult component(String name, int value) {
+        this.components.put(name, new JsonPrimitive(value));
+        return this;
+    }
+
+    public JResult component(String name, String value) {
+        this.components.put(name, new JsonPrimitive(value));
+        return this;
+    }
+
+    public JResult removedComponent(String name) {
+        this.components.put("!" + name, new JsonObject());
+        return this;
     }
 }

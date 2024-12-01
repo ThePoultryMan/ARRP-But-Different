@@ -1,24 +1,25 @@
 package io.github.thepoultryman.arrp_neoforge.json.recipe.crafting;
 
-import io.github.thepoultryman.arrp_neoforge.json.recipe.JIngredients;
+import io.github.thepoultryman.arrp_neoforge.json.recipe.JIngredient;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JResult;
-import io.github.thepoultryman.arrp_neoforge.json.recipe.JResultRecipe;
 
-public class JShapelessRecipe extends JResultRecipe {
-    private final JIngredients ingredients;
+import java.util.ArrayList;
+import java.util.List;
 
-    JShapelessRecipe(JResult result, JIngredients ingredients) {
-        super("minecraft:crafting_shapeless", result);
-        this.ingredients = ingredients;
+public class JShapelessRecipe extends JCraftingRecipe<JShapelessRecipe> {
+    private final List<JIngredient> ingredients = new ArrayList<>();
+
+    public JShapelessRecipe() {
+        super("minecraft:crafting_shapeless");
     }
 
-    @Override
-    public JShapelessRecipe group(final String group) {
-        return (JShapelessRecipe) super.group(group);
+    public JShapelessRecipe ingredient(JIngredient ingredient) {
+        this.ingredients.add(ingredient);
+        return this;
     }
 
-    @Override
-    public JShapelessRecipe clone() {
-        return (JShapelessRecipe) super.clone();
+    public JShapelessRecipe ingredients(JIngredient... ingredients) {
+        this.ingredients.addAll(List.of(ingredients));
+        return this;
     }
 }

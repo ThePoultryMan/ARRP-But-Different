@@ -16,10 +16,7 @@ import io.github.thepoultryman.arrp_neoforge.json.loot.JPool;
 import io.github.thepoultryman.arrp_neoforge.json.model.JModel;
 import io.github.thepoultryman.arrp_neoforge.json.model.JTextures;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JIngredient;
-import io.github.thepoultryman.arrp_neoforge.json.recipe.JIngredients;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JRecipe;
-import io.github.thepoultryman.arrp_neoforge.json.recipe.crafting.JKeys;
-import io.github.thepoultryman.arrp_neoforge.json.recipe.crafting.JPattern;
 import io.github.thepoultryman.arrp_neoforge.json.state.JMultipart;
 import io.github.thepoultryman.arrp_neoforge.json.state.JState;
 import io.github.thepoultryman.arrp_neoforge.json.state.JWhen;
@@ -64,10 +61,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JAnimation.class, new JAnimation.Serializer())
             .registerTypeAdapter(JFunction.class, new JFunction.Serializer())
             .registerTypeAdapter(JPool.class, new JPool.Serializer())
-            .registerTypeAdapter(JPattern.class, new JPattern.Serializer())
-            .registerTypeAdapter(JKeys.class, new JKeys.Serializer())
             .registerTypeAdapter(JIngredient.class, new JIngredient.Serializer())
-            .registerTypeAdapter(JIngredients.class, new JIngredients.Serializer())
             .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
             .registerTypeAdapter(JCondition.class, new JCondition.Serializer())
             .setPrettyPrinting()

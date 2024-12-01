@@ -1,25 +1,28 @@
 package io.github.thepoultryman.arrp_neoforge.json.recipe.crafting;
 
-import io.github.thepoultryman.arrp_neoforge.json.recipe.JResult;
-import io.github.thepoultryman.arrp_neoforge.json.recipe.JResultRecipe;
+import io.github.thepoultryman.arrp_neoforge.json.recipe.JIngredient;
 
-public class JShapedRecipe extends JResultRecipe {
-    private final JPattern pattern;
-    private final JKeys keys;
+import java.util.HashMap;
+import java.util.Map;
 
-    public JShapedRecipe(JResult result, JPattern pattern, JKeys keys) {
-        super("minecraft:crafting_shaped", result);
-        this.pattern = pattern;
-        this.keys = keys;
+public class JShapedRecipe extends JCraftingRecipe<JShapedRecipe> {
+    private final String[] pattern = new String[3];
+    private final Map<String, JIngredient> key = new HashMap<>();
+
+    public JShapedRecipe() {
+        super("minecraft:crafting_shaped");
     }
 
-    @Override
-    public JShapedRecipe group(final String group) {
-        return (JShapedRecipe) super.group(group);
+    public JShapedRecipe row(int index, String row) {
+        if (index > 2) {
+            throw new IllegalStateException("There are only three rows in the crafting grid, therefore the highest index is 2.");
+        }
+        this.pattern[index] = row;
+        return this;
     }
 
-    @Override
-    public JShapedRecipe clone() {
-        return (JShapedRecipe) super.clone();
+    public JShapedRecipe key(String key, JIngredient ingredient) {
+        this.key.put(key, ingredient);
+        return this;
     }
 }
