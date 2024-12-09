@@ -1,12 +1,13 @@
 package io.github.thepoultryman;
 
-import com.google.gson.JsonObject;
 import io.github.thepoultryman.arrp_neoforge.api.RuntimeResourcePack;
 import io.github.thepoultryman.arrp_neoforge.json.JLang;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JIngredient;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JResult;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.crafting.JShapedRecipe;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.crafting.JShapelessRecipe;
+import io.github.thepoultryman.arrp_neoforge.json.recipe.smelting.JSmeltingRecipe;
+import io.github.thepoultryman.arrp_neoforge.json.recipe.smelting.SmeltingTypes;
 import io.github.thepoultryman.arrp_neoforge.json.state.JBlockModel;
 import io.github.thepoultryman.arrp_neoforge.json.state.JState;
 import io.github.thepoultryman.arrp_neoforge.json.state.JVariant;
@@ -14,8 +15,6 @@ import io.github.thepoultryman.arrp_neoforge.neoforge.ARRPForNeoForge;
 import io.github.thepoultryman.arrp_neoforge.neoforge.ARRPNeoForgeEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.common.Mod;
-
-import java.util.Arrays;
 
 @Mod(ARRPNeoForgeTest.MOD_ID)
 public class ARRPNeoForgeTest {
@@ -67,6 +66,49 @@ public class ARRPNeoForgeTest {
                                             .id(ResourceLocation.withDefaultNamespace("golden_sword"))
                                             .component("minecraft:damage", 3)
                                             .component("minecraft:rarity", "rare")
+                            )
+            );
+            pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_furnace"),
+                    new JSmeltingRecipe(SmeltingTypes.SMELTING)
+                            .cookingTime(100)
+                            .experience(50)
+                            .ingredient(
+                                    new JIngredient().entry("minecraft:wheat")
+                            )
+                            .result(
+                                    new JResult().id(ResourceLocation.withDefaultNamespace("bread"))
+                            )
+            );
+            pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_blast"),
+                    new JSmeltingRecipe(SmeltingTypes.BLASTING)
+                            .cookingTime(80)
+                            .experience(500)
+                            .ingredient(
+                                    new JIngredient().entry("minecraft:wheat")
+                            )
+                            .result(
+                                    new JResult().id(ResourceLocation.withDefaultNamespace("bread"))
+                            )
+            );
+            pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_smoker"),
+                    new JSmeltingRecipe(SmeltingTypes.SMOKING)
+                            .cookingTime(50)
+                            .experience(5000)
+                            .ingredient(
+                                    new JIngredient().entry("minecraft:wheat")
+                            )
+                            .result(
+                                    new JResult().id(ResourceLocation.withDefaultNamespace("bread"))
+                            )
+            );
+            pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_campfire"),
+                    new JSmeltingRecipe(SmeltingTypes.CAMPFIRE_COOKING)
+                            .cookingTime(10)
+                            .ingredient(
+                                    new JIngredient().entry("minecraft:wheat")
+                            )
+                            .result(
+                                    new JResult().id(ResourceLocation.withDefaultNamespace("bread"))
                             )
             );
             event.addPack(pack);
