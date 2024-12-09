@@ -15,8 +15,8 @@ import io.github.thepoultryman.arrp_neoforge.json.loot.JLootTable;
 import io.github.thepoultryman.arrp_neoforge.json.loot.JPool;
 import io.github.thepoultryman.arrp_neoforge.json.model.JModel;
 import io.github.thepoultryman.arrp_neoforge.json.model.JTextures;
+import io.github.thepoultryman.arrp_neoforge.json.recipe.AbstractJRecipe;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JIngredient;
-import io.github.thepoultryman.arrp_neoforge.json.recipe.JRecipe;
 import io.github.thepoultryman.arrp_neoforge.json.state.JMultipart;
 import io.github.thepoultryman.arrp_neoforge.json.state.JState;
 import io.github.thepoultryman.arrp_neoforge.json.state.JWhen;
@@ -354,7 +354,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
     }
 
     @Override
-    public byte[] addRecipe(ResourceLocation path, JRecipe recipe) {
+    public byte[] addRecipe(ResourceLocation path, AbstractJRecipe recipe) {
         return this.addData(formatResourceLocation(path, "recipes", "json"), serialize(recipe));
     }
 

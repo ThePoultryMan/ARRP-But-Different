@@ -5,7 +5,7 @@ import io.github.thepoultryman.arrp_neoforge.json.recipe.JIngredient;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JShapedRecipe extends JCraftingRecipe<JShapedRecipe> {
+public class JShapedRecipe extends AbstractJCraftingRecipe<JShapedRecipe> {
     private final String[] pattern = new String[3];
     private final Map<String, JIngredient> key = new HashMap<>();
 

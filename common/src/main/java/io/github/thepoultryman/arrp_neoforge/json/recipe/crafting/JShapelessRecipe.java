@@ -1,12 +1,11 @@
 package io.github.thepoultryman.arrp_neoforge.json.recipe.crafting;
 
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JIngredient;
-import io.github.thepoultryman.arrp_neoforge.json.recipe.JResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class JShapelessRecipe extends JCraftingRecipe<JShapelessRecipe> {
+public class JShapelessRecipe extends AbstractJCraftingRecipe<JShapelessRecipe> {
     private final List<JIngredient> ingredients = new ArrayList<>();
 
     public JShapelessRecipe() {

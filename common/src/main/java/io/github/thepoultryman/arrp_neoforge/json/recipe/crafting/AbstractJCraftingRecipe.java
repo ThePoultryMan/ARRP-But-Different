@@ -1,13 +1,13 @@
 package io.github.thepoultryman.arrp_neoforge.json.recipe.crafting;
 
-import io.github.thepoultryman.arrp_neoforge.json.recipe.JRecipe;
+import io.github.thepoultryman.arrp_neoforge.json.recipe.AbstractJRecipe;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JResult;
 
-public abstract class JCraftingRecipe<T extends JCraftingRecipe<T>> extends JRecipe {
+public abstract class AbstractJCraftingRecipe<T extends AbstractJCraftingRecipe<T>> extends AbstractJRecipe {
     private String group;
     private JResult result;
 
-    public JCraftingRecipe(String type) {
+    public AbstractJCraftingRecipe(String type) {
         super(type);
     }
 

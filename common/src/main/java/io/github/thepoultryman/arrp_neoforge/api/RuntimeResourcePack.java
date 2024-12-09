@@ -6,7 +6,7 @@ import io.github.thepoultryman.arrp_neoforge.json.JTag;
 import io.github.thepoultryman.arrp_neoforge.json.animation.JAnimation;
 import io.github.thepoultryman.arrp_neoforge.json.loot.JLootTable;
 import io.github.thepoultryman.arrp_neoforge.json.model.JModel;
-import io.github.thepoultryman.arrp_neoforge.json.recipe.JRecipe;
+import io.github.thepoultryman.arrp_neoforge.json.recipe.AbstractJRecipe;
 import io.github.thepoultryman.arrp_neoforge.json.state.JState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackResources;
@@ -166,7 +166,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param recipe The recipe data.
      * @return TODO: Add return information.
      */
-    byte[] addRecipe(ResourceLocation path, JRecipe recipe);
+    byte[] addRecipe(ResourceLocation path, AbstractJRecipe recipe);
 
     void load(Path path) throws IOException;
 
