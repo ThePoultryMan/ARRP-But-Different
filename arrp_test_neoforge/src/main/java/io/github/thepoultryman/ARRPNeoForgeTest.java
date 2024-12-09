@@ -4,6 +4,7 @@ import io.github.thepoultryman.arrp_neoforge.api.RuntimeResourcePack;
 import io.github.thepoultryman.arrp_neoforge.json.JLang;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JIngredient;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JResult;
+import io.github.thepoultryman.arrp_neoforge.json.recipe.JSmithingRecipe;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.crafting.JShapedRecipe;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.crafting.JShapelessRecipe;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.smelting.JSmeltingRecipe;
@@ -110,6 +111,13 @@ public class ARRPNeoForgeTest {
                             .result(
                                     new JResult().id(ResourceLocation.withDefaultNamespace("bread"))
                             )
+            );
+            pack.addRecipe(
+                    ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_trims"),
+                    new JSmithingRecipe()
+                            .trimmableArmor()
+                            .template(new JIngredient().tag("minecraft:trim_templates"))
+                            .addition(new JIngredient().entry("minecraft:bread"))
             );
             event.addPack(pack);
         });

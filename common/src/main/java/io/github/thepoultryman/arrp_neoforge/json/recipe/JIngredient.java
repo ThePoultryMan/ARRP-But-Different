@@ -3,8 +3,8 @@ package io.github.thepoultryman.arrp_neoforge.json.recipe;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import io.github.thepoultryman.arrp_neoforge.json.JTag;
 import io.github.thepoultryman.arrp_neoforge.util.BaseCloneable;
+import net.minecraft.resources.ResourceLocation;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class JIngredient extends BaseCloneable<JIngredient> {
     private final List<String> entries = new ArrayList<>();
-    private JTag tag;
+    private String tag;
 
     public JIngredient entry(String entry) {
         if (this.tag != null) {
@@ -23,12 +23,22 @@ public class JIngredient extends BaseCloneable<JIngredient> {
         return this;
     }
 
-    public JIngredient tag(JTag tag) {
+    /**
+     * Sets the ingredient to uses the provided tag to match items. Prepends the
+     * "#" onto the provided string.
+     * @param tag The tag used for matching items.
+     * @return The current {@link JIngredient} instance
+     */
+    public JIngredient tag(String tag) {
         if (!this.entries.isEmpty()) {
             throw new IllegalStateException("You cannot have both tags and items in an ingredient.");
         }
-        this.tag = tag;
+        this.tag = "#" + tag;
         return this;
+    }
+
+    public JIngredient tag(ResourceLocation tag) {
+        return this.tag(tag.toString());
     }
 
     public static class Serializer implements JsonSerializer<JIngredient> {
