@@ -20,7 +20,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "arrp_for_neoforge"
+rootProject.name = "arrp_but_different"
 
 include("common")
 include("neoforge")

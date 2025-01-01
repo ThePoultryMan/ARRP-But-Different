@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "io.github.thepoultryman.arrp_neoforge.mixins",
+  "package": "io.github.thepoultryman.arrp_but_different.mixins",
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "injectors": {
