@@ -2,6 +2,10 @@ package io.github.thepoultryman;
 
 import io.github.thepoultryman.arrp_neoforge.api.RuntimeResourcePack;
 import io.github.thepoultryman.arrp_neoforge.json.JLang;
+import io.github.thepoultryman.arrp_neoforge.json.model.JElement;
+import io.github.thepoultryman.arrp_neoforge.json.model.JFace;
+import io.github.thepoultryman.arrp_neoforge.json.model.JFaces;
+import io.github.thepoultryman.arrp_neoforge.json.model.JModel;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JIngredient;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JResult;
 import io.github.thepoultryman.arrp_neoforge.json.recipe.JSmithingRecipe;
@@ -119,6 +123,29 @@ public class ARRPNeoForgeTest {
                             .template(new JIngredient().tag("minecraft:trim_templates"))
                             .addition(new JIngredient().entry("minecraft:bread"))
             );
+
+            // Custom Model Test
+            pack.addModel(ResourceLocation.fromNamespaceAndPath(MOD_ID, "block/test_model"),
+                    new JModel()
+                            .element(
+                                    new JElement()
+                                            .from(11, 0, 8)
+                                            .to(13, 2, 10)
+                                            .faces(JFaces.allSame(new JFace("missing").uv(0, 0, 2, 2)))
+                            )
+                            .element(
+                                    new JElement()
+                                            .from(10, 0, 7)
+                                            .to(12, 2, 9)
+                                            .faces(JFaces.allSame(new JFace("missing").uv(0, 0, 2, 2)))
+                            )
+            );
+            // Replace cobblestone block state
+            pack.addBlockSate(ResourceLocation.withDefaultNamespace("cobblestone"),
+                    new JState()
+                            .add(new JVariant().model(new JBlockModel(ResourceLocation.fromNamespaceAndPath(MOD_ID, "block/test_model"))))
+            );
+
             event.addPack(pack);
         });
     }
