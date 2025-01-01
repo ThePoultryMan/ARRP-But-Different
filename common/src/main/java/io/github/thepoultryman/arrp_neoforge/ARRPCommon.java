@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class ARRPCommon {
-    public static final String MOD_ID = "advanced_runtime_resource_pack_for_neoforge";
+    public static final String MOD_ID = "advanced_runtime_resource_pack_but_different";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @ExpectPlatform
