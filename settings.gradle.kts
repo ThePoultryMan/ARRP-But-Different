@@ -24,5 +24,7 @@ rootProject.name = "arrp_but_different"
 
 include("common")
 include("neoforge")
+include("fabric")
 include("arrp_test_common")
 include("arrp_test_neoforge")
+include("arrp_test_fabric")

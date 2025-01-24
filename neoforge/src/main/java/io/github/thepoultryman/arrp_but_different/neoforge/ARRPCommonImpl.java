@@ -1,10 +1,12 @@
 package io.github.thepoultryman.arrp_but_different.neoforge;
 
 import io.github.thepoultryman.arrp_but_different.ARRPCommon;
-import io.github.thepoultryman.arrp_but_different.api.ARRPEvent;
+import io.github.thepoultryman.arrp_but_different.api.ARRPEventTypes;
 import net.minecraft.server.packs.PackResources;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ARRPCommonImpl {
     public static void startEventBus() {
@@ -12,13 +14,14 @@ public class ARRPCommonImpl {
         ARRPForNeoForge.ARRP_EVENT_BUS.start();
     }
 
-    public static List<PackResources> sendEvent(ARRPEvent event) {
+    public static List<PackResources> sendEvent(ARRPEventTypes event, List<PackResources> resourcePacks) {
         ARRPNeoForgeEvent neoForgeEvent = null;
-        switch (event) {
-            case BeforeUser -> neoForgeEvent = new ARRPNeoForgeEvent.BeforeUserNeoForgeEvent();
-            case AfterVanilla -> neoForgeEvent = new ARRPNeoForgeEvent.AfterVanillaNeoForgeEvent();
+        if (Objects.requireNonNull(event) == ARRPEventTypes.BeforeUser) {
+            neoForgeEvent = new ARRPNeoForgeEvent.BeforeUserNeoForgeEvent();
+        } else {
+            ARRPCommon.LOGGER.error("{} is not currently supported on NeoForge", event);
         }
         ARRPForNeoForge.ARRP_EVENT_BUS.post(neoForgeEvent);
-        return neoForgeEvent.getPacks();
+        return neoForgeEvent != null ? neoForgeEvent.getPacks() : new ArrayList<>();
     }
 }

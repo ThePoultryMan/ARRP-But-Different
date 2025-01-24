@@ -1,7 +1,7 @@
 package io.github.thepoultryman.arrp_but_different.mixins;
 
 import io.github.thepoultryman.arrp_but_different.ARRPCommon;
-import io.github.thepoultryman.arrp_but_different.api.ARRPEvent;
+import io.github.thepoultryman.arrp_but_different.api.ARRPEventTypes;
 import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackSelectionConfig;
@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -26,7 +27,7 @@ public class FolderRepositorySourceMixin {
     @Inject(at = @At("HEAD"), method = "loadPacks")
     private void arrp_neoforge$loadPacks(Consumer<Pack> pOnLoad, CallbackInfo ci) {
         ARRPCommon.LOGGER.info("Getting 'BeforeUser' packs");
-        List<PackResources> packs = ARRPCommon.sendEvent(ARRPEvent.BeforeUser);
+        List<PackResources> packs = ARRPCommon.sendEvent(ARRPEventTypes.BeforeUser, new ArrayList<>());
 
         for (PackResources pack : packs) {
             pOnLoad.accept(Pack.readMetaAndCreate(pack.location(), new Pack.ResourcesSupplier() {

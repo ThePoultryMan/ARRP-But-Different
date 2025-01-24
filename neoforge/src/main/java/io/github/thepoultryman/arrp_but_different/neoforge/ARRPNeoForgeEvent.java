@@ -18,10 +18,10 @@ public abstract class ARRPNeoForgeEvent extends Event {
     }
 
     // I can't figure out how to run anything before game launch, so these first
-    // three are not implemented yet.
+    // four are not implemented yet.
 //    public static class BeforeVanillaEvent extends ARRPEvent {}
 //    public static class BetweenVanillaAndModsEvent extends ARRPEvent {}
 //    public static class BetweenModsAndUserEvent extends ARRPEvent {}
+//    public static class AfterVanillaNeoForgeEvent extends ARRPNeoForgeEvent {}
     public static class BeforeUserNeoForgeEvent extends ARRPNeoForgeEvent {}
-    public static class AfterVanillaNeoForgeEvent extends ARRPNeoForgeEvent {}
 }

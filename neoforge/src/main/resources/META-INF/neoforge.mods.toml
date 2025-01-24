@@ -28,4 +28,4 @@ ordering = "NONE"
 side = "BOTH"
 
 [[mixins]]
-config = "advanced_runtime_resource_pack_but_different.mixins.json"
+config = "advanced_runtime_resource_packs_but_different.mixins.json"

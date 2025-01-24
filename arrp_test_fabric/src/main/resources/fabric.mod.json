@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "arrp_fabric_testing",
+  "version": "${version}",
+  "name": "ARRP But Different Fabric Test",
+  "description": "A mod that allows mods to generate assets/data on the fly, but it's (slightly) different, and also on NeoForge.",
+  "authors": [
+    {
+      "name": "ThePoultryMan"
+    }
+  ],
+  "license": "GNU LGPL 3.0",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.thepoultryman.arrp_but_testing.fabric.ARRPFabricTest"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": ">=1.21.3",
+    "fabric-api": ">=0.110.0+1.21.3"
+  }
+}

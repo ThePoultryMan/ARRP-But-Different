@@ -25,6 +25,10 @@ subprojects {
         maven {
             url = uri("https://maven.neoforged.net/releases/")
         }
+        maven {
+            name = "Fuzs Mod Resources"
+            url = uri("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
+        }
     }
 
     val minecraft by configurations.existing

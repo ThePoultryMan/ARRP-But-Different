@@ -4,7 +4,7 @@ loaderVersion = "[2,)"
 license = "GNU LGPL 3.0"
 
 [[mods]]
-modId = "arrp_neoforge_test"
+modId = "arrp_but_testing"
 version = "1.0.0"
 displayName = "ARRP for NeoForge Test"
 authors = "ThePoultryMan"
@@ -13,14 +13,14 @@ A mod that allows mods to generate assets/data on the fly, but it's for NeoForge
 '''
 logoFile = "icon.png"
 
-[[dependencies.arrp_neoforge_test]]
+[[dependencies.arrp_but_testing]]
 modId = "neoforge"
 type = "required"
 versionRange = "[21,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.arrp_neoforge_test]]
+[[dependencies.arrp_but_testing]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21.3,)"
