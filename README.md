@@ -9,6 +9,18 @@ mod-dependent, item generation.
 ARRP But Different is a fork of the [ARRP](https://modrinth.com/mod/arrp) mod. This mod has made
 changes to the system ARRP used, and also supports the NeoForge mod loader.
 
+## Status
+
+ARRP But Different is still in a beta state. Please report any issues and bugs you find.
+
+### Support
+
+Supports the same generators that the original ARRP mod did, with some small syntax differences.
+
+### Events
+
+Fabric supports all events. NeoForge _only_ supports "BeforeUser" currently.
+
 ## FAQ
 
 ### Is this compatible with resource packs?
