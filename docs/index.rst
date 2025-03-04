@@ -25,7 +25,7 @@ Supports the same generators that the original ARRP mod did, with some small syn
 Events
 ------
 
-Fabric supports all events. NeoForge _only_ supports "BeforeUser" currently.
+Fabric supports all events. NeoForge *only* supports "BeforeUser" currently.
 
 FAQ
 ===
