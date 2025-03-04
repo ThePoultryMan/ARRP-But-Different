@@ -4,7 +4,7 @@ Advanced Runtime Resource Packs but it's different but it's Still Advanced Runti
 
 .. toctree::
     :maxdepth: 2
-    :caption: Getting Started
+    :caption: About
 
     getting-started
     events
