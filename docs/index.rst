@@ -2,13 +2,6 @@
 Advanced Runtime Resource Packs but it's different but it's Still Advanced Runtime Resource Packs
 =================================================================================================
 
-.. toctree::
-    :maxdepth: 2
-    :caption: About
-
-    getting-started
-    events
-
 ARRP But Different allows developers to dynamically create assets and data at runtime, allowing
 developers to not have to pack extreme amounts of resources into mods for things such as dynamic,
 mod-dependent, item generation.
@@ -58,3 +51,13 @@ NeoForge Support
 This mod also supports NeoForge alongside Fabric, but there is one small piece that does not translate
 nicely between the two loaders. The NeoForge version does not support all the entrypoints that the
 Fabric version does due to the way mod loading works.
+
+Contents
+========
+
+.. toctree::
+    :maxdepth: 2
+    :caption: About
+
+    getting-started
+    events
