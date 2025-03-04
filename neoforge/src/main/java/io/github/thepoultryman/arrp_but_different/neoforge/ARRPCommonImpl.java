@@ -17,7 +17,7 @@ public class ARRPCommonImpl {
     public static List<PackResources> sendEvent(ARRPEventTypes event, List<PackResources> resourcePacks) {
         ARRPNeoForgeEvent neoForgeEvent = null;
         if (Objects.requireNonNull(event) == ARRPEventTypes.BeforeUser) {
-            neoForgeEvent = new ARRPNeoForgeEvent.BeforeUserNeoForgeEvent();
+            neoForgeEvent = new ARRPNeoForgeEvent.BeforeUser();
         } else {
             ARRPCommon.LOGGER.error("{} is not currently supported on NeoForge", event);
         }
