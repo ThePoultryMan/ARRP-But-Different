@@ -71,7 +71,7 @@ depending on the loader.
 
 .. tip:: Which Event to Use
 
-    See :ref:`Events <events>` for more more information.
+    See :doc:`Events </events>` for more more information.
 
 Fabric
 ------
