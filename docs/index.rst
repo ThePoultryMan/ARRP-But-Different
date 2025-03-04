@@ -10,7 +10,7 @@ Note
 ----
 
 ARRP But Different is a fork of the `ARRP <https://modrinth.com/mod/arrp>`_ mod. This mod has made
-changes to the system ARRP used, and supports >=1.21.4 and NeoForge.
+changes to the system ARRP used, and supports ≥1.21.4 and NeoForge.
 
 Status
 ======
