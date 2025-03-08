@@ -33,7 +33,7 @@ FAQ
 Is this compatible with resource packs?
 ---------------------------------------
 
-Yes, just like the original ARRP mod, this mod creates "fakes" resource packs that are the second to
+Yes, just like the original ARRP mod, this mod creates "fake" resource packs that are the second to
 last in priority. This allows any other resource pack to override the resource packs created through
 this mod.
 
