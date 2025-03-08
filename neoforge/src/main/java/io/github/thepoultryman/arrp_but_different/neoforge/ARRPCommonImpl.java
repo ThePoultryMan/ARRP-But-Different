@@ -4,7 +4,6 @@ import io.github.thepoultryman.arrp_but_different.ARRPCommon;
 import io.github.thepoultryman.arrp_but_different.api.ARRPEventTypes;
 import net.minecraft.server.packs.PackResources;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,12 +15,13 @@ public class ARRPCommonImpl {
 
     public static List<PackResources> sendEvent(ARRPEventTypes event, List<PackResources> resourcePacks) {
         ARRPNeoForgeEvent neoForgeEvent = null;
+        ARRPCommon.LOGGER.info("{}", resourcePacks);
         if (Objects.requireNonNull(event) == ARRPEventTypes.BeforeUser) {
             neoForgeEvent = new ARRPNeoForgeEvent.BeforeUser();
+            ARRPForNeoForge.ARRP_EVENT_BUS.post(neoForgeEvent);
         } else {
             ARRPCommon.LOGGER.error("{} is not currently supported on NeoForge", event);
         }
-        ARRPForNeoForge.ARRP_EVENT_BUS.post(neoForgeEvent);
-        return neoForgeEvent != null ? neoForgeEvent.getPacks() : new ArrayList<>();
+        return neoForgeEvent != null ? neoForgeEvent.getPacks() : resourcePacks;
     }
 }
