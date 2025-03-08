@@ -17,6 +17,7 @@ import io.github.thepoultryman.arrp_but_different.json.state.JBlockModel;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
 import io.github.thepoultryman.arrp_but_different.json.state.JVariant;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 
 public class ARRPButTestingCommon {
     public static final String MOD_ID = "arrp_but_testing";
@@ -25,6 +26,7 @@ public class ARRPButTestingCommon {
         RuntimeResourcePack pack = RuntimeResourcePack.create(ResourceLocation.fromNamespaceAndPath(MOD_ID, "before_user"));
         pack.addLang(ResourceLocation.fromNamespaceAndPath(MOD_ID, "en_us"),
                 new JLang().addBlockTranslation(ResourceLocation.withDefaultNamespace("torch"), "Torch but it's different but it's not so it's the same")
+                        .addItemTranslation(Items.STICK, "It's still a stick")
         );
         pack.addBlockSate(ResourceLocation.withDefaultNamespace("acacia_door"),
                 new JState().add(
