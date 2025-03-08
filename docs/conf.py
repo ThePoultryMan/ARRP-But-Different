@@ -1,1 +1,1 @@
-html_theme = "press"
+html_theme = "sphinxawesome_theme"
