@@ -13,12 +13,13 @@ First, add create a *JLang* instance.
 
 Once a *JLang* has been created, you can start adding translations to it.
 
-.. tip:: *JLang*s can be constructed via a builder pattern, allowing consecutive translations to be placed
+.. tip:: JLangs can be constructed via a builder pattern, allowing consecutive translations to be placed
 one after another.
 
 Example:
 
 .. code-block:: java
+
     ...
     lang.addBlockTranslation(ResourceLocation.withDefaultNamespace("torch"), "Torch but it's different but it's not so it's the same.)
             .addItemTranslation(Items.STICK, "It's still a stick");
