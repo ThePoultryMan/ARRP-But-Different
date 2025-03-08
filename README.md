@@ -25,7 +25,7 @@ Fabric supports all events. NeoForge _only_ supports "BeforeUser" currently.
 
 ### Is this compatible with resource packs?
 
-Yes, just like the original ARRP mod, this mod creates fakes resource packs that are the second to
+Yes, just like the original ARRP mod, this mod creates "fake" resource packs that are the second to
 last in priority. This allows any other resource pack to override the resource packs created through
 this mod.
 
@@ -34,8 +34,7 @@ mods, but can still override Minecraft's resources.
 
 ### Is this compatible with the original ARRP
 
-No, this mod makes changes to the syntax and systems that ARRP used. Fortunately, migrating from ARRP
-is rather straightforward.
+No, this mod makes changes to the syntax and systems that ARRP used.
 
 ## NeoForge Support
 
@@ -45,7 +44,7 @@ Fabric version does due to the way mod loading works.
 
 ## Using ARRP But Different
 
-For information on how to use ARRP But Different, refer to the [wiki](https://github.com/ThePoultryMan/ARRP-But-Different/wiki).
+For information on how to use ARRP But Different, refer to the [docs](https://arrp-but-different.readthedocs.io/en/latest/).
 
 For resource pack creators looking to add support for generated resources, refer to the [resource
-dumping page](https://github.com/ThePoultryMan/ARRP-But-Different/wiki/Dumping-Resources).
+dumping page](https://arrp-but-different.readthedocs.io/en/latest/dumping-resources).
