@@ -58,7 +58,7 @@ Contents
     :maxdepth: 2
     :caption: About
 
-    index
+    /
     getting-started
     events
 
