@@ -61,3 +61,9 @@ Contents
 
     getting-started
     events
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Usage
+
+    /usage/lang
