@@ -6,11 +6,10 @@ ARRP But Different allows developers to dynamically create assets and data at ru
 developers to not have to pack extreme amounts of resources into mods for things such as dynamic,
 mod-dependent, item generation.
 
-Note
-----
+.. note:: This is a Fork
 
-ARRP But Different is a fork of the `ARRP <https://modrinth.com/mod/arrp>`_ mod. This mod has made
-changes to the system ARRP used, and supports ≥1.21.4 and NeoForge.
+    ARRP But Different is a fork of the `ARRP <https://modrinth.com/mod/arrp>`_ mod. This mod has
+    made changes to the system ARRP used, and supports ≥1.21.4 and NeoForge.
 
 Status
 ======
@@ -59,6 +58,7 @@ Contents
     :maxdepth: 2
     :caption: About
 
+    index
     getting-started
     events
 
