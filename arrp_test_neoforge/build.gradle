@@ -14,9 +14,7 @@ loom {
 
 architectury {
     platformSetupLoomIde()
-    neoForge {
-        platformPackage = "forge"
-    }
+    neoForge()
 }
 
 configurations {

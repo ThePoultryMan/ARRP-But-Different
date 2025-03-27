@@ -4,5 +4,5 @@ dependencies {
 }
 
 architectury {
-    common(rootProject.properties["enabled_platforms"].toString().split(","))
+    common(rootProject.enabled_platforms.split(","))
 }
