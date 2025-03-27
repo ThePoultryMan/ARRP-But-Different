@@ -3,6 +3,8 @@ package io.github.thepoultryman.arrp_but_different.impl;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.JsonOps;
 import io.github.thepoultryman.arrp_but_different.ARRPCommon;
 import io.github.thepoultryman.arrp_but_different.ARRPConfig;
 import io.github.thepoultryman.arrp_but_different.api.RuntimeResourcePack;
@@ -27,7 +29,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.AbstractPackResources;
 import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.metadata.MetadataSectionSerializer;
+import net.minecraft.server.packs.metadata.MetadataSectionType;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.resources.IoSupplier;
 import org.jetbrains.annotations.NotNull;
@@ -51,7 +53,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class RuntimeResourcePackImpl implements RuntimeResourcePack {
-    private static final int RESOURCE_PACK_VERSION = 42;
+    private static final int RESOURCE_PACK_VERSION = 46;
 
     public static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(JMultipart.class, new JMultipart.Serializer())
@@ -139,7 +141,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
     }
 
     @Override
-    public @Nullable <T> T getMetadataSection(@NotNull MetadataSectionSerializer<T> pDeserializer) {
+    public @Nullable <T> T getMetadataSection(@NotNull MetadataSectionType<T> pSectionType) {
         InputStream inputStream = null;
         try {
             IoSupplier<InputStream> ioSupplier = this.getRootResource("pack.mcmeta");
@@ -150,16 +152,21 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             throw new RuntimeException(exception);
         }
         if (inputStream != null) {
-            return AbstractPackResources.getMetadataFromStream(pDeserializer, inputStream);
+            return AbstractPackResources.getMetadataFromStream(pSectionType, inputStream);
         } else {
-            if (pDeserializer.getMetadataSectionName().equals("pack")) {
+            if (pSectionType.name().equals("pack")) {
                 JsonObject object = new JsonObject();
                 object.addProperty("pack_format", RESOURCE_PACK_VERSION);
                 object.addProperty("description", "runtime resource pack");
-                return pDeserializer.fromJson(object);
+                DataResult<T> result = pSectionType.codec().parse(JsonOps.INSTANCE, object);
+                if (result.isSuccess()) {
+                    return result.getOrThrow();
+                } else {
+                    throw new RuntimeException("Resource Pack information could not be parsed.");
+                }
             }
-            if (KEY_WARNINGS.add(pDeserializer.getMetadataSectionName())) {
-                ARRPCommon.LOGGER.info("\"{}\" is an unsupported metadata key", pDeserializer.getMetadataSectionName());
+            if (KEY_WARNINGS.add(pSectionType.name())) {
+                ARRPCommon.LOGGER.info("\"{}\" is an unsupported metadata key", pSectionType.name());
             }
             return null;
         }
