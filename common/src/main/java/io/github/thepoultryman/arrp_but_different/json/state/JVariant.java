@@ -37,6 +37,11 @@ public class JVariant implements Cloneable {
         return this.putFormatted(property, value);
     }
 
+    public JVariant empty() {
+        this.conditions.add("");
+        return this;
+    }
+
     public JVariant model(JBlockModel model) {
         this.model = model;
         return this;
