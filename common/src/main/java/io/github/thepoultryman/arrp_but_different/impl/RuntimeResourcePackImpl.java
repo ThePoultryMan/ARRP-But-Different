@@ -21,6 +21,7 @@ import io.github.thepoultryman.arrp_but_different.json.recipe.AbstractJRecipe;
 import io.github.thepoultryman.arrp_but_different.json.recipe.JIngredient;
 import io.github.thepoultryman.arrp_but_different.json.recipe.banner.JBannerPatternType;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.JBannerPatternsComponent;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.JBaseColorComponent;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.JIntegerComponent;
 import io.github.thepoultryman.arrp_but_different.json.state.JMultipart;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
@@ -73,6 +74,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JIntegerComponent.class, new JIntegerComponent.Serializer())
             .registerTypeAdapter(JBannerPatternsComponent.class, new JBannerPatternsComponent.Serializer())
             .registerTypeAdapter(JBannerPatternType.class, new JBannerPatternType.Serializer())
+            .registerTypeAdapter(JBaseColorComponent.class, new JBaseColorComponent.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
