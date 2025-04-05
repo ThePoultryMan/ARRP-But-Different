@@ -23,6 +23,7 @@ import io.github.thepoultryman.arrp_but_different.json.state.JMultipart;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
 import io.github.thepoultryman.arrp_but_different.json.state.JWhen;
 import io.github.thepoultryman.arrp_but_different.util.CountingInputStream;
+import io.github.thepoultryman.arrp_but_different.util.ResourceLocationSerializer;
 import io.github.thepoultryman.arrp_but_different.util.UnsafeByteArrayOutputStream;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -53,7 +54,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class RuntimeResourcePackImpl implements RuntimeResourcePack {
-    private static final int RESOURCE_PACK_VERSION = 46;
+    private static final int RESOURCE_PACK_VERSION = 55;
 
     public static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(JMultipart.class, new JMultipart.Serializer())
@@ -64,7 +65,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JFunction.class, new JFunction.Serializer())
             .registerTypeAdapter(JPool.class, new JPool.Serializer())
             .registerTypeAdapter(JIngredient.class, new JIngredient.Serializer())
-            .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
+            .registerTypeAdapter(ResourceLocation.class, new ResourceLocationSerializer())
             .registerTypeAdapter(JCondition.class, new JCondition.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
