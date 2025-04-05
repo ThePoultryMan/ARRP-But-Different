@@ -19,10 +19,14 @@ import io.github.thepoultryman.arrp_but_different.json.model.JModel;
 import io.github.thepoultryman.arrp_but_different.json.model.JTextures;
 import io.github.thepoultryman.arrp_but_different.json.recipe.AbstractJRecipe;
 import io.github.thepoultryman.arrp_but_different.json.recipe.JIngredient;
+import io.github.thepoultryman.arrp_but_different.json.recipe.banner.JBannerPatternType;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JSound;
 import io.github.thepoultryman.arrp_but_different.json.state.JMultipart;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
 import io.github.thepoultryman.arrp_but_different.json.state.JWhen;
 import io.github.thepoultryman.arrp_but_different.util.CountingInputStream;
+import io.github.thepoultryman.arrp_but_different.util.ResourceLocationSerializer;
 import io.github.thepoultryman.arrp_but_different.util.UnsafeByteArrayOutputStream;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -53,7 +57,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class RuntimeResourcePackImpl implements RuntimeResourcePack {
-    private static final int RESOURCE_PACK_VERSION = 46;
+    private static final int RESOURCE_PACK_VERSION = 55;
 
     public static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(JMultipart.class, new JMultipart.Serializer())
@@ -64,8 +68,19 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JFunction.class, new JFunction.Serializer())
             .registerTypeAdapter(JPool.class, new JPool.Serializer())
             .registerTypeAdapter(JIngredient.class, new JIngredient.Serializer())
-            .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
+            .registerTypeAdapter(ResourceLocation.class, new ResourceLocationSerializer())
             .registerTypeAdapter(JCondition.class, new JCondition.Serializer())
+            .registerTypeAdapter(JIntegerComponent.class, new JIntegerComponent.Serializer())
+            .registerTypeAdapter(JBannerPatternsComponent.class, new JBannerPatternsComponent.Serializer())
+            .registerTypeAdapter(JBannerPatternType.class, new JBannerPatternType.Serializer())
+            .registerTypeAdapter(JBaseColorComponent.class, new JBaseColorComponent.Serializer())
+            .registerTypeAdapter(JBeesComponent.class, new JBeesComponent.Serializer())
+            .registerTypeAdapter(JBeesComponent.BeeData.class, new JBeesComponent.BeeData.Serializer())
+            .registerTypeAdapter(JResourceLocationComponent.class, new JResourceLocationComponent.Serializer())
+            .registerTypeAdapter(JBlockStateComponent.class, new JBlockStateComponent.Serializer())
+            .registerTypeAdapter(JItemListComponent.class, new JItemListComponent.Serializer())
+            .registerTypeAdapter(JSound.class, new JSound.Serializer())
+            .registerTypeAdapter(JContainerComponent.class, new JContainerComponent.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
