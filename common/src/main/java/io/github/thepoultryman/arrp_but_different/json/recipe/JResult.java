@@ -84,6 +84,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:consumable", component);
     }
 
+    public JResult containerLoot(JContainerLootComponent component) {
+        return this.component("minecraft:container_loot", component);
+    }
+
     public JResult container(JContainerComponent component) {
         return this.component("minecraft:container", component);
     }
