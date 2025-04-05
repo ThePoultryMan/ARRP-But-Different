@@ -19,6 +19,9 @@ import io.github.thepoultryman.arrp_but_different.json.model.JModel;
 import io.github.thepoultryman.arrp_but_different.json.model.JTextures;
 import io.github.thepoultryman.arrp_but_different.json.recipe.AbstractJRecipe;
 import io.github.thepoultryman.arrp_but_different.json.recipe.JIngredient;
+import io.github.thepoultryman.arrp_but_different.json.recipe.banner.JBannerPatternType;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.JBannerPatternsComponent;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.JIntegerComponent;
 import io.github.thepoultryman.arrp_but_different.json.state.JMultipart;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
 import io.github.thepoultryman.arrp_but_different.json.state.JWhen;
@@ -67,6 +70,9 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JIngredient.class, new JIngredient.Serializer())
             .registerTypeAdapter(ResourceLocation.class, new ResourceLocationSerializer())
             .registerTypeAdapter(JCondition.class, new JCondition.Serializer())
+            .registerTypeAdapter(JIntegerComponent.class, new JIntegerComponent.Serializer())
+            .registerTypeAdapter(JBannerPatternsComponent.class, new JBannerPatternsComponent.Serializer())
+            .registerTypeAdapter(JBannerPatternType.class, new JBannerPatternType.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
