@@ -77,6 +77,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JBeesComponent.BeeData.class, new JBeesComponent.BeeData.Serializer())
             .registerTypeAdapter(JResourceLocationComponent.class, new JResourceLocationComponent.Serializer())
             .registerTypeAdapter(JBlockStateComponent.class, new JBlockStateComponent.Serializer())
+            .registerTypeAdapter(JBundleContentsComponent.class, new JBundleContentsComponent.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
