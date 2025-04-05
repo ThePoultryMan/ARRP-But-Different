@@ -20,10 +20,7 @@ import io.github.thepoultryman.arrp_but_different.json.model.JTextures;
 import io.github.thepoultryman.arrp_but_different.json.recipe.AbstractJRecipe;
 import io.github.thepoultryman.arrp_but_different.json.recipe.JIngredient;
 import io.github.thepoultryman.arrp_but_different.json.recipe.banner.JBannerPatternType;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.JBannerPatternsComponent;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.JBaseColorComponent;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.JBeesComponent;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.JIntegerComponent;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
 import io.github.thepoultryman.arrp_but_different.json.state.JMultipart;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
 import io.github.thepoultryman.arrp_but_different.json.state.JWhen;
@@ -78,6 +75,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JBaseColorComponent.class, new JBaseColorComponent.Serializer())
             .registerTypeAdapter(JBeesComponent.class, new JBeesComponent.Serializer())
             .registerTypeAdapter(JBeesComponent.BeeData.class, new JBeesComponent.BeeData.Serializer())
+            .registerTypeAdapter(JResourceLocationComponent.class, new JResourceLocationComponent.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
