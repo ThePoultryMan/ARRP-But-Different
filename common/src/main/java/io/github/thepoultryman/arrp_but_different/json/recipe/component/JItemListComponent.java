@@ -9,19 +9,19 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JBundleContentsComponent extends AbstractJComponent {
+public class JItemListComponent extends AbstractJComponent {
     // JResult happens to have the same fields that this field takes, so we're just going to use it
     // until it differs.
     private final List<JResult> contents = new ArrayList<>();
 
-    public JBundleContentsComponent content(JResult content) {
+    public JItemListComponent content(JResult content) {
         this.contents.add(content);
         return this;
     }
 
-    public static class Serializer implements JsonSerializer<JBundleContentsComponent> {
+    public static class Serializer implements JsonSerializer<JItemListComponent> {
         @Override
-        public JsonElement serialize(JBundleContentsComponent src, Type type, JsonSerializationContext context) {
+        public JsonElement serialize(JItemListComponent src, Type type, JsonSerializationContext context) {
             return context.serialize(src.contents);
         }
     }
