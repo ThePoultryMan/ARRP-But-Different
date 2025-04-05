@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class JCanBreakComponent extends AbstractJComponent {
+public class JPredicateListComponent extends AbstractJComponent {
     private final List<JPredicate> predicates = new ArrayList<>();
     @SerializedName("show_in_tooltip")
     private boolean showInTooltip;
