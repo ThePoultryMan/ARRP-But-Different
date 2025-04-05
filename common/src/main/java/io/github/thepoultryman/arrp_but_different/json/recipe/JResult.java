@@ -1,6 +1,7 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe;
 
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JConsumableComponent;
 import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.resources.ResourceLocation;
 
@@ -77,6 +78,10 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult chargedProjectiles(JItemListComponent component) {
         return this.component("minecraft:charged_projectiles", component);
+    }
+
+    public JResult consumable(JConsumableComponent component) {
+        return this.component("minecraft:consumable", component);
     }
 
     public JResult removedComponent(String name) {
