@@ -187,6 +187,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:frog/variant", new JFrogVariantComponent(variant));
     }
 
+    public JResult glider() {
+        return this.component("minecraft:glider", new EmptyJComponent());
+    }
+
     public JResult removedComponent(String name) {
         return this.component("!" + name, new EmptyJComponent());
     }
