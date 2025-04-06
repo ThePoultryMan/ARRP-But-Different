@@ -109,7 +109,7 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult damageResistance(ResourceLocation types) {
-        return this.component("minecraft:damage_resistance", new JDamageResistanceComponent(types));
+        return this.component("minecraft:damage_resistant", new JDamageResistanceComponent(types));
     }
 
     public JResult container(JContainerComponent component) {
