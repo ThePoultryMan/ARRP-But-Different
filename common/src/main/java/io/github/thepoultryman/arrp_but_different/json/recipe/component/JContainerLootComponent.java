@@ -6,7 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 public class JContainerLootComponent extends AbstractJComponent {
     @SerializedName("loot_table")
     private final ResourceLocation lootTable;
-    private int seed;
+    private Integer seed;
 
     public JContainerLootComponent(ResourceLocation lootTable) {
         this.lootTable = lootTable;

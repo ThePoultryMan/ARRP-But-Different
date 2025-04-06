@@ -11,9 +11,9 @@ public class JFireworkExplosionComponent extends AbstractJComponent {
     @SerializedName("fade_colors")
     private List<Integer> fadeColors;
     @SerializedName("has_trail")
-    private boolean hasTrail;
+    private Boolean hasTrail;
     @SerializedName("has_twinkle")
-    private boolean hasTwinkle;
+    private Boolean hasTwinkle;
 
     public JFireworkExplosionComponent(Shape shape) {
         this.shape = shape;

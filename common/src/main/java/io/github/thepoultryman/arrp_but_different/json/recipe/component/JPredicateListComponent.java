@@ -10,7 +10,7 @@ import java.util.List;
 public class JPredicateListComponent extends AbstractJComponent {
     private final List<JPredicate> predicates = new ArrayList<>();
     @SerializedName("show_in_tooltip")
-    private boolean showInTooltip;
+    private Boolean showInTooltip;
 
     public static class JPredicate {
         private final List<ResourceLocation> blocks = new ArrayList<>();

@@ -1,7 +1,7 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable;
 
 public class JTeleportRandomly extends JConsumeEffect {
-    private int diameter;
+    private Integer diameter;
 
     public JTeleportRandomly() {
         super("minecraft:teleport_randomly");

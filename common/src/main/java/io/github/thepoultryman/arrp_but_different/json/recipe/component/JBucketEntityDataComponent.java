@@ -6,9 +6,9 @@ import net.minecraft.resources.ResourceLocation;
 public class JBucketEntityDataComponent extends AbstractJComponent {
     private final ResourceLocation id;
     @SerializedName("HuntingCooldown")
-    private int huntingCooldown = 0;
+    private Integer huntingCooldown = 0;
     @SerializedName("BucketVariantTag")
-    private int bucketVariantTag = 0;
+    private Integer bucketVariantTag = 0;
 
     public JBucketEntityDataComponent(ResourceLocation id) {
         this.id = id;

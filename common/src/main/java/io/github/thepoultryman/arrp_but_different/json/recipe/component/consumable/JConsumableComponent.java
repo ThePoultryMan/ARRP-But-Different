@@ -8,11 +8,11 @@ import java.util.List;
 
 public class JConsumableComponent extends AbstractJComponent {
     @SerializedName("consume_seconds")
-    private float consumeSeconds;
+    private Float consumeSeconds;
     private JConsumeAnimation animation;
     private JSound sound;
     @SerializedName("has_consume_particles")
-    private boolean hasConsumeParticles;
+    private Boolean hasConsumeParticles;
     @SerializedName("on_consume_effects")
     private final List<JConsumeEffect> onConsumeEffects = new ArrayList<>();
 

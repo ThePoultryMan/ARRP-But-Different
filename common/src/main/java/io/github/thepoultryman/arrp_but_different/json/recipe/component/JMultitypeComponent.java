@@ -10,8 +10,8 @@ import java.util.List;
 
 public class JMultitypeComponent extends AbstractJComponent {
     private Type type;
-    private boolean booleanValue;
-    private double doubleValue;
+    private Boolean booleanValue;
+    private Double doubleValue;
     private String stringValue;
     private final List<JMultitypeComponent> listValue = new ArrayList<>();
     private final HashMap<String, JMultitypeComponent> structValue = new HashMap<>();

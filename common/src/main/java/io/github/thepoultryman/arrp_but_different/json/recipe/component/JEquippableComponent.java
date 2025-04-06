@@ -17,12 +17,12 @@ public class JEquippableComponent extends AbstractJComponent {
     private ResourceLocation cameraOverlay;
     @SerializedName("allowed_entities")
     private List<ResourceLocation> allowedEntities;
-    private boolean dispensable;
-    private boolean swappable;
+    private Boolean dispensable;
+    private Boolean swappable;
     @SerializedName("damage_on_hurt")
-    private boolean damageOnHurt;
+    private Boolean damageOnHurt;
     @SerializedName("equip_on_interact")
-    private boolean equipOnInteract;
+    private Boolean equipOnInteract;
 
     public JEquippableComponent(Slot slot) {
         this.slot = slot;
