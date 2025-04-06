@@ -1,5 +1,6 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe;
 
+import io.github.thepoultryman.arrp_but_different.json.PresetColor;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JConsumableComponent;
 import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
@@ -44,7 +45,7 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:banner_patterns", component);
     }
 
-    public JResult baseColor(JBaseColorComponent component) {
+    public JResult baseColor(JColorComponent component) {
         return this.component("minecraft:base_color", component);
     }
 
@@ -74,6 +75,10 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult canPlaceOn(JPredicateListComponent component) {
         return this.component("minecraft:can_place_on", component);
+    }
+
+    public JResult catCollar(PresetColor color) {
+        return this.component("minecraft:cat/collar", new JColorComponent(color));
     }
 
     public JResult chargedProjectiles(JItemListComponent component) {

@@ -7,16 +7,16 @@ import io.github.thepoultryman.arrp_but_different.json.PresetColor;
 
 import java.lang.reflect.Type;
 
-public class JBaseColorComponent extends AbstractJComponent {
+public class JColorComponent extends AbstractJComponent {
     private final PresetColor color;
 
-    public JBaseColorComponent(PresetColor color) {
+    public JColorComponent(PresetColor color) {
         this.color = color;
     }
 
-    public static class Serializer implements JsonSerializer<JBaseColorComponent> {
+    public static class Serializer implements JsonSerializer<JColorComponent> {
         @Override
-        public JsonElement serialize(JBaseColorComponent src, Type type, JsonSerializationContext context) {
+        public JsonElement serialize(JColorComponent src, Type type, JsonSerializationContext context) {
             return context.serialize(src.color);
         }
     }
