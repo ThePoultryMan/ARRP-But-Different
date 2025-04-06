@@ -257,6 +257,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:potion_contents", new JCodecComponent<>(contents, PotionContents.CODEC));
     }
 
+    public JResult potionDurationScale(float durationScale) {
+        return this.component("minecraft:potion_duration_scale", new JSimpleComponent<>(durationScale));
+    }
+
     public JResult catVariant(ResourceLocation resourceLocation) {
         return this.component("minecraft:cat/variant", new JSimpleComponent<>(resourceLocation));
     }
