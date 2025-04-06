@@ -201,6 +201,14 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:instrument", new JCodecComponent<>(instrument, Instrument.DIRECT_CODEC));
     }
 
+    public JResult intangibleProjectile() {
+        return this.component("minecraft:intangible_projectile", new EmptyJComponent());
+    }
+
+    public JResult itemModel(ResourceLocation modelLocation) {
+        return this.component("minecraft:item_model", new JSimpleComponent<>(modelLocation));
+    }
+
     public JResult removedComponent(String name) {
         return this.component("!" + name, new EmptyJComponent());
     }
