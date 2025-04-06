@@ -13,6 +13,7 @@ import net.minecraft.world.item.Instrument;
 import net.minecraft.world.item.component.LodestoneTracker;
 import net.minecraft.world.item.component.MapDecorations;
 import net.minecraft.world.item.component.MapPostProcessing;
+import net.minecraft.world.level.block.entity.PotDecorations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -237,6 +238,18 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult maxStackSize(int maxStackSize) {
         return this.component("minecraft:max_stack_size", new JSimpleComponent<>(maxStackSize));
+    }
+
+    public JResult noteBlockSound(ResourceLocation noteBlockSound) {
+        return this.component("minecraft:note_block_sound", new JSimpleComponent<>(noteBlockSound));
+    }
+
+    public JResult ominousBottleAmplifier(int amplifier) {
+        return this.component("minecraft:ominous_bottle_amplifier", new JSimpleComponent<>(amplifier));
+    }
+
+    public JResult potDecorations(PotDecorations decorations) {
+        return this.component("minecraft:pot_decorations", new JCodecComponent<>(decorations, PotDecorations.CODEC));
     }
 
     public JResult catVariant(ResourceLocation resourceLocation) {
