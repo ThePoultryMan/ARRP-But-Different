@@ -145,6 +145,14 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:dyed_color", component);
     }
 
+    public JResult enchantable(int value) {
+        return this.component("minecraft:enchantable", new JSimpleComponent<>(value));
+    }
+
+    public JResult enchantmentGlintOverride(boolean override) {
+        return this.component("minecraft:enchantment_glint_override", new JSimpleComponent<>(override));
+    }
+
     public JResult removedComponent(String name) {
         return this.component("!" + name, new EmptyJComponent());
     }
