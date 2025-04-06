@@ -3,6 +3,8 @@ package io.github.thepoultryman.arrp_but_different.json.recipe;
 import io.github.thepoultryman.arrp_but_different.json.PresetColor;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JConsumableComponent;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JFoxVariantComponent;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JFrogVariantComponent;
 import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.resources.ResourceLocation;
 
@@ -175,6 +177,14 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult food(JFoodComponent component) {
         return this.component("minecraft:food", component);
+    }
+
+    public JResult foxVariant(JFoxVariantComponent.Variant variant) {
+        return this.component("minecraft:fox/variant", new JFoxVariantComponent(variant));
+    }
+
+    public JResult frogVariant(JFrogVariantComponent.Variant variant) {
+        return this.component("minecraft:frog/variant", new JFrogVariantComponent(variant));
     }
 
     public JResult removedComponent(String name) {
