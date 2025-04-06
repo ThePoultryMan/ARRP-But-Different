@@ -81,6 +81,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:cat/collar", new JColorComponent(color));
     }
 
+    public JResult catVariant(ResourceLocation resourceLocation) {
+        return this.component("minecraft:cat/variant", new JSimpleComponent<>(resourceLocation));
+    }
+
     public JResult chargedProjectiles(JItemListComponent component) {
         return this.component("minecraft:charged_projectiles", component);
     }
