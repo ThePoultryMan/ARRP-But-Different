@@ -16,6 +16,9 @@ import io.github.thepoultryman.arrp_but_different.json.recipe.smelting.SmeltingT
 import io.github.thepoultryman.arrp_but_different.json.state.JBlockModel;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
 import io.github.thepoultryman.arrp_but_different.json.state.JVariant;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
@@ -80,7 +83,10 @@ public class ARRPButTestingCommon {
                         .result(
                                 new JResult()
                                         .id(ResourceLocation.withDefaultNamespace("goat_horn"))
-                                        .customName("Burnt Coal")
+                                        .itemName(
+                                                Component.literal("Burnt Coal")
+                                                        .setStyle(Style.EMPTY.applyFormat(ChatFormatting.BOLD))
+                                        )
                         )
         );
         pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_furnace"),

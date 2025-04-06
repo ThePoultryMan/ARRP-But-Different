@@ -7,6 +7,8 @@ import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JFrogVariantComponent;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JHorseVariant;
 import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Instrument;
 
@@ -207,6 +209,10 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult itemModel(ResourceLocation modelLocation) {
         return this.component("minecraft:item_model", new JSimpleComponent<>(modelLocation));
+    }
+
+    public JResult itemName(Component component) {
+        return this.component("minecraft:item_name", new JCodecComponent<>(component, ComponentSerialization.CODEC));
     }
 
     public JResult removedComponent(String name) {
