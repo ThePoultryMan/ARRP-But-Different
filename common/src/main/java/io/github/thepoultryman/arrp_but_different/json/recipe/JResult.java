@@ -31,7 +31,7 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult component(String name, int value) {
-        this.components.put(name, new JIntegerComponent(value));
+        this.components.put(name, new JPrimitiveComponent<>(value));
         return this;
     }
 
@@ -98,6 +98,10 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult customModelData(JCustomModelDataComponent component) {
         return this.component("minecraft:custom_model_data", component);
+    }
+
+    public JResult customName(String string) {
+        return this.component("minecraft:custom_name", new JPrimitiveComponent<>(string));
     }
 
     public JResult container(JContainerComponent component) {
