@@ -14,6 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.LockCode;
 import net.minecraft.world.item.Instrument;
 import net.minecraft.world.item.component.LodestoneTracker;
+import net.minecraft.world.item.component.MapDecorations;
+import net.minecraft.world.item.component.MapPostProcessing;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -242,6 +244,22 @@ public class JResult extends BaseCloneable<JResult> {
             codecComponents.add(i, new JCodecComponent<>(components[i], ComponentSerialization.CODEC));
         }
         return this.component("minecraft:lore", new JSimpleComponent<>(codecComponents));
+    }
+
+    public JResult mapColor(int mapColor) {
+        return this.component("minecraft:map_color", new JSimpleComponent<>(mapColor));
+    }
+
+    public JResult mapDecorations(MapDecorations mapDecorations) {
+        return this.component("minecraft:map_decorations", new JCodecComponent<>(mapDecorations, MapDecorations.CODEC));
+    }
+
+    public JResult mapId(int mapId) {
+        return this.component("minecraft:map_id", new JSimpleComponent<>(mapId));
+    }
+
+    public JResult mapPostProcessing(MapPostProcessing mapPostProcessing) {
+        return this.component("minecraft:map_post_processing", new JSimpleComponent<>(mapPostProcessing));
     }
 
     public JResult removedComponent(String name) {
