@@ -76,7 +76,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JBaseColorComponent.class, new JBaseColorComponent.Serializer())
             .registerTypeAdapter(JBeesComponent.class, new JBeesComponent.Serializer())
             .registerTypeAdapter(JBeesComponent.BeeData.class, new JBeesComponent.BeeData.Serializer())
-            .registerTypeAdapter(JBlockStateComponent.class, new JBlockStateComponent.Serializer())
+            .registerTypeAdapter(JStringMapComponent.class, new JStringMapComponent.Serializer())
             .registerTypeAdapter(JItemListComponent.class, new JItemListComponent.Serializer())
             .registerTypeAdapter(JSound.class, new JSound.Serializer())
             .registerTypeAdapter(JContainerComponent.class, new JContainerComponent.Serializer())
