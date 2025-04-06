@@ -10,8 +10,10 @@ import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.LockCode;
 import net.minecraft.world.item.Instrument;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.*;
+import net.minecraft.world.item.enchantment.Repairable;
 import net.minecraft.world.level.block.entity.PotDecorations;
 
 import java.util.ArrayList;
@@ -269,6 +271,18 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult providesTrimMaterial(ProvidesTrimMaterial material) {
         return this.component("minecraft:provides_trim_material", new JCodecComponent<>(material, ProvidesTrimMaterial.CODEC));
+    }
+
+    public JResult rarity(Rarity rarity) {
+        return this.component("minecraft:rarity", new JCodecComponent<>(rarity, Rarity.CODEC));
+    }
+
+    public JResult repairable(Repairable repairable) {
+        return this.component("minecraft:repairable", new JCodecComponent<>(repairable, Repairable.CODEC));
+    }
+
+    public JResult repairCost(int cost) {
+        return this.component("minecraft:repair_cost", new JSimpleComponent<>(cost));
     }
 
     public JResult catVariant(ResourceLocation resourceLocation) {

@@ -21,6 +21,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
 
 public class ARRPButTestingCommon {
     public static final String MOD_ID = "arrp_but_testing";
@@ -70,7 +71,7 @@ public class ARRPButTestingCommon {
                                 new JResult()
                                         .id(ResourceLocation.withDefaultNamespace("golden_sword"))
                                         .component("minecraft:damage", 3)
-//                                        .component("minecraft:rarity", "rare")
+                                        .rarity(Rarity.RARE)
                         )
         );
         pack.addRecipe(
