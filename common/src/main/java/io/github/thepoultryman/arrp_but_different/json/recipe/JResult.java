@@ -91,16 +91,8 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:cat/collar", new JColorComponent(color));
     }
 
-    public JResult catVariant(ResourceLocation resourceLocation) {
-        return this.component("minecraft:cat/variant", new JSimpleComponent<>(resourceLocation));
-    }
-
     public JResult chargedProjectiles(JItemListComponent component) {
         return this.component("minecraft:charged_projectiles", component);
-    }
-
-    public JResult chickenVariant(ResourceLocation resourceLocation) {
-        return this.component("minecraft:chicken/variant", new JSimpleComponent<>(resourceLocation));
     }
 
     public JResult consumable(JConsumableComponent component) {
@@ -113,10 +105,6 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult containerLoot(JContainerLootComponent component) {
         return this.component("minecraft:container_loot", component);
-    }
-
-    public JResult cowVariant(ResourceLocation resourceLocation) {
-        return this.component("minecraft:cow/variant", new JSimpleComponent<>(resourceLocation));
     }
 
     public JResult creativeSlotLock(JMultitypeComponent component) {
@@ -187,20 +175,8 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:food", component);
     }
 
-    public JResult foxVariant(FoxVariant variant) {
-        return this.component("minecraft:fox/variant", new JSimpleComponent<>(variant));
-    }
-
-    public JResult frogVariant(FrogVariant variant) {
-        return this.component("minecraft:frog/variant", new JSimpleComponent<>(variant));
-    }
-
     public JResult glider() {
         return this.component("minecraft:glider", new EmptyJComponent());
-    }
-
-    public JResult horseVariant(HorseVariant variant) {
-        return this.component("minecraft:horse/variant", new JSimpleComponent<>(variant));
     }
 
     public JResult instrument(Instrument instrument) {
@@ -221,10 +197,6 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult jukeboxPlayable(ResourceLocation resourceLocation) {
         return this.component("minecraft:jukebox_playable", new JSimpleComponent<>(resourceLocation));
-    }
-
-    public JResult llamaVariant(LlamaVariant variant) {
-        return this.component("minecraft:llama/variant", new JSimpleComponent<>(variant));
     }
 
     public JResult lock(LockCode lockCode) {
@@ -265,6 +237,34 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult maxStackSize(int maxStackSize) {
         return this.component("minecraft:max_stack_size", new JSimpleComponent<>(maxStackSize));
+    }
+
+    public JResult catVariant(ResourceLocation resourceLocation) {
+        return this.component("minecraft:cat/variant", new JSimpleComponent<>(resourceLocation));
+    }
+
+    public JResult chickenVariant(ResourceLocation resourceLocation) {
+        return this.component("minecraft:chicken/variant", new JSimpleComponent<>(resourceLocation));
+    }
+
+    public JResult cowVariant(ResourceLocation resourceLocation) {
+        return this.component("minecraft:cow/variant", new JSimpleComponent<>(resourceLocation));
+    }
+
+    public JResult foxVariant(FoxVariant variant) {
+        return this.component("minecraft:fox/variant", new JSimpleComponent<>(variant));
+    }
+
+    public JResult frogVariant(FrogVariant variant) {
+        return this.component("minecraft:frog/variant", new JSimpleComponent<>(variant));
+    }
+
+    public JResult horseVariant(HorseVariant variant) {
+        return this.component("minecraft:horse/variant", new JSimpleComponent<>(variant));
+    }
+
+    public JResult llamaVariant(LlamaVariant variant) {
+        return this.component("minecraft:llama/variant", new JSimpleComponent<>(variant));
     }
 
     public JResult mooshroomVariant(MooshroomVariant variant) {
