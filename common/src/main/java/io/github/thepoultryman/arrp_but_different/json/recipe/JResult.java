@@ -173,6 +173,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:fireworks", component);
     }
 
+    public JResult food(JFoodComponent component) {
+        return this.component("minecraft:food", component);
+    }
+
     public JResult removedComponent(String name) {
         return this.component("!" + name, new EmptyJComponent());
     }
