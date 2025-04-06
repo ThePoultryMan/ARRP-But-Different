@@ -97,8 +97,16 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:consumable", component);
     }
 
+    public JResult container(JContainerComponent component) {
+        return this.component("minecraft:container", component);
+    }
+
     public JResult containerLoot(JContainerLootComponent component) {
         return this.component("minecraft:container_loot", component);
+    }
+
+    public JResult cowVariant(ResourceLocation resourceLocation) {
+        return this.component("minecraft:cow/variant", new JSimpleComponent<>(resourceLocation));
     }
 
     public JResult creativeSlotLock(JMultitypeComponent component) {
@@ -127,10 +135,6 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult debugStickState(JStringMapComponent component) {
         return this.component("minecraft:debug_stick_state", component);
-    }
-
-    public JResult container(JContainerComponent component) {
-        return this.component("minecraft:container", component);
     }
 
     public JResult removedComponent(String name) {
