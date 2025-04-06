@@ -92,6 +92,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:creative_slot_lock", component);
     }
 
+    public JResult customData(JCustomDataComponent component) {
+        return this.component("minecraft:custom_data", component);
+    }
+
     public JResult container(JContainerComponent component) {
         return this.component("minecraft:container", component);
     }

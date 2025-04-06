@@ -82,6 +82,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JSound.class, new JSound.Serializer())
             .registerTypeAdapter(JContainerComponent.class, new JContainerComponent.Serializer())
             .registerTypeAdapter(JMultitypeComponent.class, new JMultitypeComponent.Serializer())
+            .registerTypeAdapter(JCustomDataComponent.class, new JCustomDataComponent.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
