@@ -6,16 +6,16 @@ import com.google.gson.JsonSerializer;
 
 import java.lang.reflect.Type;
 
-public class JPrimitiveComponent<T> extends AbstractJComponent {
+public class JSimpleComponent<T> extends AbstractJComponent {
     private final T value;
 
-    public JPrimitiveComponent(T value) {
+    public JSimpleComponent(T value) {
         this.value = value;
     }
 
-    public static class Serializer implements JsonSerializer<JPrimitiveComponent<?>> {
+    public static class Serializer implements JsonSerializer<JSimpleComponent<?>> {
         @Override
-        public JsonElement serialize(JPrimitiveComponent<?> src, Type type, JsonSerializationContext context) {
+        public JsonElement serialize(JSimpleComponent<?> src, Type type, JsonSerializationContext context) {
             return context.serialize(src.value);
         }
     }

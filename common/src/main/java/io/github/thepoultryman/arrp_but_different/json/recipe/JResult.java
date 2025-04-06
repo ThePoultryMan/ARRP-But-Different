@@ -31,7 +31,7 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult component(String name, int value) {
-        this.components.put(name, new JPrimitiveComponent<>(value));
+        this.components.put(name, new JSimpleComponent<>(value));
         return this;
     }
 
@@ -52,8 +52,8 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:bees", component);
     }
 
-    public JResult blockEntityData(JResourceLocationComponent component) {
-        return this.component("minecraft:block_entity_data", component);
+    public JResult blockEntityData(ResourceLocation resourceLocation) {
+        return this.component("minecraft:block_entity_data", new JSimpleComponent<>(resourceLocation));
     }
 
     public JResult blockState(JBlockStateComponent component) {
@@ -101,7 +101,11 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult customName(String string) {
-        return this.component("minecraft:custom_name", new JPrimitiveComponent<>(string));
+        return this.component("minecraft:custom_name", new JSimpleComponent<>(string));
+    }
+
+    public JResult damage(int damage) {
+        return this.component("minecraft:damage", damage);
     }
 
     public JResult container(JContainerComponent component) {
