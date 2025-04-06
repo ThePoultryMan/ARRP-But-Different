@@ -67,7 +67,20 @@ public class ARRPButTestingCommon {
                                 new JResult()
                                         .id(ResourceLocation.withDefaultNamespace("golden_sword"))
                                         .component("minecraft:damage", 3)
-                                        .component("minecraft:rarity", "rare")
+//                                        .component("minecraft:rarity", "rare")
+                        )
+        );
+        pack.addRecipe(
+                ResourceLocation.fromNamespaceAndPath(MOD_ID, "burnt_bread"),
+                new JSmeltingRecipe(SmeltingTypes.BLASTING)
+                        .ingredient(
+                                new JIngredient().entry("minecraft:bread")
+                        )
+                        .cookingTime(30)
+                        .result(
+                                new JResult()
+                                        .id(ResourceLocation.withDefaultNamespace("goat_horn"))
+                                        .customName("Burnt Coal")
                         )
         );
         pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_furnace"),

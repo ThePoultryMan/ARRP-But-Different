@@ -8,6 +8,7 @@ import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JHorseVariant;
 import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Instrument;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -194,6 +195,10 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult horseVariant(JHorseVariant.Variant variant) {
         return this.component("minecraft:horse/variant", new JHorseVariant(variant));
+    }
+
+    public JResult instrument(Instrument instrument) {
+        return this.component("minecraft:instrument", new JCodecComponent<>(instrument, Instrument.DIRECT_CODEC));
     }
 
     public JResult removedComponent(String name) {

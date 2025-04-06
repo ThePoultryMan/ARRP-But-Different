@@ -73,6 +73,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JIngredient.class, new JIngredient.Serializer())
             .registerTypeAdapter(ResourceLocation.class, new ResourceLocationSerializer())
             .registerTypeAdapter(JCondition.class, new JCondition.Serializer())
+            .registerTypeAdapter(JCodecComponent.class, new JCodecComponent.Serializer<>())
             .registerTypeAdapter(JSimpleComponent.class, new JSimpleComponent.Serializer())
             .registerTypeAdapter(JBannerPatternsComponent.class, new JBannerPatternsComponent.Serializer())
             .registerTypeAdapter(JBannerPatternType.class, new JBannerPatternType.Serializer())
