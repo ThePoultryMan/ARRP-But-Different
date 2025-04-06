@@ -165,6 +165,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:equippable", component);
     }
 
+    public JResult fireworkExplosion(JFireworkExplosionComponent component) {
+        return this.component("minecraft:firework_explosion", component);
+    }
+
     public JResult removedComponent(String name) {
         return this.component("!" + name, new EmptyJComponent());
     }
