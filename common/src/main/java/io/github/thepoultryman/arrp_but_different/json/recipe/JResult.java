@@ -133,6 +133,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:damage_resistant", new JDamageResistanceComponent(types));
     }
 
+    public JResult deathProtection(JDeathProtectionComponent component) {
+        return this.component("minecraft:death_protection", component);
+    }
+
     public JResult debugStickState(JStringMapComponent component) {
         return this.component("minecraft:debug_stick_state", component);
     }
