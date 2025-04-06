@@ -89,6 +89,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:charged_projectiles", component);
     }
 
+    public JResult chickenVariant(ResourceLocation resourceLocation) {
+        return this.component("minecraft:chicken/variant", new JSimpleComponent<>(resourceLocation));
+    }
+
     public JResult consumable(JConsumableComponent component) {
         return this.component("minecraft:consumable", component);
     }
