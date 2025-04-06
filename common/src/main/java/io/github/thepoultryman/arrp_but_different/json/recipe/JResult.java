@@ -5,6 +5,7 @@ import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JConsumableComponent;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JFoxVariantComponent;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JFrogVariantComponent;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JHorseVariant;
 import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.resources.ResourceLocation;
 
@@ -189,6 +190,10 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult glider() {
         return this.component("minecraft:glider", new EmptyJComponent());
+    }
+
+    public JResult horseVariant(JHorseVariant.Variant variant) {
+        return this.component("minecraft:horse/variant", new JHorseVariant(variant));
     }
 
     public JResult removedComponent(String name) {
