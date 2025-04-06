@@ -141,6 +141,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:debug_stick_state", component);
     }
 
+    public JResult dyedColor(JDyedColorComponent component) {
+        return this.component("minecraft:dyed_color", component);
+    }
+
     public JResult removedComponent(String name) {
         return this.component("!" + name, new EmptyJComponent());
     }
