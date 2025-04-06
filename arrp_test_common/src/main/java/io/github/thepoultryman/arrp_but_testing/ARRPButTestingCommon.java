@@ -82,10 +82,14 @@ public class ARRPButTestingCommon {
                         .cookingTime(30)
                         .result(
                                 new JResult()
-                                        .id(ResourceLocation.withDefaultNamespace("goat_horn"))
+                                        .id(ResourceLocation.withDefaultNamespace("coal"))
                                         .itemName(
-                                                Component.literal("Burnt Coal")
+                                                Component.literal("Burnt Bread")
                                                         .setStyle(Style.EMPTY.applyFormat(ChatFormatting.BOLD))
+                                        )
+                                        .lore(
+                                                Component.literal("A burnt piece of bread"),
+                                                Component.literal("Does nothing").withStyle(ChatFormatting.ITALIC)
                                         )
                         )
         );

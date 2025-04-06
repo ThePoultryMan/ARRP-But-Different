@@ -11,9 +11,13 @@ import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.LockCode;
 import net.minecraft.world.item.Instrument;
+import net.minecraft.world.item.component.LodestoneTracker;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JResult extends BaseCloneable<JResult> {
@@ -222,6 +226,22 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult llamaVariant(LlamaVariant variant) {
         return this.component("minecraft:llama/variant", new JSimpleComponent<>(variant));
+    }
+
+    public JResult lock(LockCode lockCode) {
+        return this.component("minecraft:lock", new JCodecComponent<>(lockCode, LockCode.CODEC));
+    }
+
+    public JResult lodestoneTracker(LodestoneTracker lodestoneTracker) {
+        return this.component("minecraft:lodestone_tracker", new JCodecComponent<>(lodestoneTracker, LodestoneTracker.CODEC));
+    }
+
+    public JResult lore(Component... components) {
+        List<JCodecComponent<Component>> codecComponents = new ArrayList<>(components.length);
+        for (int i = 0; i < components.length; i++) {
+            codecComponents.add(i, new JCodecComponent<>(components[i], ComponentSerialization.CODEC));
+        }
+        return this.component("minecraft:lore", new JSimpleComponent<>(codecComponents));
     }
 
     public JResult removedComponent(String name) {
