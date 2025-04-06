@@ -3,10 +3,7 @@ package io.github.thepoultryman.arrp_but_different.json.recipe;
 import io.github.thepoultryman.arrp_but_different.json.PresetColor;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JConsumableComponent;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.FoxVariant;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.FrogVariant;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.HorseVariant;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.LlamaVariant;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.*;
 import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
@@ -268,6 +265,10 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult maxStackSize(int maxStackSize) {
         return this.component("minecraft:max_stack_size", new JSimpleComponent<>(maxStackSize));
+    }
+
+    public JResult mooshroomVariant(MooshroomVariant variant) {
+        return this.component("minecraft:mooshroom/variant", new JSimpleComponent<>(variant));
     }
 
     public JResult removedComponent(String name) {
