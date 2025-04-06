@@ -96,6 +96,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:custom_data", component);
     }
 
+    public JResult customModelData(JCustomModelDataComponent component) {
+        return this.component("minecraft:custom_model_data", component);
+    }
+
     public JResult container(JContainerComponent component) {
         return this.component("minecraft:container", component);
     }
