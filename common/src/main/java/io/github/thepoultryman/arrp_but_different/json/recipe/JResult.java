@@ -161,6 +161,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:entity_data", new JIdResourceLocationComponent(id));
     }
 
+    public JResult equippable(JEquippableComponent component) {
+        return this.component("minecraft:equippable", component);
+    }
+
     public JResult removedComponent(String name) {
         return this.component("!" + name, new EmptyJComponent());
     }
