@@ -262,6 +262,14 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:map_post_processing", new JSimpleComponent<>(mapPostProcessing));
     }
 
+    public JResult maxDamage(int maxDamage) {
+        return this.component("minecraft:max_damage", new JSimpleComponent<>(maxDamage));
+    }
+
+    public JResult maxStackSize(int maxStackSize) {
+        return this.component("minecraft:max_stack_size", new JSimpleComponent<>(maxStackSize));
+    }
+
     public JResult removedComponent(String name) {
         return this.component("!" + name, new EmptyJComponent());
     }
