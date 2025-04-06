@@ -157,6 +157,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:enchantments", component);
     }
 
+    public JResult entityData(ResourceLocation id) {
+        return this.component("minecraft:entity_data", new JIdResourceLocationComponent(id));
+    }
+
     public JResult removedComponent(String name) {
         return this.component("!" + name, new EmptyJComponent());
     }
