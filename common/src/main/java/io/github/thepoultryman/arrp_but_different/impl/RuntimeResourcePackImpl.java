@@ -22,9 +22,6 @@ import io.github.thepoultryman.arrp_but_different.json.recipe.JIngredient;
 import io.github.thepoultryman.arrp_but_different.json.recipe.banner.JBannerPatternType;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JSound;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JFoxVariantComponent;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JFrogVariantComponent;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JHorseVariant;
 import io.github.thepoultryman.arrp_but_different.json.state.JMultipart;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
 import io.github.thepoultryman.arrp_but_different.json.state.JWhen;
@@ -88,9 +85,6 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JCustomDataComponent.class, new JCustomDataComponent.Serializer())
             .registerTypeAdapter(JDyedColorComponent.class, new JDyedColorComponent.Serializer())
             .registerTypeAdapter(JEnchantmentsComponent.class, new JEnchantmentsComponent.Serializer())
-            .registerTypeAdapter(JFoxVariantComponent.class, new JFoxVariantComponent.Serializer())
-            .registerTypeAdapter(JFrogVariantComponent.class, new JFrogVariantComponent.Serializer())
-            .registerTypeAdapter(JHorseVariant.class, new JHorseVariant.Serializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();

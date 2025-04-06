@@ -3,9 +3,10 @@ package io.github.thepoultryman.arrp_but_different.json.recipe;
 import io.github.thepoultryman.arrp_but_different.json.PresetColor;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JConsumableComponent;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JFoxVariantComponent;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JFrogVariantComponent;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.JHorseVariant;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.FoxVariant;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.FrogVariant;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.HorseVariant;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.LlamaVariant;
 import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
@@ -183,20 +184,20 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:food", component);
     }
 
-    public JResult foxVariant(JFoxVariantComponent.Variant variant) {
-        return this.component("minecraft:fox/variant", new JFoxVariantComponent(variant));
+    public JResult foxVariant(FoxVariant variant) {
+        return this.component("minecraft:fox/variant", new JSimpleComponent<>(variant));
     }
 
-    public JResult frogVariant(JFrogVariantComponent.Variant variant) {
-        return this.component("minecraft:frog/variant", new JFrogVariantComponent(variant));
+    public JResult frogVariant(FrogVariant variant) {
+        return this.component("minecraft:frog/variant", new JSimpleComponent<>(variant));
     }
 
     public JResult glider() {
         return this.component("minecraft:glider", new EmptyJComponent());
     }
 
-    public JResult horseVariant(JHorseVariant.Variant variant) {
-        return this.component("minecraft:horse/variant", new JHorseVariant(variant));
+    public JResult horseVariant(HorseVariant variant) {
+        return this.component("minecraft:horse/variant", new JSimpleComponent<>(variant));
     }
 
     public JResult instrument(Instrument instrument) {
@@ -213,6 +214,14 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult itemName(Component component) {
         return this.component("minecraft:item_name", new JCodecComponent<>(component, ComponentSerialization.CODEC));
+    }
+
+    public JResult jukeboxPlayable(ResourceLocation resourceLocation) {
+        return this.component("minecraft:jukebox_playable", new JSimpleComponent<>(resourceLocation));
+    }
+
+    public JResult llamaVariant(LlamaVariant variant) {
+        return this.component("minecraft:llama/variant", new JSimpleComponent<>(variant));
     }
 
     public JResult removedComponent(String name) {
