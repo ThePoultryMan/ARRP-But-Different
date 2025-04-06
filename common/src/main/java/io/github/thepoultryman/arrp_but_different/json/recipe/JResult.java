@@ -153,6 +153,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:enchantment_glint_override", new JSimpleComponent<>(override));
     }
 
+    public JResult enchantments(JEnchantmentsComponent component) {
+        return this.component("minecraft:enchantments", component);
+    }
+
     public JResult removedComponent(String name) {
         return this.component("!" + name, new EmptyJComponent());
     }

@@ -83,6 +83,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JMultitypeComponent.class, new JMultitypeComponent.Serializer())
             .registerTypeAdapter(JCustomDataComponent.class, new JCustomDataComponent.Serializer())
             .registerTypeAdapter(JDyedColorComponent.class, new JDyedColorComponent.Serializer())
+            .registerTypeAdapter(JEnchantmentsComponent.class, JEnchantmentsComponent.Serializer.class)
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
