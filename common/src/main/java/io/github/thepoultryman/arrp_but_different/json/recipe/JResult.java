@@ -293,6 +293,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:stored_enchantments", enchantments);
     }
 
+    public JResult suspiciousStewEffects(JListComponent<JSuspiciousStewEffect> effects) {
+        return this.component("minecraft:suspicious_stew_effects", effects);
+    }
+
     public JResult catVariant(ResourceLocation resourceLocation) {
         return this.component("minecraft:cat/variant", new JSimpleComponent<>(resourceLocation));
     }
