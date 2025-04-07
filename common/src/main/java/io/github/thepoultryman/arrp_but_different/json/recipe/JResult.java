@@ -289,6 +289,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:repair_cost", new JSimpleComponent<>(cost));
     }
 
+    public JResult storedEnchantments(JListComponent<ResourceLocation> enchantments) {
+        return this.component("minecraft:stored_enchantments", enchantments);
+    }
+
     public JResult catVariant(ResourceLocation resourceLocation) {
         return this.component("minecraft:cat/variant", new JSimpleComponent<>(resourceLocation));
     }
