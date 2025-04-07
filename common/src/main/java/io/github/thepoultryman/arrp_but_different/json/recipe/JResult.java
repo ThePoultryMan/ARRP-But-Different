@@ -277,6 +277,10 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:rarity", new JCodecComponent<>(rarity, Rarity.CODEC));
     }
 
+    public JResult recipes(JListComponent<ResourceLocation> component) {
+        return this.component("minecraft:recipes", component);
+    }
+
     public JResult repairable(Repairable repairable) {
         return this.component("minecraft:repairable", new JCodecComponent<>(repairable, Repairable.CODEC));
     }
