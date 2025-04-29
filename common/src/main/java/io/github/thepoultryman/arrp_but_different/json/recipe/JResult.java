@@ -329,6 +329,16 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:weapon", new JCodecComponent<>(weapon, Weapon.CODEC));
     }
 
+    public JResult writableBookContent() {
+        return this.component("minecraft:writable_book_content",
+                new JCodecComponent<>(WritableBookContent.EMPTY, WritableBookContent.CODEC)
+        );
+    }
+
+    public JResult writableBookContent(JWritableBookContentComponent pages) {
+        return this.component("minecraft:writable_book_content", pages);
+    }
+
     public JResult catVariant(ResourceLocation resourceLocation) {
         return this.component("minecraft:cat/variant", new JSimpleComponent<>(resourceLocation));
     }

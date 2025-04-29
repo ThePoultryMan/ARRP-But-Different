@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JListComponent<T> extends AbstractJComponent {
-    private final List<T> list = new ArrayList<>();
+    protected final List<T> list = new ArrayList<>();
 
     public void addItem(T item) {
         this.list.add(item);
