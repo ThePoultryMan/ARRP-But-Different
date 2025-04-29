@@ -297,6 +297,14 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:suspicious_stew_effects", effects);
     }
 
+    public JResult tool(JToolComponentBuilder tool) {
+        return this.component("minecraft:tool", tool);
+    }
+
+    public JResult tool(Tool tool) {
+        return this.component("minecraft:tool", new JToolComponentBuilder(tool));
+    }
+
     public JResult catVariant(ResourceLocation resourceLocation) {
         return this.component("minecraft:cat/variant", new JSimpleComponent<>(resourceLocation));
     }
