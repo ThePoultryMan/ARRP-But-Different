@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JToolComponentBuilder extends JCodecBuilderComponent<Tool> {
+public class JToolComponent extends JCodecBuilderComponent<Tool> {
     private final List<Tool.Rule> rules = new ArrayList<>();
     private float defaultMiningSpeed;
     private int damagePerBlock;
@@ -18,10 +18,10 @@ public class JToolComponentBuilder extends JCodecBuilderComponent<Tool> {
      * <br />
      * If you're going to be using all the fields on {@link Tool}, you are encouraged to use the
      * constructor overload that takes a {@link Tool} instance. This will merge the rules from
-     * {@link JToolComponentBuilder} and the provided {@link Tool} together, while keeping all the other values
+     * {@link JToolComponent} and the provided {@link Tool} together, while keeping all the other values
      * from the {@link Tool}.
      */
-    public JToolComponentBuilder() {
+    public JToolComponent() {
         super(Tool.CODEC);
         this.defaultMiningSpeed = 1.0f;
         this.damagePerBlock = 1;
@@ -30,30 +30,30 @@ public class JToolComponentBuilder extends JCodecBuilderComponent<Tool> {
 
     /**
      * This overload should only be called if you want to merge {@link Tool.Rule}s provided to
-     * {@link JToolComponentBuilder} with an existing {@link Tool}.
+     * {@link JToolComponent} with an existing {@link Tool}.
      * @param tool The {@link Tool} rules will be merged with.
      */
-    public JToolComponentBuilder(@NotNull Tool tool) {
+    public JToolComponent(@NotNull Tool tool) {
         super(Tool.CODEC);
         this.object = tool;
     }
 
-    public JToolComponentBuilder defaultMiningSpeed(float speed) {
+    public JToolComponent defaultMiningSpeed(float speed) {
         this.defaultMiningSpeed = speed;
         return this;
     }
 
-    public JToolComponentBuilder damagePerBlock(int damage) {
+    public JToolComponent damagePerBlock(int damage) {
         this.damagePerBlock = damage;
         return this;
     }
 
-    public JToolComponentBuilder canDestroyBlocksInCreative(boolean canDestroy) {
+    public JToolComponent canDestroyBlocksInCreative(boolean canDestroy) {
         this.canDestroyBlocksInCreative = canDestroy;
         return this;
     }
 
-    public JToolComponentBuilder rule(Tool.Rule rule) {
+    public JToolComponent rule(Tool.Rule rule) {
         this.rules.add(rule);
         return this;
     }
