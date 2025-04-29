@@ -1,18 +1,12 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe.component;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 import net.minecraft.world.item.component.Tool;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class JToolComponentBuilder extends AbstractJComponent {
-    private Optional<Tool> tool;
+public class JToolComponentBuilder extends JCodecBuilderComponent<Tool> {
     private final List<Tool.Rule> rules = new ArrayList<>();
     private float defaultMiningSpeed;
     private int damagePerBlock;
@@ -20,7 +14,7 @@ public class JToolComponentBuilder extends AbstractJComponent {
 
     /**
      * Creates a {@link Tool} through the builder pattern. There shouldn't be a reason why you need
-     * to call {@link #build()}, but it is public if you need to do so.
+     * to call {@link #manuallyBuild()}, but it is public if you need to do so.
      * <br />
      * If you're going to be using all the fields on {@link Tool}, you are encouraged to use the
      * constructor overload that takes a {@link Tool} instance. This will merge the rules from
@@ -28,6 +22,7 @@ public class JToolComponentBuilder extends AbstractJComponent {
      * from the {@link Tool}.
      */
     public JToolComponentBuilder() {
+        super(Tool.CODEC);
         this.defaultMiningSpeed = 1.0f;
         this.damagePerBlock = 1;
         this.canDestroyBlocksInCreative = true;
@@ -39,7 +34,8 @@ public class JToolComponentBuilder extends AbstractJComponent {
      * @param tool The {@link Tool} rules will be merged with.
      */
     public JToolComponentBuilder(@NotNull Tool tool) {
-        this.tool = Optional.of(tool);
+        super(Tool.CODEC);
+        this.object = tool;
     }
 
     public JToolComponentBuilder defaultMiningSpeed(float speed) {
@@ -62,15 +58,16 @@ public class JToolComponentBuilder extends AbstractJComponent {
         return this;
     }
 
-    public Tool build() {
-        this.tool.ifPresent((tool) -> tool.rules().addAll(this.rules));
-        return this.tool.orElse(new Tool(this.rules, this.defaultMiningSpeed, this.damagePerBlock, this.canDestroyBlocksInCreative));
+    @Override
+    protected Tool build() {
+        if (this.object != null) {
+            this.object.rules().addAll(this.rules);
+        }
+        return super.build();
     }
 
-    public static class Serializer implements JsonSerializer<JToolComponentBuilder> {
-        @Override
-        public JsonElement serialize(JToolComponentBuilder src, Type type, JsonSerializationContext context) {
-            return context.serialize(src.build());
-        }
+    @Override
+    public Tool manuallyBuild() {
+        return new Tool(this.rules, this.defaultMiningSpeed, this.damagePerBlock, this.canDestroyBlocksInCreative);
     }
 }
