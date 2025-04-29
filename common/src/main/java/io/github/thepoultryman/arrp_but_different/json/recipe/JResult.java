@@ -321,6 +321,14 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:remainder", component);
     }
 
+    public JResult weapon() {
+        return this.component("minecraft:weapon", new EmptyJComponent());
+    }
+
+    public JResult weapon(Weapon weapon) {
+        return this.component("minecraft:weapon", new JCodecComponent<>(weapon, Weapon.CODEC));
+    }
+
     public JResult catVariant(ResourceLocation resourceLocation) {
         return this.component("minecraft:cat/variant", new JSimpleComponent<>(resourceLocation));
     }
