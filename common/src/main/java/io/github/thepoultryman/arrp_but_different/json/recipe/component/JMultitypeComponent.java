@@ -50,7 +50,7 @@ public class JMultitypeComponent extends AbstractJComponent {
             this.type = type;
         } else if (this.type != type) {
             throw new IllegalStateException(
-                    "A multitype component cannot have varying types within it. You are currently trying to use the List type, but the current type is " + this.type
+                    "A multitype component cannot have varying types within it. You are currently trying to use the" + type + "type, but the current type is " + this.type
             );
         }
     }
