@@ -1,5 +1,6 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe;
 
+import com.google.gson.JsonElement;
 import io.github.thepoultryman.arrp_but_different.json.PresetColor;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JConsumableComponent;
@@ -38,14 +39,58 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     // Allow inputting specific components.
+
+    /**
+     * Adds a data component to the result.
+     * <br/>
+     * {@link JResult} has numerous helper methods for adding specific components, check to see if
+     * one is available before using this function.
+     * <br/>
+     * When adding non-vanilla components to {@link JResult}, it's advised that you use the
+     * {@link #component(String, Object)} overload rather than extending {@link AbstractJComponent}
+     * because that is an internal api, and is subject to change. Additionally, you should only use
+     * the {@link #component(String, JsonElement)} overload if your non-vanilla component can't be
+     * serialized without a type adapter.
+     * @param name The name of the component
+     * @param value The component
+     * @return The current {@link JResult} instance
+     */
     public JResult component(String name, AbstractJComponent value) {
         this.components.put(name, value);
         return this;
     }
 
-    public JResult component(String name, int value) {
+    /**
+     * Adds a data component to the result.
+     * <br/>
+     * <b>If you are attempting to add a vanilla component, refer to the {@link #component(String, AbstractJComponent)}
+     * docs.</b>
+     * <br/>
+     * This is the goto method for adding non-vanilla components, however if your class would need
+     * a type adapter, then you should serialize it to a {@link JsonElement} and pass it to the
+     * {@link #component(String, JsonElement)} overload.
+     * @param name
+     * @param value
+     * @return
+     * @param <T>
+     */
+    public <T> JResult component(String name, T value) {
         this.components.put(name, new JSimpleComponent<>(value));
         return this;
+    }
+
+    /**
+     * Adds a data component to the result.
+     * <br/>
+     * This overload is meant to be used with non-vanilla components that won't
+     * serialize without a type adapter. If that doesn't apply use {@link #component(String, AbstractJComponent)}
+     * or {@link #component(String, Object)}
+     * @param name The name of the component
+     * @param json The component represented/pre-serialized into json
+     * @return The current {@link JResult} instance
+     */
+    public JResult component(String name, JsonElement json) {
+        return this.component(name, new JSimpleComponent<>(json));
     }
 
     // Helpers for adding specific Components
