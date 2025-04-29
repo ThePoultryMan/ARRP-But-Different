@@ -4,18 +4,17 @@ import com.google.gson.JsonElement;
 import io.github.thepoultryman.arrp_but_different.json.PresetColor;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JConsumableComponent;
-import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.*;
 import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.LockCode;
-import net.minecraft.world.entity.animal.Parrot;
-import net.minecraft.world.entity.animal.Rabbit;
-import net.minecraft.world.entity.animal.Salmon;
-import net.minecraft.world.entity.animal.TropicalFish;
+import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraft.world.entity.animal.frog.FrogVariant;
+import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.entity.animal.horse.Variant;
 import net.minecraft.world.entity.animal.wolf.WolfSoundVariant;
 import net.minecraft.world.entity.animal.wolf.WolfVariant;
 import net.minecraft.world.entity.npc.VillagerType;
@@ -121,7 +120,7 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult blockEntityData(ResourceLocation resourceLocation) {
-        return this.component("minecraft:block_entity_data", new JSimpleComponent<>(resourceLocation));
+        return this.component("minecraft:block_entity_data", resourceLocation);
     }
 
     public JResult blockState(JStringMapComponent component) {
@@ -177,7 +176,7 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult customName(String string) {
-        return this.component("minecraft:custom_name", new JSimpleComponent<>(string));
+        return this.component("minecraft:custom_name", string);
     }
 
     public JResult damage(int damage) {
@@ -201,11 +200,11 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult enchantable(int value) {
-        return this.component("minecraft:enchantable", new JSimpleComponent<>(value));
+        return this.component("minecraft:enchantable", value);
     }
 
     public JResult enchantmentGlintOverride(boolean override) {
-        return this.component("minecraft:enchantment_glint_override", new JSimpleComponent<>(override));
+        return this.component("minecraft:enchantment_glint_override", override);
     }
 
     public JResult enchantments(JEnchantmentsComponent component) {
@@ -245,7 +244,7 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult itemModel(ResourceLocation modelLocation) {
-        return this.component("minecraft:item_model", new JSimpleComponent<>(modelLocation));
+        return this.component("minecraft:item_model", modelLocation);
     }
 
     public JResult itemName(Component component) {
@@ -253,7 +252,7 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult jukeboxPlayable(ResourceLocation resourceLocation) {
-        return this.component("minecraft:jukebox_playable", new JSimpleComponent<>(resourceLocation));
+        return this.component("minecraft:jukebox_playable", resourceLocation);
     }
 
     public JResult lock(LockCode lockCode) {
@@ -269,11 +268,11 @@ public class JResult extends BaseCloneable<JResult> {
         for (int i = 0; i < components.length; i++) {
             codecComponents.add(i, new JCodecComponent<>(components[i], ComponentSerialization.CODEC));
         }
-        return this.component("minecraft:lore", new JSimpleComponent<>(codecComponents));
+        return this.component("minecraft:lore", codecComponents);
     }
 
     public JResult mapColor(int mapColor) {
-        return this.component("minecraft:map_color", new JSimpleComponent<>(mapColor));
+        return this.component("minecraft:map_color", mapColor);
     }
 
     public JResult mapDecorations(MapDecorations mapDecorations) {
@@ -281,27 +280,27 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult mapId(int mapId) {
-        return this.component("minecraft:map_id", new JSimpleComponent<>(mapId));
+        return this.component("minecraft:map_id", mapId);
     }
 
     public JResult mapPostProcessing(MapPostProcessing mapPostProcessing) {
-        return this.component("minecraft:map_post_processing", new JSimpleComponent<>(mapPostProcessing));
+        return this.component("minecraft:map_post_processing", mapPostProcessing);
     }
 
     public JResult maxDamage(int maxDamage) {
-        return this.component("minecraft:max_damage", new JSimpleComponent<>(maxDamage));
+        return this.component("minecraft:max_damage", maxDamage);
     }
 
     public JResult maxStackSize(int maxStackSize) {
-        return this.component("minecraft:max_stack_size", new JSimpleComponent<>(maxStackSize));
+        return this.component("minecraft:max_stack_size", maxStackSize);
     }
 
     public JResult noteBlockSound(ResourceLocation noteBlockSound) {
-        return this.component("minecraft:note_block_sound", new JSimpleComponent<>(noteBlockSound));
+        return this.component("minecraft:note_block_sound", noteBlockSound);
     }
 
     public JResult ominousBottleAmplifier(int amplifier) {
-        return this.component("minecraft:ominous_bottle_amplifier", new JSimpleComponent<>(amplifier));
+        return this.component("minecraft:ominous_bottle_amplifier", amplifier);
     }
 
     public JResult potDecorations(PotDecorations decorations) {
@@ -313,7 +312,7 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult potionDurationScale(float durationScale) {
-        return this.component("minecraft:potion_duration_scale", new JSimpleComponent<>(durationScale));
+        return this.component("minecraft:potion_duration_scale", durationScale);
     }
 
     public JResult profile(ResolvableProfile profile) {
@@ -321,7 +320,7 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult providesBannerPatterns(ResourceLocation tag) {
-        return this.component("minecraft:provides_banner_pattern", new JSimpleComponent<>("#" + tag.toString()));
+        return this.component("minecraft:provides_banner_pattern", "#" + tag.toString());
     }
 
     public JResult providesTrimMaterial(ProvidesTrimMaterial material) {
@@ -341,7 +340,7 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult repairCost(int cost) {
-        return this.component("minecraft:repair_cost", new JSimpleComponent<>(cost));
+        return this.component("minecraft:repair_cost", cost);
     }
 
     public JResult storedEnchantments(JListComponent<ResourceLocation> enchantments) {
@@ -361,7 +360,7 @@ public class JResult extends BaseCloneable<JResult> {
     }
 
     public JResult tooltip_style(ResourceLocation style) {
-        return this.component("minecraft:tooltip_style", new JSimpleComponent<>(style));
+        return this.component("minecraft:tooltip_style", style);
     }
 
     public JResult unbreakable() {
@@ -414,36 +413,36 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:cat/collar", color.getName());
     }
 
-    public JResult catVariant(ResourceLocation resourceLocation) {
-        return this.component("minecraft:cat/variant", new JSimpleComponent<>(resourceLocation));
+    public JResult catVariant(ResourceKey<CatVariant> variant) {
+        return this.component("minecraft:cat/variant", variant.location());
     }
 
-    public JResult chickenVariant(ResourceLocation resourceLocation) {
-        return this.component("minecraft:chicken/variant", new JSimpleComponent<>(resourceLocation));
+    public JResult chickenVariant(ResourceKey<ChickenVariant> variant) {
+        return this.component("minecraft:chicken/variant", variant.location());
     }
 
-    public JResult cowVariant(ResourceLocation resourceLocation) {
-        return this.component("minecraft:cow/variant", new JSimpleComponent<>(resourceLocation));
+    public JResult cowVariant(ResourceKey<CowVariant> variant) {
+        return this.component("minecraft:cow/variant", variant.location());
     }
 
-    public JResult foxVariant(FoxVariant variant) {
-        return this.component("minecraft:fox/variant", new JSimpleComponent<>(variant));
+    public JResult foxVariant(Fox.Variant variant) {
+        return this.component("minecraft:fox/variant", variant.getSerializedName());
     }
 
-    public JResult frogVariant(FrogVariant variant) {
-        return this.component("minecraft:frog/variant", new JSimpleComponent<>(variant));
+    public JResult frogVariant(ResourceKey<FrogVariant> variant) {
+        return this.component("minecraft:frog/variant", variant.location());
     }
 
-    public JResult horseVariant(HorseVariant variant) {
-        return this.component("minecraft:horse/variant", new JSimpleComponent<>(variant));
+    public JResult horseVariant(Variant variant) {
+        return this.component("minecraft:horse/variant", variant.getSerializedName());
     }
 
-    public JResult llamaVariant(LlamaVariant variant) {
-        return this.component("minecraft:llama/variant", new JSimpleComponent<>(variant));
+    public JResult llamaVariant(Llama.Variant variant) {
+        return this.component("minecraft:llama/variant", variant.getSerializedName());
     }
 
-    public JResult mooshroomVariant(MooshroomVariant variant) {
-        return this.component("minecraft:mooshroom/variant", new JSimpleComponent<>(variant));
+    public JResult mooshroomVariant(MushroomCow.Variant variant) {
+        return this.component("minecraft:mooshroom/variant", variant.getSerializedName());
     }
 
     /**
