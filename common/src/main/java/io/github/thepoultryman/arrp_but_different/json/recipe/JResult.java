@@ -8,8 +8,18 @@ import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.
 import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.LockCode;
+import net.minecraft.world.entity.animal.Parrot;
+import net.minecraft.world.entity.animal.Rabbit;
+import net.minecraft.world.entity.animal.Salmon;
+import net.minecraft.world.entity.animal.TropicalFish;
+import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraft.world.entity.animal.wolf.WolfSoundVariant;
+import net.minecraft.world.entity.animal.wolf.WolfVariant;
+import net.minecraft.world.entity.npc.VillagerType;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Instrument;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.alchemy.PotionContents;
@@ -396,6 +406,14 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:written_book_content", content);
     }
 
+    public JResult axolotlVariant(Axolotl.Variant variant) {
+        return this.component("minecraft:axolotl/variant", variant.getSerializedName());
+    }
+
+    public JResult catCollar(DyeColor color) {
+        return this.component("minecraft:cat/collar", color.getName());
+    }
+
     public JResult catVariant(ResourceLocation resourceLocation) {
         return this.component("minecraft:cat/variant", new JSimpleComponent<>(resourceLocation));
     }
@@ -426,6 +444,64 @@ public class JResult extends BaseCloneable<JResult> {
 
     public JResult mooshroomVariant(MooshroomVariant variant) {
         return this.component("minecraft:mooshroom/variant", new JSimpleComponent<>(variant));
+    }
+
+    /**
+     * <p>Adds a new painting variant component to the result.</p>
+     * <p>Doesn't support creating a new painting definition, which will no longer be an option in 1.21.6.
+     * @param variant The variant of the painting</p>
+     * @return The current {@link JResult} instance
+     * */
+    public JResult paintingVariant(ResourceLocation variant) {
+        return this.component("minecraft:painting/variant", variant);
+    }
+
+    public JResult parrotVariant(Parrot.Variant variant) {
+        return this.component("minecraft:parrot/variant", variant.getSerializedName());
+    }
+
+    public JResult rabbitVariant(Rabbit.Variant variant) {
+        return this.component("minecraft:rabbit/variant", variant.getSerializedName());
+    }
+
+    public JResult salmonSize(Salmon.Variant size) {
+        return this.component("minecraft:salmon/size", size.getSerializedName());
+    }
+
+    public JResult sheepColor(DyeColor color) {
+        return this.component("minecraft:sheep/color", color.getName());
+    }
+
+    public JResult shulkerColor(DyeColor color) {
+        return this.component("minecraft:shulker/color", color.getName());
+    }
+
+    public JResult tropicalFishBaseColor(DyeColor color) {
+        return this.component("minecraft:tropical_fish/base_color", color.getName());
+    }
+
+    public JResult tropicalFishPattern(TropicalFish.Pattern pattern) {
+        return this.component("minecraft:tropical_fish/pattern", pattern.getSerializedName());
+    }
+
+    public JResult tropicalFishPatternColor(DyeColor color) {
+        return this.component("minecraft:tropical_fish/pattern_color", color.getName());
+    }
+
+    public JResult villagerVariant(ResourceKey<VillagerType> variant) {
+        return this.component("minecraft:villager/variant", variant.location());
+    }
+
+    public JResult wolfCollar(DyeColor color) {
+        return this.component("minecraft:wolf/collar", color.getName());
+    }
+
+    public JResult wolfSoundVariant(ResourceKey<WolfSoundVariant> soundVariant) {
+        return this.component("minecraft:wolf/sound_variant", soundVariant.location());
+    }
+
+    public JResult wolfVariant(ResourceKey<WolfVariant> variant) {
+        return this.component("minecraft:wolf/variant", variant.location());
     }
 
     public JResult removedComponent(String name) {
