@@ -305,6 +305,22 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:tool", new JToolComponentBuilder(tool));
     }
 
+    public JResult tooltip_style(ResourceLocation style) {
+        return this.component("minecraft:tooltip_style", new JSimpleComponent<>(style));
+    }
+
+    public JResult unbreakable() {
+        return this.component("minecraft:unbreakable", new EmptyJComponent());
+    }
+
+    public JResult useCooldown(UseCooldown cooldown) {
+        return this.component("minecraft:use_cooldown", new JCodecComponent<>(cooldown, UseCooldown.CODEC));
+    }
+
+    public JResult remainder(JMultitypeComponent component) {
+        return this.component("minecraft:remainder", component);
+    }
+
     public JResult catVariant(ResourceLocation resourceLocation) {
         return this.component("minecraft:cat/variant", new JSimpleComponent<>(resourceLocation));
     }
