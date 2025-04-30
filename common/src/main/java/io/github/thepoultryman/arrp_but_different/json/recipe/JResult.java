@@ -4,21 +4,12 @@ import com.google.gson.JsonElement;
 import io.github.thepoultryman.arrp_but_different.json.PresetColor;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JConsumableComponent;
+import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.MobVariant;
 import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.LockCode;
-import net.minecraft.world.entity.animal.*;
-import net.minecraft.world.entity.animal.axolotl.Axolotl;
-import net.minecraft.world.entity.animal.frog.FrogVariant;
-import net.minecraft.world.entity.animal.horse.Llama;
-import net.minecraft.world.entity.animal.horse.Variant;
-import net.minecraft.world.entity.animal.wolf.WolfSoundVariant;
-import net.minecraft.world.entity.animal.wolf.WolfVariant;
-import net.minecraft.world.entity.npc.VillagerType;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Instrument;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.alchemy.PotionContents;
@@ -405,102 +396,8 @@ public class JResult extends BaseCloneable<JResult> {
         return this.component("minecraft:written_book_content", content);
     }
 
-    public JResult axolotlVariant(Axolotl.Variant variant) {
-        return this.component("minecraft:axolotl/variant", variant.getSerializedName());
-    }
-
-    public JResult catCollar(DyeColor color) {
-        return this.component("minecraft:cat/collar", color.getName());
-    }
-
-    public JResult catVariant(ResourceKey<CatVariant> variant) {
-        return this.component("minecraft:cat/variant", variant.location());
-    }
-
-    public JResult chickenVariant(ResourceKey<ChickenVariant> variant) {
-        return this.component("minecraft:chicken/variant", variant.location());
-    }
-
-    public JResult cowVariant(ResourceKey<CowVariant> variant) {
-        return this.component("minecraft:cow/variant", variant.location());
-    }
-
-    public JResult foxVariant(Fox.Variant variant) {
-        return this.component("minecraft:fox/variant", variant.getSerializedName());
-    }
-
-    public JResult frogVariant(ResourceKey<FrogVariant> variant) {
-        return this.component("minecraft:frog/variant", variant.location());
-    }
-
-    public JResult horseVariant(Variant variant) {
-        return this.component("minecraft:horse/variant", variant.getSerializedName());
-    }
-
-    public JResult llamaVariant(Llama.Variant variant) {
-        return this.component("minecraft:llama/variant", variant.getSerializedName());
-    }
-
-    public JResult mooshroomVariant(MushroomCow.Variant variant) {
-        return this.component("minecraft:mooshroom/variant", variant.getSerializedName());
-    }
-
-    /**
-     * <p>Adds a new painting variant component to the result.</p>
-     * <p>Doesn't support creating a new painting definition, which will no longer be an option in 1.21.6.
-     * @param variant The variant of the painting</p>
-     * @return The current {@link JResult} instance
-     * */
-    public JResult paintingVariant(ResourceLocation variant) {
-        return this.component("minecraft:painting/variant", variant);
-    }
-
-    public JResult parrotVariant(Parrot.Variant variant) {
-        return this.component("minecraft:parrot/variant", variant.getSerializedName());
-    }
-
-    public JResult rabbitVariant(Rabbit.Variant variant) {
-        return this.component("minecraft:rabbit/variant", variant.getSerializedName());
-    }
-
-    public JResult salmonSize(Salmon.Variant size) {
-        return this.component("minecraft:salmon/size", size.getSerializedName());
-    }
-
-    public JResult sheepColor(DyeColor color) {
-        return this.component("minecraft:sheep/color", color.getName());
-    }
-
-    public JResult shulkerColor(DyeColor color) {
-        return this.component("minecraft:shulker/color", color.getName());
-    }
-
-    public JResult tropicalFishBaseColor(DyeColor color) {
-        return this.component("minecraft:tropical_fish/base_color", color.getName());
-    }
-
-    public JResult tropicalFishPattern(TropicalFish.Pattern pattern) {
-        return this.component("minecraft:tropical_fish/pattern", pattern.getSerializedName());
-    }
-
-    public JResult tropicalFishPatternColor(DyeColor color) {
-        return this.component("minecraft:tropical_fish/pattern_color", color.getName());
-    }
-
-    public JResult villagerVariant(ResourceKey<VillagerType> variant) {
-        return this.component("minecraft:villager/variant", variant.location());
-    }
-
-    public JResult wolfCollar(DyeColor color) {
-        return this.component("minecraft:wolf/collar", color.getName());
-    }
-
-    public JResult wolfSoundVariant(ResourceKey<WolfSoundVariant> soundVariant) {
-        return this.component("minecraft:wolf/sound_variant", soundVariant.location());
-    }
-
-    public JResult wolfVariant(ResourceKey<WolfVariant> variant) {
-        return this.component("minecraft:wolf/variant", variant.location());
+    public JResult mobVariant(MobVariant variant) {
+        return this.component(variant.toString(), variant.value());
     }
 
     public JResult removedComponent(String name) {
