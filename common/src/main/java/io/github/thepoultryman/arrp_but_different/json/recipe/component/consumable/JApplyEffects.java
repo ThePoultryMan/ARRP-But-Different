@@ -20,13 +20,13 @@ public class JApplyEffects extends JConsumeEffect {
 
     public static class JEffect {
         private final ResourceLocation id;
-        private int amplifier;
-        private int duration;
-        private boolean ambient;
+        private Integer amplifier;
+        private Integer duration;
+        private Boolean ambient;
         @SerializedName("show_particles")
-        private boolean showParticles;
+        private Boolean showParticles;
         @SerializedName("show_icon")
-        private boolean showIcon;
+        private Boolean showIcon;
         @SerializedName("hidden_effect")
         private JEffect hiddenEffect;
 

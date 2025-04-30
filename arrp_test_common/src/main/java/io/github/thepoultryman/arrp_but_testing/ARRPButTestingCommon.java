@@ -16,8 +16,12 @@ import io.github.thepoultryman.arrp_but_different.json.recipe.smelting.SmeltingT
 import io.github.thepoultryman.arrp_but_different.json.state.JBlockModel;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
 import io.github.thepoultryman.arrp_but_different.json.state.JVariant;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
 
 public class ARRPButTestingCommon {
     public static final String MOD_ID = "arrp_but_testing";
@@ -67,7 +71,27 @@ public class ARRPButTestingCommon {
                                 new JResult()
                                         .id(ResourceLocation.withDefaultNamespace("golden_sword"))
                                         .component("minecraft:damage", 3)
-                                        .component("minecraft:rarity", "rare")
+                                        .rarity(Rarity.RARE)
+                        )
+        );
+        pack.addRecipe(
+                ResourceLocation.fromNamespaceAndPath(MOD_ID, "burnt_bread"),
+                new JSmeltingRecipe(SmeltingTypes.BLASTING)
+                        .ingredient(
+                                new JIngredient().entry("minecraft:bread")
+                        )
+                        .cookingTime(30)
+                        .result(
+                                new JResult()
+                                        .id(ResourceLocation.withDefaultNamespace("coal"))
+                                        .itemName(
+                                                Component.literal("Burnt Bread")
+                                                        .setStyle(Style.EMPTY.applyFormat(ChatFormatting.BOLD))
+                                        )
+                                        .lore(
+                                                Component.literal("A burnt piece of bread"),
+                                                Component.literal("Does nothing").withStyle(ChatFormatting.ITALIC)
+                                        )
                         )
         );
         pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_furnace"),
