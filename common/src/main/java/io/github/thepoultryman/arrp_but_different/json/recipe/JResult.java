@@ -25,7 +25,6 @@ import java.util.Map;
 public class JResult extends BaseCloneable<JResult> {
     private ResourceLocation id;
     private int count;
-    // TODO: Add builders for all vanilla components
     private final Map<String, AbstractJComponent> components = new HashMap<>();
 
     public JResult id(ResourceLocation location) {
