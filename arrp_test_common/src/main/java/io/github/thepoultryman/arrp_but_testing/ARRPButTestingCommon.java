@@ -8,11 +8,11 @@ import io.github.thepoultryman.arrp_but_different.json.model.JFaces;
 import io.github.thepoultryman.arrp_but_different.json.model.JModel;
 import io.github.thepoultryman.arrp_but_different.json.recipe.JIngredient;
 import io.github.thepoultryman.arrp_but_different.json.recipe.JResult;
-import io.github.thepoultryman.arrp_but_different.json.recipe.JSmithingRecipe;
 import io.github.thepoultryman.arrp_but_different.json.recipe.crafting.JShapedRecipe;
 import io.github.thepoultryman.arrp_but_different.json.recipe.crafting.JShapelessRecipe;
 import io.github.thepoultryman.arrp_but_different.json.recipe.smelting.JSmeltingRecipe;
 import io.github.thepoultryman.arrp_but_different.json.recipe.smelting.SmeltingTypes;
+import io.github.thepoultryman.arrp_but_different.json.recipe.smithing.JSmithingTrimRecipe;
 import io.github.thepoultryman.arrp_but_different.json.state.JBlockModel;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
 import io.github.thepoultryman.arrp_but_different.json.state.JVariant;
@@ -139,7 +139,7 @@ public class ARRPButTestingCommon {
         );
         pack.addRecipe(
                 ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_trims"),
-                new JSmithingRecipe()
+                new JSmithingTrimRecipe()
                         .trimmableArmor()
                         .template(new JIngredient().tag("minecraft:trim_templates"))
                         .addition(new JIngredient().entry("minecraft:bread"))
