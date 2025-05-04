@@ -19,8 +19,6 @@ public class ARRPForNeoForge {
 
     public ARRPForNeoForge(ModContainer modContainer, IEventBus modBus) {
         modContainer.registerConfig(ModConfig.Type.COMMON, ARRPConfigSpec.CONFIG);
-        modBus.addListener((ModConfigEvent event) -> {
-            ARRPConfigSpec.load();
-        });
+        modBus.addListener((ModConfigEvent event) -> ARRPConfigSpec.load());
     }
 }

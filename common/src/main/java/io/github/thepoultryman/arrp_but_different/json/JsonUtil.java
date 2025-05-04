@@ -1,6 +1,7 @@
 package io.github.thepoultryman.arrp_but_different.json;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 
@@ -13,5 +14,9 @@ public class JsonUtil {
             array.add(codec.encodeStart(JsonOps.INSTANCE, item).getOrThrow());
         }
         return array;
+    }
+
+    public static <T> JsonElement serializeCodec(T value, Codec<T> codec) {
+        return codec.encodeStart(JsonOps.INSTANCE, value).getOrThrow();
     }
 }

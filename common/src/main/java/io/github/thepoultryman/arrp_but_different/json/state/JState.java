@@ -98,12 +98,10 @@ public class JState {
             JsonObject jsonObject = new JsonObject();
             if (!src.variants.isEmpty()) {
                 JsonObject variants = new JsonObject();
-                src.variants.forEach(variant -> {
-                    variants.add(
-                            String.join(",", variant.conditions),
-                            context.serialize(variant.model)
-                    );
-                });
+                src.variants.forEach(variant -> variants.add(
+                        String.join(",", variant.conditions),
+                        context.serialize(variant.model)
+                ));
                 jsonObject.add("variants", variants);
 
             }

@@ -1,7 +1,7 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable;
 
 public class JPlaySound extends JConsumeEffect {
-    private JSound sound;
+    private final JSound sound;
 
     public JPlaySound() {
         this(null);

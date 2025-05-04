@@ -2,14 +2,13 @@ package io.github.thepoultryman.arrp_but_different.json.animation;
 
 import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;
-import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JAnimation extends BaseCloneable<JAnimation> {
+public class JAnimation {
     private Boolean interpolate;
     private Integer width;
     private Integer height;

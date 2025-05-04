@@ -2,12 +2,11 @@ package io.github.thepoultryman.arrp_but_different.json;
 
 import com.google.gson.*;
 import io.github.thepoultryman.arrp_but_different.impl.RuntimeResourcePackImpl;
-import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.resources.ResourceLocation;
 
 import java.lang.reflect.Type;
 
-public class JCondition extends BaseCloneable<JCondition> {
+public class JCondition {
     private JsonObject parameters = new JsonObject();
 
     public JCondition() {}

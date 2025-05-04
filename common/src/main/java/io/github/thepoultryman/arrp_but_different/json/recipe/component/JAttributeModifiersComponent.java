@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JAttributeModifiersComponent extends AbstractJComponent {
-    private List<JAttributeModifier> modifiers = new ArrayList<>();
+    private final List<JAttributeModifier> modifiers = new ArrayList<>();
     @SerializedName("show_in_tooltip")
     private Boolean showInTooltip;
 

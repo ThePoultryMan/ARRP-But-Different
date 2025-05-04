@@ -2,7 +2,6 @@ package io.github.thepoultryman.arrp_but_different.util;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 
@@ -40,7 +39,7 @@ public class UnsafeByteArrayOutputStream extends OutputStream implements AutoClo
     }
 
     @Override
-    public void write(@NotNull byte[] b, int off, int len) throws IOException {
+    public void write(byte @NotNull [] b, int off, int len) {
         if (off < 0 || off > b.length || len < 0 || off + len - b.length > 0) {
             throw new IndexOutOfBoundsException();
         }

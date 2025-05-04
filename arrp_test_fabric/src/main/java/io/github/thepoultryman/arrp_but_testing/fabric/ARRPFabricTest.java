@@ -6,7 +6,7 @@ import net.fabricmc.api.ModInitializer;
 
 public class ARRPFabricTest implements ModInitializer {
     @Override
-    public void onInitialize() {;
+    public void onInitialize() {
         ARRPEvent.BEFORE_USER.register((resourcePacks) -> resourcePacks.add(ARRPButTestingCommon.beforeUserEvent()));
     }
 }

@@ -1,7 +1,6 @@
 package io.github.thepoultryman.arrp_but_different.json.model;
 
 import com.google.gson.annotations.SerializedName;
-import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -9,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JModel extends BaseCloneable<JModel> {
+public class JModel {
     private String parent;
     @SerializedName("ambientocclusion")
     private Boolean ambientOcclusion;

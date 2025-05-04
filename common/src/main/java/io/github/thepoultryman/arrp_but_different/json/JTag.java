@@ -1,12 +1,11 @@
 package io.github.thepoultryman.arrp_but_different.json;
 
-import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class JTag extends BaseCloneable<JTag> {
+public class JTag {
     private Boolean replace = false;
     private final List<String> values = new ArrayList<>();
 

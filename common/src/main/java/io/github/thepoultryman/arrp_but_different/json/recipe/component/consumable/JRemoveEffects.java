@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JRemoveEffects extends JConsumeEffect {
-    private List<ResourceLocation> effects = new ArrayList<>();
+    private final List<ResourceLocation> effects = new ArrayList<>();
 
     public JRemoveEffects() {
         super("minecraft:remove_effects");

@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import io.github.thepoultryman.arrp_but_different.json.JsonUtil;
-import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
 
@@ -13,7 +12,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JLootTable extends BaseCloneable<JLootTable> {
+public class JLootTable {
     private final String type;
     private List<JPool> pools;
     private List<LootItemFunction> functions;

@@ -1,24 +1,24 @@
 package io.github.thepoultryman.arrp_but_different.json.loot;
 
-import com.google.gson.*;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.google.gson.annotations.SerializedName;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.JsonOps;
 import io.github.thepoultryman.arrp_but_different.json.JsonUtil;
-import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntries;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.providers.number.*;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JPool extends BaseCloneable<JPool> {
+public class JPool {
     private List<LootItemCondition> conditions;
     private List<LootItemFunction> functions;
     private List<LootPoolEntryContainer> entries;
@@ -60,18 +60,6 @@ public class JPool extends BaseCloneable<JPool> {
         return this;
     }
 
-    private static Codec<NumberProvider> getNumberProviderCodec(@NotNull NumberProvider numberProvider) {
-        return (Codec<NumberProvider>) switch (numberProvider) {
-            case BinomialDistributionGenerator ignored -> BinomialDistributionGenerator.CODEC.codec();
-            case ConstantValue ignored -> ConstantValue.CODEC.codec();
-            case EnchantmentLevelProvider ignored -> EnchantmentLevelProvider.CODEC.codec();
-            case ScoreboardValue ignored -> ScoreboardValue.CODEC.codec();
-            case StorageValue ignored -> ScoreboardValue.CODEC.codec();
-            case UniformGenerator ignored -> UniformGenerator.CODEC.codec();
-            default -> throw new IllegalStateException("Unexpected value: " + numberProvider);
-        };
-    }
-
     public static class Serializer implements JsonSerializer<JPool> {
         @Override
         public JsonElement serialize(JPool src, Type typeOfSrc, JsonSerializationContext context) {
@@ -83,17 +71,13 @@ public class JPool extends BaseCloneable<JPool> {
                 jsonObject.add("functions", JsonUtil.serializeCodecList(src.functions, LootItemFunctions.TYPED_CODEC));
             }
             if (src.entries != null) {
-                JsonArray entries = new JsonArray(src.entries.size());
-                for (LootPoolEntryContainer entry : src.entries) {
-                    entries.add(LootPoolEntries.CODEC.encodeStart(JsonOps.INSTANCE, entry).getOrThrow());
-                }
-                jsonObject.add("entries", entries);
+                jsonObject.add("entries", JsonUtil.serializeCodecList(src.entries, LootPoolEntries.CODEC));
             }
             if (src.rolls != null) {
-                jsonObject.add("rolls", getNumberProviderCodec(src.rolls).encodeStart(JsonOps.INSTANCE, src.rolls).getOrThrow());
+                jsonObject.add("rolls", JsonUtil.serializeCodec(src.rolls, NumberProviders.CODEC));
             }
             if (src.bonusRolls != null) {
-                jsonObject.add("bonus_rolls", getNumberProviderCodec(src.bonusRolls).encodeStart(JsonOps.INSTANCE, src.rolls).getOrThrow());
+                jsonObject.add("bonus_rolls", JsonUtil.serializeCodec(src.bonusRolls, NumberProviders.CODEC));
             }
             return jsonObject;
         }
