@@ -12,7 +12,6 @@ import io.github.thepoultryman.arrp_but_different.json.JCondition;
 import io.github.thepoultryman.arrp_but_different.json.JLang;
 import io.github.thepoultryman.arrp_but_different.json.JTag;
 import io.github.thepoultryman.arrp_but_different.json.animation.JAnimation;
-import io.github.thepoultryman.arrp_but_different.json.loot.JFunction;
 import io.github.thepoultryman.arrp_but_different.json.loot.JLootTable;
 import io.github.thepoultryman.arrp_but_different.json.loot.JPool;
 import io.github.thepoultryman.arrp_but_different.json.model.JModel;
@@ -65,6 +64,8 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JState.class, new JState.Serializer())
             .registerTypeAdapter(JTextures.class, new JTextures.Serializer())
             .registerTypeAdapter(JAnimation.class, new JAnimation.Serializer())
+            .registerTypeAdapter(JNumberProvider.class, new JNumberProvider.Serializer())
+            .registerTypeAdapter(JEnchantmentLevel.class, new JEnchantmentLevel.Serializer())
             .registerTypeAdapter(JFunction.class, new JFunction.Serializer())
             .registerTypeAdapter(JPool.class, new JPool.Serializer())
             .registerTypeAdapter(JIngredient.class, new JIngredient.Serializer())
