@@ -2,6 +2,7 @@ package io.github.thepoultryman.arrp_but_testing;
 
 import io.github.thepoultryman.arrp_but_different.api.RuntimeResourcePack;
 import io.github.thepoultryman.arrp_but_different.json.JLang;
+import io.github.thepoultryman.arrp_but_different.json.JTag;
 import io.github.thepoultryman.arrp_but_different.json.model.JElement;
 import io.github.thepoultryman.arrp_but_different.json.model.JFace;
 import io.github.thepoultryman.arrp_but_different.json.model.JFaces;
@@ -166,6 +167,7 @@ public class ARRPButTestingCommon {
                 new JState()
                         .add(new JVariant().model(new JBlockModel(ResourceLocation.fromNamespaceAndPath(MOD_ID, "block/test_model"))))
         );
+        pack.addTag(ResourceLocation.withDefaultNamespace("block/mineable/pickaxe"), new JTag().add(ResourceLocation.withDefaultNamespace("oak_log")));
 
         return pack;
     }

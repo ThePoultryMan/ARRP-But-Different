@@ -379,7 +379,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
 
     @Override
     public byte[] addTag(ResourceLocation path, JTag tag) {
-        return this.addData(formatResourceLocation(path, "tag", "json"), serialize(tag));
+        return this.addData(formatResourceLocation(path, "tags", "json"), serialize(tag));
     }
 
     @Override
