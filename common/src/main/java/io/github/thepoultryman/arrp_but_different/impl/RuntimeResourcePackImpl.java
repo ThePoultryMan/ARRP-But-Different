@@ -384,7 +384,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
 
     @Override
     public byte[] addRecipe(ResourceLocation path, AbstractJRecipe recipe) {
-        return this.addData(formatResourceLocation(path, "recipes", "json"), serialize(recipe));
+        return this.addData(formatResourceLocation(path, "recipe", "json"), serialize(recipe));
     }
 
     @Override
