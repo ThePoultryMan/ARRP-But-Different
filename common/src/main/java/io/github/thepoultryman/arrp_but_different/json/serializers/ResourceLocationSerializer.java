@@ -1,4 +1,4 @@
-package io.github.thepoultryman.arrp_but_different.util;
+package io.github.thepoultryman.arrp_but_different.json.serializers;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSerializationContext;

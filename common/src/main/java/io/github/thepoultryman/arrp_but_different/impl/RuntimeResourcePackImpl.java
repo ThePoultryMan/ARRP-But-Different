@@ -11,8 +11,8 @@ import io.github.thepoultryman.arrp_but_different.api.RuntimeResourcePack;
 import io.github.thepoultryman.arrp_but_different.json.JCondition;
 import io.github.thepoultryman.arrp_but_different.json.JLang;
 import io.github.thepoultryman.arrp_but_different.json.JTag;
+import io.github.thepoultryman.arrp_but_different.json.advancement.JAdvancement;
 import io.github.thepoultryman.arrp_but_different.json.animation.JAnimation;
-import io.github.thepoultryman.arrp_but_different.json.loot.JFunction;
 import io.github.thepoultryman.arrp_but_different.json.loot.JLootTable;
 import io.github.thepoultryman.arrp_but_different.json.loot.JPool;
 import io.github.thepoultryman.arrp_but_different.json.model.JModel;
@@ -22,13 +22,18 @@ import io.github.thepoultryman.arrp_but_different.json.recipe.JIngredient;
 import io.github.thepoultryman.arrp_but_different.json.recipe.banner.JBannerPatternType;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JSound;
+import io.github.thepoultryman.arrp_but_different.json.serializers.*;
 import io.github.thepoultryman.arrp_but_different.json.state.JMultipart;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
 import io.github.thepoultryman.arrp_but_different.json.state.JWhen;
 import io.github.thepoultryman.arrp_but_different.util.CountingInputStream;
-import io.github.thepoultryman.arrp_but_different.util.ResourceLocationSerializer;
 import io.github.thepoultryman.arrp_but_different.util.UnsafeByteArrayOutputStream;
+import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.AbstractPackResources;
 import net.minecraft.server.packs.PackLocationInfo;
@@ -60,34 +65,39 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
     private static final int RESOURCE_PACK_VERSION = 55;
 
     public static final Gson GSON = new GsonBuilder()
-            .registerTypeAdapter(JMultipart.class, new JMultipart.Serializer())
-            .registerTypeAdapter(JWhen.class, new JWhen.Serializer())
-            .registerTypeAdapter(JState.class, new JState.Serializer())
-            .registerTypeAdapter(JTextures.class, new JTextures.Serializer())
+            .registerTypeAdapter(AdvancementRewards.class, new AdvancementRewardsSerializer())
+            .registerTypeAdapter(Component.class, new CodecSerializer<>(ComponentSerialization.CODEC))
+            .registerTypeAdapter(Criterion.class, new CriterionSerializer())
+            .registerTypeAdapter(DisplayInfo.class, new DisplayInfoSerializer())
             .registerTypeAdapter(JAnimation.class, new JAnimation.Serializer())
-            .registerTypeAdapter(JFunction.class, new JFunction.Serializer())
-            .registerTypeAdapter(JPool.class, new JPool.Serializer())
-            .registerTypeAdapter(JIngredient.class, new JIngredient.Serializer())
-            .registerTypeAdapter(ResourceLocation.class, new ResourceLocationSerializer())
-            .registerTypeAdapter(JCondition.class, new JCondition.Serializer())
-            .registerTypeAdapter(JCodecComponent.class, new JCodecComponent.Serializer<>())
-            .registerTypeAdapter(JCodecBuilderComponent.class, new JCodecBuilderComponent.Serializer<>())
-            .registerTypeAdapter(JSimpleComponent.class, new JSimpleComponent.Serializer())
-            .registerTypeAdapter(JListComponent.class, new JListComponent.Serializer())
-            .registerTypeAdapter(JBannerPatternsComponent.class, new JBannerPatternsComponent.Serializer())
             .registerTypeAdapter(JBannerPatternType.class, new JBannerPatternType.Serializer())
-            .registerTypeAdapter(JColorComponent.class, new JColorComponent.Serializer())
-            .registerTypeAdapter(JBeesComponent.class, new JBeesComponent.Serializer())
+            .registerTypeAdapter(JBannerPatternsComponent.class, new JBannerPatternsComponent.Serializer())
             .registerTypeAdapter(JBeesComponent.BeeData.class, new JBeesComponent.BeeData.Serializer())
-            .registerTypeAdapter(JStringMapComponent.class, new JStringMapComponent.Serializer())
-            .registerTypeAdapter(JItemListComponent.class, new JItemListComponent.Serializer())
-            .registerTypeAdapter(JSound.class, new JSound.Serializer())
+            .registerTypeAdapter(JBeesComponent.class, new JBeesComponent.Serializer())
+            .registerTypeAdapter(JCodecBuilderComponent.class, new JCodecBuilderComponent.Serializer<>())
+            .registerTypeAdapter(JCodecComponent.class, new JCodecComponent.Serializer<>())
+            .registerTypeAdapter(JColorComponent.class, new JColorComponent.Serializer())
+            .registerTypeAdapter(JCondition.class, new JCondition.Serializer())
             .registerTypeAdapter(JContainerComponent.class, new JContainerComponent.Serializer())
-            .registerTypeAdapter(JMultitypeComponent.class, new JMultitypeComponent.Serializer())
             .registerTypeAdapter(JCustomDataComponent.class, new JCustomDataComponent.Serializer())
             .registerTypeAdapter(JDyedColorComponent.class, new JDyedColorComponent.Serializer())
             .registerTypeAdapter(JEnchantmentsComponent.class, new JEnchantmentsComponent.Serializer())
+            .registerTypeAdapter(JIngredient.class, new JIngredient.Serializer())
+            .registerTypeAdapter(JItemListComponent.class, new JItemListComponent.Serializer())
+            .registerTypeAdapter(JListComponent.class, new JListComponent.Serializer())
+            .registerTypeAdapter(JLootTable.class, new JLootTable.Serializer())
+            .registerTypeAdapter(JMultipart.class, new JMultipart.Serializer())
+            .registerTypeAdapter(JMultitypeComponent.class, new JMultitypeComponent.Serializer())
+            .registerTypeAdapter(JPool.class, new JPool.Serializer())
+            .registerTypeAdapter(JSimpleComponent.class, new JSimpleComponent.Serializer())
+            .registerTypeAdapter(JSound.class, new JSound.Serializer())
+            .registerTypeAdapter(JState.class, new JState.Serializer())
+            .registerTypeAdapter(JStringMapComponent.class, new JStringMapComponent.Serializer())
+            .registerTypeAdapter(JTextures.class, new JTextures.Serializer())
+            .registerTypeAdapter(JWhen.class, new JWhen.Serializer())
             .registerTypeAdapter(JWritableBookContentComponent.class, new JWritableBookContentComponent.Serializer())
+            .registerTypeAdapter(MutableComponent.class, new CodecSerializer<>(ComponentSerialization.CODEC))
+            .registerTypeAdapter(ResourceLocation.class, new ResourceLocationSerializer())
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
@@ -188,7 +198,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
                 }
             }
             if (KEY_WARNINGS.add(pSectionType.name())) {
-                ARRPCommon.LOGGER.info("\"{}\" is an unsupported metadata key", pSectionType.name());
+                ARRPCommon.LOGGER.debug("\"{}\" is an unsupported metadata key", pSectionType.name());
             }
             return null;
         }
@@ -321,7 +331,12 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
 
     @Override
     public byte[] addLootTable(ResourceLocation resourceLocation, JLootTable lootTable) {
-        return this.addData(formatResourceLocation(resourceLocation, "loot_tables", "json"), serialize(lootTable));
+        return this.addData(formatResourceLocation(resourceLocation, "loot_table", "json"), serialize(lootTable));
+    }
+
+    @Override
+    public byte[] addAdvancement(ResourceLocation resourceLocation, JAdvancement advancement) {
+        return this.addData(formatResourceLocation(resourceLocation, "advancement", "json"), serialize(advancement));
     }
 
     @Override
@@ -439,7 +454,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
         return data;
     }
 
-    private static byte[] serialize(Object object) {
+    public static byte[] serialize(Object object) {
         UnsafeByteArrayOutputStream byteArrayOutputStream = new UnsafeByteArrayOutputStream();
         OutputStreamWriter writer = new OutputStreamWriter(byteArrayOutputStream, StandardCharsets.UTF_8);
         GSON.toJson(object, writer);

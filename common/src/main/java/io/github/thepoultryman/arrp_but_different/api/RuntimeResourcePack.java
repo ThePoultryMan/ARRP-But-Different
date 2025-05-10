@@ -3,6 +3,7 @@ package io.github.thepoultryman.arrp_but_different.api;
 import io.github.thepoultryman.arrp_but_different.impl.RuntimeResourcePackImpl;
 import io.github.thepoultryman.arrp_but_different.json.JLang;
 import io.github.thepoultryman.arrp_but_different.json.JTag;
+import io.github.thepoultryman.arrp_but_different.json.advancement.JAdvancement;
 import io.github.thepoultryman.arrp_but_different.json.animation.JAnimation;
 import io.github.thepoultryman.arrp_but_different.json.loot.JLootTable;
 import io.github.thepoultryman.arrp_but_different.json.model.JModel;
@@ -68,6 +69,8 @@ public interface RuntimeResourcePack extends PackResources {
      * @return TODO: Add return information.
      */
     byte[] addLootTable(ResourceLocation resourceLocation, JLootTable lootTable);
+
+    byte[] addAdvancement(ResourceLocation resourceLocation, JAdvancement advancement);
 
     /**
      * Adds a resource that is lazily evaluated.

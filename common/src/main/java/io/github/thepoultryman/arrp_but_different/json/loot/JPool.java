@@ -5,25 +5,28 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.annotations.SerializedName;
-import io.github.thepoultryman.arrp_but_different.json.JCondition;
-import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
+import io.github.thepoultryman.arrp_but_different.json.JsonUtil;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntries;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JPool extends BaseCloneable<JPool> {
-    private List<JCondition> conditions;
-    private List<JFunction> functions;
-    private List<JEntry> entries;
-    private Integer rolls;
-    private JRoll roll;
+public class JPool {
+    private List<LootItemCondition> conditions;
+    private List<LootItemFunction> functions;
+    private List<LootPoolEntryContainer> entries;
+    private NumberProvider rolls;
     @SerializedName("bonus_rolls")
-    private Integer bonusRolls;
-    @SerializedName("bonus_roll")
-    private JRoll bonusRoll;
+    private NumberProvider bonusRolls;
 
-    public JPool entry(JEntry entry) {
+    public JPool entry(LootPoolEntryContainer entry) {
         if (this.entries == null) {
             this.entries = new ArrayList<>();
         }
@@ -31,7 +34,7 @@ public class JPool extends BaseCloneable<JPool> {
         return this;
     }
 
-    public JPool condition(JCondition condition) {
+    public JPool condition(LootItemCondition condition) {
         if (this.conditions == null) {
             this.conditions = new ArrayList<>();
         }
@@ -39,7 +42,7 @@ public class JPool extends BaseCloneable<JPool> {
         return this;
     }
 
-    public JPool function(JFunction function) {
+    public JPool function(LootItemFunction function) {
         if (this.functions == null) {
             this.functions = new ArrayList<>();
         }
@@ -47,23 +50,13 @@ public class JPool extends BaseCloneable<JPool> {
         return this;
     }
 
-    public JPool rolls(int rolls) {
+    public JPool rolls(NumberProvider rolls) {
         this.rolls = rolls;
         return this;
     }
 
-    public JPool rolls(JRoll roll) {
-        this.roll = roll;
-        return this;
-    }
-
-    public JPool bonusRolls(int bonusRolls) {
+    public JPool bonusRolls(NumberProvider bonusRolls) {
         this.bonusRolls = bonusRolls;
-        return this;
-    }
-
-    public JPool bonusRolls(JRoll bonusRoll) {
-        this.bonusRoll = bonusRoll;
         return this;
     }
 
@@ -72,25 +65,19 @@ public class JPool extends BaseCloneable<JPool> {
         public JsonElement serialize(JPool src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject jsonObject = new JsonObject();
             if (src.conditions != null) {
-                jsonObject.add("conditions", context.serialize(src.conditions));
+                jsonObject.add("conditions", JsonUtil.serializeCodecList(src.conditions, LootItemCondition.TYPED_CODEC));
             }
             if (src.functions != null) {
-                jsonObject.add("functions", context.serialize(src.functions));
+                jsonObject.add("functions", JsonUtil.serializeCodecList(src.functions, LootItemFunctions.TYPED_CODEC));
             }
             if (src.entries != null) {
-                jsonObject.add("entries", context.serialize(src.entries));
+                jsonObject.add("entries", JsonUtil.serializeCodecList(src.entries, LootPoolEntries.CODEC));
             }
             if (src.rolls != null) {
-                jsonObject.addProperty("rolls", src.rolls);
-            }
-            if (src.roll != null) {
-                jsonObject.add("rolls", context.serialize(src.roll));
+                jsonObject.add("rolls", JsonUtil.serializeCodec(src.rolls, NumberProviders.CODEC));
             }
             if (src.bonusRolls != null) {
-                jsonObject.add("bonus_rolls", context.serialize(src.bonusRolls));
-            }
-            if (src.bonusRoll != null) {
-                jsonObject.add("bonus_rolls", context.serialize(src.bonusRoll));
+                jsonObject.add("bonus_rolls", JsonUtil.serializeCodec(src.bonusRolls, NumberProviders.CODEC));
             }
             return jsonObject;
         }

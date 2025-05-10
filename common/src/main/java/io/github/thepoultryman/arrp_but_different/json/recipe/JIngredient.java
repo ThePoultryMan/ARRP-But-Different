@@ -3,7 +3,6 @@ package io.github.thepoultryman.arrp_but_different.json.recipe;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.resources.ResourceLocation;
 
 import java.lang.reflect.Type;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class JIngredient extends BaseCloneable<JIngredient> {
+public class JIngredient {
     private final List<String> entries = new ArrayList<>();
     private String tag;
 

@@ -8,8 +8,6 @@ import net.neoforged.fml.common.Mod;
 @Mod(ARRPButTestingCommon.MOD_ID)
 public class ARRPNeoForgeTest {
     public ARRPNeoForgeTest() {
-        ARRPForNeoForge.ARRP_EVENT_BUS.addListener((ARRPNeoForgeEvent.BeforeUser event) -> {
-            event.addPack(ARRPButTestingCommon.beforeUserEvent());
-        });
+        ARRPForNeoForge.ARRP_EVENT_BUS.addListener((ARRPNeoForgeEvent.BeforeUser event) -> event.addPack(ARRPButTestingCommon.beforeUserEvent()));
     }
 }

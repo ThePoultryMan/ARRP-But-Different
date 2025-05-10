@@ -5,7 +5,6 @@ import io.github.thepoultryman.arrp_but_different.json.PresetColor;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.*;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable.JConsumableComponent;
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.MobVariant;
-import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.ResourceLocation;
@@ -22,10 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JResult extends BaseCloneable<JResult> {
+public class JResult {
     private ResourceLocation id;
     private int count;
-    // TODO: Add builders for all vanilla components
     private final Map<String, AbstractJComponent> components = new HashMap<>();
 
     public JResult id(ResourceLocation location) {
@@ -69,10 +67,10 @@ public class JResult extends BaseCloneable<JResult> {
      * This is the goto method for adding non-vanilla components, however if your class would need
      * a type adapter, then you should serialize it to a {@link JsonElement} and pass it to the
      * {@link #component(String, JsonElement)} overload.
-     * @param name
-     * @param value
-     * @return
-     * @param <T>
+     * @param name The name of the component to add
+     * @param value The directly-serializable value of the component
+     * @return The current {@link JResult} instance
+     * @param <T> The directly-serializable type that the component uses
      */
     public <T> JResult component(String name, T value) {
         this.components.put(name, new JSimpleComponent<>(value));

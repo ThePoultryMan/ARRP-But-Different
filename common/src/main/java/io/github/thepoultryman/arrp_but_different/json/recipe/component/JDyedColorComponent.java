@@ -7,6 +7,7 @@ import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class JDyedColorComponent extends AbstractJComponent {
     private Integer color;
@@ -25,11 +26,7 @@ public class JDyedColorComponent extends AbstractJComponent {
     public static class Serializer implements JsonSerializer<JDyedColorComponent> {
         @Override
         public JsonElement serialize(JDyedColorComponent src, Type type, JsonSerializationContext context) {
-            if (src.color != null) {
-                return context.serialize(src.color);
-            } else {
-                return context.serialize(src.colorPieces);
-            }
+            return context.serialize(Objects.requireNonNullElseGet(src.color, () -> src.colorPieces));
         }
     }
 }

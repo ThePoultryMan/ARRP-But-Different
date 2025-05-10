@@ -1,8 +1,6 @@
 package io.github.thepoultryman.arrp_but_different.json.animation;
 
-import io.github.thepoultryman.arrp_but_different.util.BaseCloneable;
-
-public class JFrame extends BaseCloneable<JFrame> {
+public class JFrame {
     private final int index;
     private Integer time;
 
