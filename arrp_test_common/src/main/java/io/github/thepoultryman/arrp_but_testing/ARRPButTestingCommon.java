@@ -2,6 +2,8 @@ package io.github.thepoultryman.arrp_but_testing;
 
 import io.github.thepoultryman.arrp_but_different.api.RuntimeResourcePack;
 import io.github.thepoultryman.arrp_but_different.json.JLang;
+import io.github.thepoultryman.arrp_but_different.json.advancement.DisplayInfoBuilder;
+import io.github.thepoultryman.arrp_but_different.json.advancement.JAdvancement;
 import io.github.thepoultryman.arrp_but_different.json.model.JElement;
 import io.github.thepoultryman.arrp_but_different.json.model.JFace;
 import io.github.thepoultryman.arrp_but_different.json.model.JFaces;
@@ -17,11 +19,21 @@ import io.github.thepoultryman.arrp_but_different.json.state.JBlockModel;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
 import io.github.thepoultryman.arrp_but_different.json.state.JVariant;
 import net.minecraft.ChatFormatting;
+import net.minecraft.advancements.AdvancementType;
+import net.minecraft.advancements.critereon.DataComponentMatchers;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.component.DataComponentExactPredicate;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.component.ItemLore;
+
+import java.util.List;
 
 public class ARRPButTestingCommon {
     public static final String MOD_ID = "arrp_but_testing";
@@ -74,6 +86,8 @@ public class ARRPButTestingCommon {
                                         .rarity(Rarity.RARE)
                         )
         );
+        Component burntBreadName = Component.literal("Burnt Bread").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BOLD));
+        List<Component> burntBreadLore = List.of(Component.literal("A burnt piece of bread"), Component.literal("Does nothing"));
         pack.addRecipe(
                 ResourceLocation.fromNamespaceAndPath(MOD_ID, "burnt_bread"),
                 new JSmeltingRecipe(SmeltingTypes.BLASTING)
@@ -84,14 +98,40 @@ public class ARRPButTestingCommon {
                         .result(
                                 new JResult()
                                         .id(ResourceLocation.withDefaultNamespace("coal"))
-                                        .itemName(
-                                                Component.literal("Burnt Bread")
-                                                        .setStyle(Style.EMPTY.applyFormat(ChatFormatting.BOLD))
+                                        .itemName(burntBreadName)
+                                        .lore(burntBreadLore.getFirst())
+                        )
+        );
+        pack.addAdvancement(ResourceLocation.fromNamespaceAndPath(MOD_ID, "root"),
+                new JAdvancement()
+                        .display(new DisplayInfoBuilder()
+                                .icon(Items.BREAD)
+                                .title(Component.literal("Cooked Bread?"))
+                                .description(Component.literal("Burn a piece of bread. Congratulations?"))
+                                .type(AdvancementType.GOAL)
+                                .build()
+                        )
+                        .criteria("burn_bread",
+                                InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item()
+                                        .of(BuiltInRegistries.ITEM, Items.BREAD)
+                                        .withComponents(
+                                                DataComponentMatchers.Builder.components()
+                                                        .exact(
+                                                                DataComponentExactPredicate.expect(
+                                                                        DataComponents.ITEM_NAME,
+                                                                        burntBreadName
+                                                                )
+                                                        )
+                                                        .exact(
+                                                                DataComponentExactPredicate.expect(
+                                                                        DataComponents.LORE,
+                                                                        ItemLore.EMPTY
+                                                                                .withLineAdded(burntBreadLore.getFirst())
+                                                                )
+                                                        )
+                                                        .build()
                                         )
-                                        .lore(
-                                                Component.literal("A burnt piece of bread"),
-                                                Component.literal("Does nothing").withStyle(ChatFormatting.ITALIC)
-                                        )
+                                )
                         )
         );
         pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_furnace"),
@@ -168,5 +208,9 @@ public class ARRPButTestingCommon {
         );
 
         return pack;
+    }
+
+    private static byte[] getAdvancement(RuntimeResourcePack pack, ResourceLocation location) {
+        return new byte[0];
     }
 }

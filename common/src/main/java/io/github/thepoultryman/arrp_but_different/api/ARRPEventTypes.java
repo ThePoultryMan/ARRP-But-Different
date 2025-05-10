@@ -5,5 +5,5 @@ public enum ARRPEventTypes {
     BeforeUser,
     AfterVanilla,
     BetweenVanillaAndMods,
-    BetweenModsAndUser
+    BetweenModsAndUser,
 }
