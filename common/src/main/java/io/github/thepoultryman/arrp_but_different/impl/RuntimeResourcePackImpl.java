@@ -331,7 +331,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
 
     @Override
     public byte[] addLootTable(ResourceLocation resourceLocation, JLootTable lootTable) {
-        return this.addData(formatResourceLocation(resourceLocation, "loot_tables", "json"), serialize(lootTable));
+        return this.addData(formatResourceLocation(resourceLocation, "loot_table", "json"), serialize(lootTable));
     }
 
     @Override
@@ -394,12 +394,12 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
 
     @Override
     public byte[] addTag(ResourceLocation path, JTag tag) {
-        return this.addData(formatResourceLocation(path, "tag", "json"), serialize(tag));
+        return this.addData(formatResourceLocation(path, "tags", "json"), serialize(tag));
     }
 
     @Override
     public byte[] addRecipe(ResourceLocation path, AbstractJRecipe recipe) {
-        return this.addData(formatResourceLocation(path, "recipes", "json"), serialize(recipe));
+        return this.addData(formatResourceLocation(path, "recipe", "json"), serialize(recipe));
     }
 
     @Override
