@@ -198,7 +198,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
                 }
             }
             if (KEY_WARNINGS.add(pSectionType.name())) {
-                ARRPCommon.LOGGER.info("\"{}\" is an unsupported metadata key", pSectionType.name());
+                ARRPCommon.LOGGER.debug("\"{}\" is an unsupported metadata key", pSectionType.name());
             }
             return null;
         }
