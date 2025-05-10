@@ -23,7 +23,6 @@ public class MultiPackResourceManagerMixin {
 
         List<PackResources> finalPacksCopy = packsCopy;
         OptionalInt fabricPackIndex = IntStream.range(0, packsCopy.size()).filter((i) -> finalPacksCopy.get(i).packId().equals("fabric")).findFirst();
-        ARRPCommon.LOGGER.error("{}", packsCopy.stream().map(PackResources::packId).toList());
 
         if (fabricPackIndex.isPresent()) {
             ARRPCommon.LOGGER.info("Getting 'BetweenVanillaAndMods' packs");

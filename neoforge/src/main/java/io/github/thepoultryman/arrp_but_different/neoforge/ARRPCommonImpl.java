@@ -15,7 +15,6 @@ public class ARRPCommonImpl {
 
     public static List<PackResources> sendEvent(ARRPEventTypes event, List<PackResources> resourcePacks) {
         ARRPNeoForgeEvent neoForgeEvent = null;
-        ARRPCommon.LOGGER.info("{}", resourcePacks);
         if (Objects.requireNonNull(event) == ARRPEventTypes.BeforeUser) {
             neoForgeEvent = new ARRPNeoForgeEvent.BeforeUser();
             ARRPForNeoForge.ARRP_EVENT_BUS.post(neoForgeEvent);
