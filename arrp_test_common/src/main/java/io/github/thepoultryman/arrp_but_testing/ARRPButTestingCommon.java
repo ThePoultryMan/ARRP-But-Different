@@ -2,9 +2,9 @@ package io.github.thepoultryman.arrp_but_testing;
 
 import io.github.thepoultryman.arrp_but_different.api.RuntimeResourcePack;
 import io.github.thepoultryman.arrp_but_different.json.JLang;
+import io.github.thepoultryman.arrp_but_different.json.JTag;
 import io.github.thepoultryman.arrp_but_different.json.advancement.DisplayInfoBuilder;
 import io.github.thepoultryman.arrp_but_different.json.advancement.JAdvancement;
-import io.github.thepoultryman.arrp_but_different.json.JTag;
 import io.github.thepoultryman.arrp_but_different.json.model.JElement;
 import io.github.thepoultryman.arrp_but_different.json.model.JFace;
 import io.github.thepoultryman.arrp_but_different.json.model.JFaces;
@@ -180,7 +180,7 @@ public class ARRPButTestingCommon {
         );
         pack.addRecipe(
                 ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_trims"),
-                new JSmithingRecipe()
+                new JSmithingTrimRecipe()
                         .trimmableArmor()
                         .template(new JIngredient().tag("minecraft:trim_templates"))
                         .addition(new JIngredient().entry("minecraft:bread"))
