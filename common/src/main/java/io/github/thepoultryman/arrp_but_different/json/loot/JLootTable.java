@@ -48,7 +48,7 @@ public class JLootTable {
             if (src.functions != null) {
                 lootTable.add("functions", JsonUtil.serializeCodecList(src.functions, LootItemFunctions.TYPED_CODEC));
             }
-            return null;
+            return lootTable;
         }
     }
 }
