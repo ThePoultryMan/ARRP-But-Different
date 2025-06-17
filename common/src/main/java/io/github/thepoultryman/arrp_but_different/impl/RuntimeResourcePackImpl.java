@@ -62,7 +62,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class RuntimeResourcePackImpl implements RuntimeResourcePack {
-    private static final int RESOURCE_PACK_VERSION = 55;
+    private static final int RESOURCE_PACK_VERSION = 63;
 
     public static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(AdvancementRewards.class, new AdvancementRewardsSerializer())

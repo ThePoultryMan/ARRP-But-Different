@@ -90,8 +90,8 @@ public class JModel {
             this.renderType = "minecraft:cutout";
         } else if (renderType.equals(RenderType.cutoutMipped())) {
             this.renderType = "minecraft:cutout_mipped";
-        } else if (renderType.equals(RenderType.translucent())) {
-            this.renderType = "minecraft:translucent";
+//        } else if (renderType.equals(RenderType.transl())) {
+//            this.renderType = "minecraft:translucent";
         } else if (renderType.equals(RenderType.tripwire())) {
             this.renderType = "minecraft:tripwire";
         }
