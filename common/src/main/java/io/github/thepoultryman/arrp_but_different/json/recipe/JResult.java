@@ -91,9 +91,8 @@ public class JResult {
         return this.component(name, new JSimpleComponent<>(json));
     }
 
-    // Helpers for adding specific Components
-    public JResult attributeModifiers(JAttributeModifiersComponent component) {
-        return this.component("minecraft:attribute_modifiers", component);
+    public JResult attributeModifiers(ItemAttributeModifiers modifiers) {
+        return this.component("minecraft:attribute_modifiers", new JCodecComponent<>(modifiers, ItemAttributeModifiers.CODEC));
     }
 
     public JResult bannerPatterns(JBannerPatternsComponent component) {
