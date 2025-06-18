@@ -14,6 +14,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.*;
 import net.minecraft.world.item.enchantment.Repairable;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.block.entity.PotDecorations;
 
 import java.util.ArrayList;
@@ -203,8 +204,8 @@ public class JResult {
         return this.component("minecraft:entity_data", new JIdResourceLocationComponent(id));
     }
 
-    public JResult equippable(JEquippableComponent component) {
-        return this.component("minecraft:equippable", component);
+    public JResult equippable(Equippable equippableComponent) {
+        return this.component("minecraft:equippable", new JCodecComponent<>(equippableComponent, Equippable.CODEC));
     }
 
     public JResult fireworkExplosion(JFireworkExplosionComponent component) {
