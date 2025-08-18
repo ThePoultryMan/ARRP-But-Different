@@ -1,3 +1,4 @@
+//? if neoforge {
 package io.github.thepoultryman.arrp_but_different.neoforge;
 
 import net.minecraft.server.packs.PackResources;
@@ -25,3 +26,4 @@ public abstract class ARRPNeoForgeEvent extends Event {
 //    public static class AfterVanillaNeoForgeEvent extends ARRPNeoForgeEvent {}
     public static class BeforeUser extends ARRPNeoForgeEvent {}
 }
+//? }

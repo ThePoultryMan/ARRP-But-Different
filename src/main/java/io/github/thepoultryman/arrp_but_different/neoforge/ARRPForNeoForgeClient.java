@@ -1,3 +1,4 @@
+//? if neoforge {
 package io.github.thepoultryman.arrp_but_different.neoforge;
 
 import io.github.thepoultryman.arrp_but_different.ARRPCommon;
@@ -13,3 +14,4 @@ public class ARRPForNeoForgeClient {
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
 }
+//? }

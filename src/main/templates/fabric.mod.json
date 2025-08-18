@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "advanced_runtime_resource_packs_but_different",
-  "version": "${version}",
-  "name": "Advanced Runtime Resource Packs but it's Different but it's Still ARRP",
-  "description": "A mod that allows mods to generate assets/data on the fly, but it's (slightly) different, and also on NeoForge.",
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
   "authors": [
     {
       "name": "ThePoultryMan"
@@ -22,7 +22,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.16.14",
-    "minecraft": ">=1.21.6",
+    "minecraft": ">=${minecraft_version}",
     "fabric-api": ">=0.127.0+1.21.6",
     "forgeconfigapiport": ">=${forge_config_api_port_version}"
   }

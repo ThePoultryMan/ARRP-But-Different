@@ -1,3 +1,4 @@
+//? if neoforge {
 package io.github.thepoultryman.arrp_but_different.neoforge;
 
 import io.github.thepoultryman.arrp_but_different.ARRPCommon;
@@ -22,3 +23,4 @@ public class ARRPForNeoForge {
         modBus.addListener((ModConfigEvent event) -> ARRPConfigSpec.load());
     }
 }
+//? }

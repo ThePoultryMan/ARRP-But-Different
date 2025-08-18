@@ -4,12 +4,12 @@ issueTrackerURL = "https://github.com/ThePoultryMan/ARRP-But-Different/issues"
 license = "GNU LGPL 3.0"
 
 [[mods]]
-modId = "advanced_runtime_resource_packs_but_different"
-version = "${version}"
-displayName = "Advanced Runtime Resource Packs but it's different but also still ARRP"
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
 authors = "ThePoultryMan"
 description = '''
-A mod that allows mods to generate assets/data on the fly, but it's (slightly) different, and also on NeoForge.
+${mod_description}
 '''
 logoFile = "icon.png"
 
@@ -23,9 +23,6 @@ side = "BOTH"
 [[dependencies.advanced_runtime_resource_packs_but_different]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.6,)"
+versionRange = "[${minecraft_version},)"
 ordering = "NONE"
 side = "BOTH"
-
-[[mixins]]
-config = "advanced_runtime_resource_packs_but_different.mixins.json"
