@@ -7,7 +7,12 @@ fun prop(name: String, consumer: (prop: String) -> Unit) {
         ?.let(consumer)
 }
 
-val minecraft = property("deps.minecraft") as String;
+val minecraft = property("deps.minecraft") as String
+val testing = if (property("testing") != null) {
+    property("testing").toString() == "true"
+} else {
+    false
+}
 
 modstitch {
     minecraftVersion = minecraft
@@ -50,7 +55,17 @@ modstitch {
 
         // Configure loom like normal in this block.
         configureLoom {
+            mods.register("advanced_runtime_resource_packs_but_different") {
+                sourceSet(sourceSets.main.get())
+                sourceSet(sourceSets.test.get())
+            }
 
+            runs {
+                getByName("client") {
+                    client()
+                    source(sourceSets.test.get())
+                }
+            }
         }
     }
 
@@ -68,12 +83,6 @@ modstitch {
         addMixinsToModManifest = true
 
         configs.register("advanced_runtime_resource_packs_but_different")
-
-        // Most of the time you wont ever need loader specific mixins.
-        // If you do, simply make the mixin file and add it like so for the respective loader:
-        // if (isLoom) configs.register("examplemod-fabric")
-        // if (isModDevGradleRegular) configs.register("examplemod-neoforge")
-        // if (isModDevGradleLegacy) configs.register("examplemod-forge")
     }
 }
 

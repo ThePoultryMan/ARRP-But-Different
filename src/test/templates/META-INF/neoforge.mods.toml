@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+issueTrackerURL = "https://github.com/ThePoultryMan/ARRP-But-Different/issues"
+license = "GNU LGPL 3.0"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "ThePoultryMan"
+description = '''
+${mod_description}
+'''
+logoFile = "icon.png"
+
+[[dependencies.advanced_runtime_resource_packs_but_different]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.advanced_runtime_resource_packs_but_different]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minecraft_version},)"
+ordering = "NONE"
+side = "BOTH"

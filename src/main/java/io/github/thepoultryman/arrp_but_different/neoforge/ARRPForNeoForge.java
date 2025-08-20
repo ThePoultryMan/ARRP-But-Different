@@ -23,4 +23,4 @@ public class ARRPForNeoForge {
         modBus.addListener((ModConfigEvent event) -> ARRPConfigSpec.load());
     }
 }
-//? }
+//?}

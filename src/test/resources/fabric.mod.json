@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "arrp_but_testing",
+  "version": "1.0.0",
+  "name": "ARRP But Testing",
+  "description": "Testing mod for ARRP But Different",
+  "authors": [
+    {
+      "name": "ThePoultryMan"
+    }
+  ],
+  "license": "GNU LGPL 3.0",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.thepoultryman.arrp_but_testing.ARRPButTestingFabric"
+    ]
+  },
+  "mixins": [
+    "advanced_runtime_resource_packs_but_different.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "minecraft": ">=1.21.6",
+    "fabric-api": ">=0.127.0+1.21.6"
+  }
+}

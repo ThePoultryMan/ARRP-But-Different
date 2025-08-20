@@ -26,4 +26,4 @@ public abstract class ARRPNeoForgeEvent extends Event {
 //    public static class AfterVanillaNeoForgeEvent extends ARRPNeoForgeEvent {}
     public static class BeforeUser extends ARRPNeoForgeEvent {}
 }
-//? }
+//?}

@@ -14,4 +14,4 @@ public class ARRPForNeoForgeClient {
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
 }
-//? }
+//?}

@@ -1,4 +1,5 @@
-package io.github.thepoultryman.arrp_but_different.fabric;
+//? if fabric {
+/*package io.github.thepoultryman.arrp_but_different.fabric;
 
 import io.github.thepoultryman.arrp_but_different.util.AddOnlyList;
 import net.fabricmc.fabric.api.event.Event;
@@ -23,3 +24,4 @@ public interface ARRPEvent {
 
     void insert(AddOnlyList<PackResources> resourcePacks);
 }
+*///?}
