@@ -47,5 +47,3 @@ stonecutter {
 }
 
 rootProject.name = "ARRP But Different"
-
-include("test")

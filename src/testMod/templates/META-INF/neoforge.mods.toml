@@ -4,7 +4,7 @@ issueTrackerURL = "https://github.com/ThePoultryMan/ARRP-But-Different/issues"
 license = "GNU LGPL 3.0"
 
 [[mods]]
-modId = "${mod_id}"
+modId = "arrp_but_testing"
 version = "${mod_version}"
 displayName = "${mod_name}"
 authors = "ThePoultryMan"

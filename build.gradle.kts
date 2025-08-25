@@ -14,6 +14,10 @@ val testing = if (property("testing") != null) {
     false
 }
 
+sourceSets.main {
+    java.srcDir("src/testMod/java")
+}
+
 modstitch {
     minecraftVersion = minecraft
 
@@ -118,6 +122,8 @@ dependencies {
         modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
         modstitchModApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${property("deps.forge_config_api_port")}")
+    } else {
+//        modstitchModImplementation(sourceSets.test.get().output)
     }
 
     // Anything else in the dependencies block will be used for all platforms.
