@@ -14,8 +14,10 @@ val testing = if (property("testing") != null) {
     false
 }
 
-sourceSets.main {
-    java.srcDir("src/testMod/java")
+if (testing) {
+    sourceSets.main {
+        java.srcDir("src/testMod/java")
+    }
 }
 
 modstitch {
@@ -48,6 +50,16 @@ modstitch {
             prop("deps.forge_config_api_port") {
                 put("forge_config_api_port_version", it)
             }
+
+            put("test_mod_block", if (testing) {
+                if (modstitch.isLoom) {
+                    ",\"io.github.thepoultryman.arrp_but_testing.ARRPButTestingFabric\""
+                } else {
+                    "[[mods]]\nmodId = \"arrp_but_testing\""
+                }
+            } else {
+                ""
+            })
         }
     }
 
@@ -58,19 +70,7 @@ modstitch {
         fabricLoaderVersion = "0.16.14"
 
         // Configure loom like normal in this block.
-        configureLoom {
-            mods.register("advanced_runtime_resource_packs_but_different") {
-                sourceSet(sourceSets.main.get())
-                sourceSet(sourceSets.test.get())
-            }
-
-            runs {
-                getByName("client") {
-                    client()
-                    source(sourceSets.test.get())
-                }
-            }
-        }
+        configureLoom {}
     }
 
     // ModDevGradle (NeoForge, Forge, Forgelike)
@@ -100,10 +100,6 @@ stonecutter {
         "forge" to constraint.equals("forge"),
         "vanilla" to constraint.equals("vanilla")
     )
-}
-
-subprojects {
-    apply("dev.kikugie.stonecutter")
 }
 
 repositories {

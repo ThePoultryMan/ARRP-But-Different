@@ -10,5 +10,4 @@ public class ARRPButTestingFabric implements ModInitializer {
         ARRPEvent.BEFORE_USER.register((resourcePacks) -> resourcePacks.add(ARRPButTestingCommon.beforeUserEvent()));
     }
 }
-//}
-*/
+*///? }

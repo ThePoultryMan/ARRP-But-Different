@@ -15,6 +15,7 @@
   "entrypoints": {
     "main": [
       "io.github.thepoultryman.arrp_but_different.fabric.ARRPButFabric"
+      ${test_mod_block}
     ]
   },
   "mixins": [
