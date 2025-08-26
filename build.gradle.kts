@@ -155,7 +155,7 @@ publishMods {
     } else {
         "neoforge"
     }
-    displayName = "${property("mod.name")} ${property("mod.version")}-${loader} for $versionRange"
+    displayName = "ARRP But Different ${property("mod.version")}-${loader} for $versionRange"
     version = "${property("mod.version")}+${minecraft}-${loader}"
     type = BETA
     if (modstitch.isLoom) {
