@@ -1,5 +1,8 @@
+import net.fabricmc.loom.task.RemapJarTask
+
 plugins {
     id("dev.isxander.modstitch.base") version "0.7.0-unstable"
+    id("me.modmuss50.mod-publish-plugin") version("0.8.4")
 }
 
 fun prop(name: String, consumer: (prop: String) -> Unit) {
@@ -33,7 +36,7 @@ modstitch {
     // the metadata files found in the templates folder.
     metadata {
         modId = "advanced_runtime_resource_packs_but_different"
-        modName = "Advanced Runtime Resource Packs but it's Different but it's Still ARRP"
+        prop("mod.name") { modName = it }
         modDescription = "A mod that allows mods to generate assets/data on the fly, but it's (slightly) different, and also on NeoForge."
         prop("mod.version") { modVersion = it }
         modGroup = "io.github.thepoultryman"
@@ -123,4 +126,73 @@ dependencies {
     }
 
     // Anything else in the dependencies block will be used for all platforms.
+}
+
+publishMods {
+    if (modstitch.isLoom) {
+        file.set(tasks.named<RemapJarTask>("remapJar").get().archiveFile)
+    } else {
+        file.set(tasks.jar.get().archiveFile)
+    }
+
+    var minMinecraftVersion = findProperty("deps.minecraft_min") as String?
+    var versionRange = if (minMinecraftVersion != null) {
+        "${minMinecraftVersion}-${minecraft}"
+    } else {
+        minecraft
+    }
+    var loader = if (modstitch.isLoom) {
+        "fabric"
+    } else {
+        "neoforge"
+    }
+    displayName = "${property("mod.name")} ${property("mod.version")}-${loader} for $versionRange"
+    version = "${property("mod.version")}+${minecraft}-${loader}"
+    type = BETA
+    if (modstitch.isLoom) {
+        modLoaders.addAll("fabric", "quilt")
+    } else {
+        modLoaders.add("neoforge")
+    }
+    changelog = rootProject.file("CHANGELOG.md").readText()
+
+    modrinth {
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        projectId = "5AA9oDBl"
+
+        projectDescription.set(providers.fileContents(layout.projectDirectory.file("README.md")).asText)
+
+        if (minMinecraftVersion != null) {
+            minecraftVersionRange {
+                start = minMinecraftVersion
+                end = minecraft
+            }
+        } else {
+            minecraftVersions.add(minecraft)
+        }
+
+        if (modstitch.isLoom) {
+            requires("fabric-api")
+            requires("forge-config-api-port")
+        }
+    }
+
+    curseforge {
+        accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+        projectId = "1232883"
+
+        if (minMinecraftVersion != null) {
+            minecraftVersionRange {
+                start = minMinecraftVersion
+                end = minecraft
+            }
+        } else {
+            minecraftVersions.add(minecraft)
+        }
+
+        if (modstitch.isLoom) {
+            requires("fabric-api")
+            requires("forge-config-api-port-fabric")
+        }
+    }
 }
