@@ -13,17 +13,17 @@ ${mod_description}
 '''
 logoFile = "icon.png"
 
-[[dependencies.advanced_runtime_resource_packs_but_different]]
+[[dependencies.${mod_id}]]
 modId = "neoforge"
 type = "required"
 versionRange = "[21,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.advanced_runtime_resource_packs_but_different]]
+[[dependencies.${mod_id}]]
 modId = "minecraft"
 type = "required"
-versionRange = "[${minecraft_version},)"
+versionRange = "[${min_minecraft_version},${minecraft_upper_bound})"
 ordering = "NONE"
 side = "BOTH"
 

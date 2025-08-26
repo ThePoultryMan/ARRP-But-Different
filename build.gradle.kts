@@ -10,7 +10,11 @@ fun prop(name: String, consumer: (prop: String) -> Unit) {
         ?.let(consumer)
 }
 
-val minecraft = property("deps.minecraft") as String
+val minecraft = if (property("deps.minecraft")?.equals("latest") == true) {
+    property("latest_minecraft") as String
+} else {
+    property("deps.minecraft") as String
+}
 val testing = if (property("testing") != null) {
     property("testing").toString() == "true"
 } else {
@@ -53,6 +57,16 @@ modstitch {
             prop("deps.forge_config_api_port") {
                 put("forge_config_api_port_version", it)
             }
+            put("min_minecraft_version", property("deps.minecraft_min") as String)
+            put("minecraft_upper_bound", if (property("deps.minecraft")?.equals("latest") == true) {
+                ""
+            } else {
+                if (modstitch.isLoom) {
+                    " <=$minecraftVersion"
+                } else {
+                    minecraftVersion.toString()
+                }
+            })
 
             put("test_mod_block", if (testing) {
                 if (modstitch.isLoom) {
@@ -119,13 +133,8 @@ repositories {
 dependencies {
     if (modstitch.isLoom) {
         modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
-
         modstitchModApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${property("deps.forge_config_api_port")}")
-    } else {
-//        modstitchModImplementation(sourceSets.test.get().output)
     }
-
-    // Anything else in the dependencies block will be used for all platforms.
 }
 
 publishMods {
