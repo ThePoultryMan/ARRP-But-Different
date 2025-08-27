@@ -33,7 +33,7 @@ to add multiple variants or multiparts.
 Variants
 ========
 
-When using variants in your blockstate, you must create one or more ``JVariant``s, and add then them
+When using variants in your blockstate, you must create one or more ``JVariant`` s, and add then them
 to your blockstate.
 
 The ``JVariant`` API is simple. You use ``JVariant::condition`` to add a condition that determines
@@ -56,7 +56,7 @@ Example
 Multiparts
 ==========
 
-When using multiparts in your blockstate, you must create one or more ``JMultipart``s, and then add
+When using multiparts in your blockstate, you must create one or more ``JMultipart`` s, and then add
 them to  your blockstate.
 
 The models that will be displayed are added to the multipart either through the constructor or through
