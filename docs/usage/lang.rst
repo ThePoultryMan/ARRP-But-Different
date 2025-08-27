@@ -6,7 +6,7 @@ To add a translation, you must add a *JLang* instance to the RRP.
 
 .. note:: The following examples assume you are working with a RRP named *pack*.
 
-First, add create a *JLang* instance.
+First, create a *JLang* instance.
 
 .. code-block:: java
     JLang lang = new JLang();
