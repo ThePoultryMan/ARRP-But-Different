@@ -2,11 +2,11 @@
 Add Blockstates
 ===============
 
-To add a blockstate, you must add a *JState* instance to the RRP.
+To add a blockstate, you must add a ``JState`` instance to the RRP.
 
 .. note:: The following examples assume you are working with a RRP named *pack*.
 
-First, create a *JState* instance.
+First, create a ``JState`` instance.
 
 .. code-block:: java
     JState blockstate = new JState();
@@ -22,8 +22,7 @@ to add multiple variants or multiparts.
 
 .. caution:: Using both variants and multiparts on the same JState instance will cause runtime errors
 
-.. tip:: Like most J* classes provided by ARRP But Different, JState use the builder pattern, allowing
-easy consecutive calls.
+.. tip:: Like most J* classes provided by ARRP But Different, JState use the builder pattern, allowing consecutive calls.
 
 .. note:: JBlockModel
 
@@ -31,19 +30,19 @@ easy consecutive calls.
     refers to a block model. It allows setting the x and y rotation, whether to use uvlock, and the
     weight of the model.
 
-Variants:
-=========
+Variants
+========
 
-When using variants in your blockstate, you must create one or more *JVariant*s, and add then them
+When using variants in your blockstate, you must create one or more ``JVariant``s, and add then them
 to your blockstate.
 
-The *JVariant* API is simple. You use ``JVariant::condition`` to add a condition that determines
+The ``JVariant`` API is simple. You use ``JVariant::condition`` to add a condition that determines
 when the specified model shows up. For example, if you wanted to show a model while your block is
 powered, you would use ``new JVariant().condition("powered", true)``. To specify the model that shows
 up, you would use the ``JVariant::model`` function, which takes a ``JBlockModel`` instance.
 
-Example:
---------
+Example
+-------
 
 .. code-block:: java
 
@@ -54,8 +53,8 @@ Example:
                     .model(new JBlockModel("block/spruce_door_bottom_left").x(90))
     );
 
-Multiparts:
-===========
+Multiparts
+==========
 
 When using multiparts in your blockstate, you must create one or more ``JMultipart``s, and then add
 them to  your blockstate.
@@ -67,8 +66,8 @@ will appear, you will set ``JMultipart::when``.
 ``JWhen`` is decently complicated, you should read through the Minecraft Wiki page on blockstates
 (linked above).
 
-Example:
---------
+Example
+-------
 
 You can find a simple example of using JMultipart at
 https://github.com/ThePoultryMan/Lanterns-Belong-On-Walls/blob/main/src/main/java/io/github/thepoultryman/walllanterns/WallLanterns.java#L40
