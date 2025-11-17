@@ -9,6 +9,7 @@
   "mixins": [
     "BootstrapMixin",
     "FolderRepositorySourceMixin",
-    "MultiPackResourceManagerMixin"
+    "MultiPackResourceManagerMixin",
+    "PackMixin"
   ]
 }

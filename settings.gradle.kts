@@ -36,13 +36,13 @@ stonecutter {
         }
 
         // Configure your targets here!
-        listOf("1.21.6").forEach {
+        listOf("1.21.6", "1.21.9").forEach {
             mc(it)
         }
 
         // This is the default target.
         // https://stonecutter.kikugie.dev/stonecutter/guide/setup#settings-settings-gradle-kts
-        vcsVersion = "1.21.6-neoforge"
+        vcsVersion = "1.21.9-neoforge"
     }
 }
 

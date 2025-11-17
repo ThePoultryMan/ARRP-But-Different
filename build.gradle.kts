@@ -1,8 +1,8 @@
 import net.fabricmc.loom.task.RemapJarTask
 
 plugins {
-    id("dev.isxander.modstitch.base") version "0.7.0-unstable"
-    id("me.modmuss50.mod-publish-plugin") version("0.8.4")
+    id("dev.isxander.modstitch.base") version "0.7.1-unstable"
+    id("me.modmuss50.mod-publish-plugin") version("1.1.0")
 }
 
 fun prop(name: String, consumer: (prop: String) -> Unit) {
@@ -28,6 +28,8 @@ if (testing) {
 }
 
 modstitch {
+    javaVersion = 21
+
     minecraftVersion = minecraft
 
     // If parchment doesnt exist for a version yet you can safely
@@ -37,7 +39,7 @@ modstitch {
     }
 
     // This metadata is used to fill out the information inside
-    // the metadata files found in the templates folder.
+    // the metadata fil es found in the templates folder.
     metadata {
         modId = "advanced_runtime_resource_packs_but_different"
         prop("mod.name") { modName = it }

@@ -39,6 +39,7 @@ import net.minecraft.server.packs.AbstractPackResources;
 import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.MetadataSectionType;
+import net.minecraft.server.packs.metadata.pack.PackFormat;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.resources.IoSupplier;
 import org.jetbrains.annotations.NotNull;
@@ -62,7 +63,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class RuntimeResourcePackImpl implements RuntimeResourcePack {
-    private static final int RESOURCE_PACK_VERSION = 63;
 
     public static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(AdvancementRewards.class, new AdvancementRewardsSerializer())
@@ -174,6 +174,10 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
 
     @Override
     public @Nullable <T> T getMetadataSection(@NotNull MetadataSectionType<T> pSectionType) {
+        return this.getMetadataSection(pSectionType, null);
+    }
+
+    public @Nullable <T> T getMetadataSection(@NotNull MetadataSectionType<T> pSectionType, PackFormat packFormat) {
         InputStream inputStream = null;
         try {
             IoSupplier<InputStream> ioSupplier = this.getRootResource("pack.mcmeta");
@@ -184,16 +188,25 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             throw new RuntimeException(exception);
         }
         if (inputStream != null) {
-            return AbstractPackResources.getMetadataFromStream(pSectionType, inputStream);
+            return AbstractPackResources.getMetadataFromStream(
+                    pSectionType,
+                    inputStream,
+                    this.info
+            );
         } else {
             if (pSectionType.name().equals("pack")) {
                 JsonObject object = new JsonObject();
-                object.addProperty("pack_format", RESOURCE_PACK_VERSION);
+                if (packFormat != null) {
+                    object.addProperty("min_format", packFormat.major());
+                    object.addProperty("max_format", packFormat.major());
+                }
+
                 object.addProperty("description", "runtime resource pack");
                 DataResult<T> result = pSectionType.codec().parse(JsonOps.INSTANCE, object);
                 if (result.isSuccess()) {
                     return result.getOrThrow();
                 } else {
+                    result.getOrThrow();
                     throw new RuntimeException("Resource Pack information could not be parsed.");
                 }
             }
