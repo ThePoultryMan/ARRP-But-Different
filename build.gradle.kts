@@ -64,9 +64,9 @@ modstitch {
                 ""
             } else {
                 if (modstitch.isLoom) {
-                    " <=$minecraftVersion"
+                    " <=${minecraftVersion.get()}"
                 } else {
-                    minecraftVersion.toString()
+                    minecraftVersion.get()
                 }
             })
 
