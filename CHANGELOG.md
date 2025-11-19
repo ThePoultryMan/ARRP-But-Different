@@ -1,4 +1,8 @@
+## Changes
+
+* Port to 1.21.9 & 1.21.10
+* refactor: dynamic pack format detection at runtime
+
 ## Internal
 
-* Now uses Stonecutter & modstitch for multi-version & multi-loader support.
-* Automated publishing from local environment
+* fix: minecraft version bounds
