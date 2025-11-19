@@ -39,6 +39,7 @@ import net.minecraft.server.packs.AbstractPackResources;
 import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.MetadataSectionType;
+//? if >= 1.21.9
 import net.minecraft.server.packs.metadata.pack.PackFormat;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.resources.IoSupplier;
@@ -174,10 +175,23 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
 
     @Override
     public @Nullable <T> T getMetadataSection(@NotNull MetadataSectionType<T> pSectionType) {
-        return this.getMetadataSection(pSectionType, null);
+        return this.getMetadataSection(pSectionType,
+                //? if >= 1.21.9 {
+                null
+                //?} else {
+                /*63
+                *///?}
+                );
     }
 
-    public @Nullable <T> T getMetadataSection(@NotNull MetadataSectionType<T> pSectionType, PackFormat packFormat) {
+    public @Nullable <T> T getMetadataSection(@NotNull MetadataSectionType<T> pSectionType,
+                                              //? if >= 1.21.9 {
+                                              PackFormat
+                                              //?} else {
+                                              /*int
+                                              *///?}
+                                              packFormat
+    ) {
         InputStream inputStream = null;
         try {
             IoSupplier<InputStream> ioSupplier = this.getRootResource("pack.mcmeta");
@@ -190,19 +204,13 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
         if (inputStream != null) {
             return AbstractPackResources.getMetadataFromStream(
                     pSectionType,
-                    inputStream,
-                    this.info
+                    inputStream
+                    //? if >= 1.21.9
+                    , this.info
             );
         } else {
             if (pSectionType.name().equals("pack")) {
-                JsonObject object = new JsonObject();
-                if (packFormat != null) {
-                    object.addProperty("min_format", packFormat.major());
-                    object.addProperty("max_format", packFormat.major());
-                }
-
-                object.addProperty("description", "runtime resource pack");
-                DataResult<T> result = pSectionType.codec().parse(JsonOps.INSTANCE, object);
+                DataResult<T> result = pSectionType.codec().parse(JsonOps.INSTANCE, createPackMeta(packFormat));
                 if (result.isSuccess()) {
                     return result.getOrThrow();
                 } else {
@@ -215,6 +223,28 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             }
             return null;
         }
+    }
+
+    private static JsonObject createPackMeta(
+            //? if >= 1.21.9 {
+            PackFormat
+            //?} else {
+            /*int
+            *///?}
+            packFormat
+    ) {
+        JsonObject object = new JsonObject();
+        //? if >=1.21.9 {
+        if (packFormat != null) {
+            object.addProperty("min_format", packFormat.major());
+            object.addProperty("max_format", packFormat.major());
+        }
+        //?} else {
+        /*object.addProperty("pack_format", packFormat);
+        *///?}
+
+        object.addProperty("description", "runtime resource pack");
+        return object;
     }
 
     @Override

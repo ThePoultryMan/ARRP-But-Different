@@ -5,8 +5,10 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import io.github.thepoultryman.arrp_but_different.impl.RuntimeResourcePackImpl;
 import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackResources;
+//? if >= 1.21.9
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.MetadataSectionType;
+//? if >= 1.21.9
 import net.minecraft.server.packs.metadata.pack.PackFormat;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.server.packs.repository.Pack;
@@ -26,8 +28,13 @@ public class PackMixin {
                                                              Operation<PackMetadataSection> original,
                                                              PackLocationInfo packLocationInfo,
                                                              Pack.ResourcesSupplier resourcesSupplier,
+                                                             //? if >= 1.21.9 {
                                                              PackFormat packFormat,
-                                                             PackType packType)
+                                                             PackType packType
+                                                             //?} else {
+                                                             /*int packFormat
+                                                             *///?}
+    )
     {
         if (packResources instanceof RuntimeResourcePackImpl runtimeResourcePack &&
                 metadataSectionType.name().equals("pack")

@@ -16,7 +16,6 @@ public class DisplayInfoBuilder {
     //? if >=1.21.9 {
     private ClientAsset.ResourceTexture background;
     //?} else {
-    
     /*private ClientAsset background;
     *///?}
     private AdvancementType type;
@@ -48,7 +47,6 @@ public class DisplayInfoBuilder {
             //? if >=1.21.9 {
                 ClientAsset.ResourceTexture
             //?} else {
-            
                 /*ClientAsset
             *///?}
             background
