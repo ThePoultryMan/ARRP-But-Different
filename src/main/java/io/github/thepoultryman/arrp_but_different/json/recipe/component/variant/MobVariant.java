@@ -11,6 +11,7 @@ import net.minecraft.world.entity.animal.wolf.WolfSoundVariant;
 import net.minecraft.world.entity.animal.wolf.WolfVariant;
 import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.item.DyeColor;
+import org.jetbrains.annotations.NotNull;
 
 public record MobVariant(ResourceLocation entity, String variantType, String value) {
     public MobVariant(String entity, String variantType, String value) {
@@ -69,6 +70,10 @@ public record MobVariant(ResourceLocation entity, String variantType, String val
         return new MobVariant("parrot", "variant", variant.getSerializedName());
     }
 
+    public static MobVariant pig(ResourceKey<PigVariant> variant) {
+        return new MobVariant("pig", "variant", variant.location());
+    }
+
     public static MobVariant rabbit(Rabbit.Variant variant) {
         return new MobVariant("rabbit", "variant", variant.getSerializedName());
     }
@@ -79,6 +84,10 @@ public record MobVariant(ResourceLocation entity, String variantType, String val
 
     public static MobVariant sheep(DyeColor color) {
         return new MobVariant("sheep", "color", color.getSerializedName());
+    }
+
+    public static MobVariant shulkerColor(DyeColor color) {
+        return new MobVariant("shulker", "color", color.getSerializedName());
     }
 
     public static MobVariant tropicalFishColor(DyeColor color) {
@@ -114,7 +123,7 @@ public record MobVariant(ResourceLocation entity, String variantType, String val
     }
 
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return this.entity.toString() + "/" + this.variantType;
     }
 }
