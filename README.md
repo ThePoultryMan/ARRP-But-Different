@@ -1,3 +1,11 @@
+# What is this branch?
+
+Due to the renaming `ResourceLocation` to `Identifier` in the 1.21.11 update, using Stonecutter to
+manage the changes between the pre-1.21.11 versions and modern versions would result in incredibly
+dense and verbose code. To avoid this, this branch `1.21.10` is the "legacy" code that may or may
+not have changes backported, while the `main` branch will continue to track with the current
+Minecraft version.
+
 # Advanced Runtime Resource Packs but it's Different but it's Still ARRP
 
 ARRP But Different allows developers to dynamically create assets and data at runtime, allowing
