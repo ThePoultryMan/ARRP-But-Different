@@ -1,12 +1,12 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe.component;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class JSuspiciousStewEffect {
-    private final ResourceLocation id;
+    private final Identifier id;
     private Integer duration;
 
-    public JSuspiciousStewEffect(ResourceLocation id) {
+    public JSuspiciousStewEffect(Identifier id) {
         this.id = id;
     }
 

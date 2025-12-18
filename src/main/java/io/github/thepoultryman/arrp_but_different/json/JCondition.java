@@ -2,7 +2,7 @@ package io.github.thepoultryman.arrp_but_different.json;
 
 import com.google.gson.*;
 import io.github.thepoultryman.arrp_but_different.impl.RuntimeResourcePackImpl;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.lang.reflect.Type;
 
@@ -45,7 +45,7 @@ public class JCondition {
         return this.parameter(key, new JsonPrimitive(value));
     }
 
-    public JCondition parameter(String key, ResourceLocation value) {
+    public JCondition parameter(String key, Identifier value) {
         return this.parameter(key, value.toString());
     }
 

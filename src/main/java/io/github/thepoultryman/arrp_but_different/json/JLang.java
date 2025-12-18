@@ -2,7 +2,7 @@ package io.github.thepoultryman.arrp_but_different.json;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -28,7 +28,7 @@ public class JLang implements Cloneable {
                 name);
     }
 
-    private JLang addObject(String type, ResourceLocation resourceLocation, String translation) {
+    private JLang addObject(String type, Identifier resourceLocation, String translation) {
         this.lang.put(type + "." + resourceLocation.getNamespace() + "." + resourceLocation.getPath(), translation);
         return this;
     }
@@ -73,15 +73,15 @@ public class JLang implements Cloneable {
     }
 
     /**
-     * Adds a translation for an item, using the provided {@link ResourceLocation}
+     * Adds a translation for an item, using the provided {@link Identifier}
      * to format the key.
      *
-     * @param resourceLocation The {@link ResourceLocation} used to format the
+     * @param resourceLocation The {@link Identifier} used to format the
      *                         key
      * @param name             The translation
      * @return The current {@link JLang} instance
      */
-    public JLang addItemTranslation(ResourceLocation resourceLocation, String name) {
+    public JLang addItemTranslation(Identifier resourceLocation, String name) {
         return this.addObject("item", resourceLocation, name);
     }
 
@@ -99,14 +99,14 @@ public class JLang implements Cloneable {
     }
 
     /**
-     * Adds a translation for a block, using the provided {@link ResourceLocation}
+     * Adds a translation for a block, using the provided {@link Identifier}
      * to format the key.
      *
-     * @param resourceLocation The {@link ResourceLocation} used to format the key
+     * @param resourceLocation The {@link Identifier} used to format the key
      * @param name             The translation
      * @return The current {@link JLang} instance
      */
-    public JLang addBlockTranslation(ResourceLocation resourceLocation, String name) {
+    public JLang addBlockTranslation(Identifier resourceLocation, String name) {
         return this.addObject("block", resourceLocation, name);
     }
 
@@ -123,15 +123,15 @@ public class JLang implements Cloneable {
     }
 
     /**
-     * Adds a translation for a fluid, using the provided {@link ResourceLocation}
+     * Adds a translation for a fluid, using the provided {@link Identifier}
      * to format the key.
      *
-     * @param resourceLocation The {@link ResourceLocation} used to format the
+     * @param resourceLocation The {@link Identifier} used to format the
      *                         key
      * @param name             The translation
      * @return The current {@link JLang} instance
      */
-    public JLang addFluidTranslation(ResourceLocation resourceLocation, String name) {
+    public JLang addFluidTranslation(Identifier resourceLocation, String name) {
         this.addObject("fluid", resourceLocation, name);
         return this;
     }
@@ -151,15 +151,15 @@ public class JLang implements Cloneable {
     }
 
     /**
-     * Adds a translation for an entity, using the provided {@link ResourceLocation}
+     * Adds a translation for an entity, using the provided {@link Identifier}
      * to format the key.
      *
-     * @param resourceLocation The {@link ResourceLocation} used to format the
+     * @param resourceLocation The {@link Identifier} used to format the
      *                         key
      * @param name             The translation
      * @return The current {@link JLang} instance
      */
-    public JLang addEntityTranslation(ResourceLocation resourceLocation, String name) {
+    public JLang addEntityTranslation(Identifier resourceLocation, String name) {
         return this.addObject("entity_type", resourceLocation, name);
     }
 
@@ -175,50 +175,50 @@ public class JLang implements Cloneable {
     }
 
     /**
-     * Adds a translation for an item group, using the provided {@link ResourceLocation}
+     * Adds a translation for an item group, using the provided {@link Identifier}
      * to format the key.
      *
-     * @param resourceLocation The {@link ResourceLocation} used to format the
+     * @param resourceLocation The {@link Identifier} used to format the
      *                         key
      * @param name             The translation
      * @return The current {@link JLang} instance
      */
-    public JLang addItemGroupTranslation(ResourceLocation resourceLocation, String name) {
+    public JLang addItemGroupTranslation(Identifier resourceLocation, String name) {
         return this.addObject("itemGroup", resourceLocation, name);
     }
 
     /**
-     * Adds a translation for a sound, using the provided {@link ResourceLocation}
+     * Adds a translation for a sound, using the provided {@link Identifier}
      * to format the key.
      * <br />
      * For those who are unaware: sound translations are used for Minecraft's
      * subtitles.
      *
-     * @param resourceLocation The {@link ResourceLocation} used to format the
+     * @param resourceLocation The {@link Identifier} used to format the
      *                         key
      * @param name             The translation
      * @return The current {@link JLang} instance
      */
-    public JLang addSoundTranslation(ResourceLocation resourceLocation, String name) {
+    public JLang addSoundTranslation(Identifier resourceLocation, String name) {
         return this.addObject("sound_event", resourceLocation, name);
     }
 
     /**
-     * Adds a translation for a status effect, using the provided {@link ResourceLocation}
+     * Adds a translation for a status effect, using the provided {@link Identifier}
      * to format the key.
      *
-     * @param resourceLocation The {@link ResourceLocation} used to format the key
+     * @param resourceLocation The {@link Identifier} used to format the key
      * @param name             The translation
      * @return The current {@link JLang} instance
      */
-    public JLang addStatusTranslation(ResourceLocation resourceLocation, String name) {
+    public JLang addStatusTranslation(Identifier resourceLocation, String name) {
         return this.addObject("mob_effect", resourceLocation, name);
     }
 
     /**
      * Adds a translation for a drinkable, splash, lingering potion, as well as
      * a tipped arrow.
-     * @param resourceLocation The {@link ResourceLocation} used to format the
+     * @param resourceLocation The {@link Identifier} used to format the
      *                         key.
      * @param drinkablePotionName The translation for the drinkable potion
      * @param splashPotionName The translation for the splash potion
@@ -227,7 +227,7 @@ public class JLang implements Cloneable {
      * @return The current {@link JLang} instance
      */
     public JLang addAllPotionTranslations(
-            ResourceLocation resourceLocation,
+            Identifier resourceLocation,
             String drinkablePotionName,
             String splashPotionName,
             String lingeringPotionName,
@@ -239,62 +239,62 @@ public class JLang implements Cloneable {
     }
 
     /**
-     * Adds a translation for a potion item, using the provided {@link ResourceLocation}
+     * Adds a translation for a potion item, using the provided {@link Identifier}
      * to format the key.
-     * @param resourceLocation The {@link ResourceLocation} used to format the key
+     * @param resourceLocation The {@link Identifier} used to format the key
      * @param name The translation
      * @return The current {@link JLang} instance
      */
-    public JLang addDrinkablePotionTranslation(ResourceLocation resourceLocation, String name) {
+    public JLang addDrinkablePotionTranslation(Identifier resourceLocation, String name) {
         this.lang.put("item.minecraft.potion.effect." + resourceLocation.getPath(), name);
         return this;
     }
 
     /**
-     * Adds a translation for a splash potion item, using the provided {@link ResourceLocation}
+     * Adds a translation for a splash potion item, using the provided {@link Identifier}
      * to format the key.
-     * @param resourceLocation The {@link ResourceLocation} used to format the key
+     * @param resourceLocation The {@link Identifier} used to format the key
      * @param name The translation
      * @return The current {@link JLang} instance
      */
-    public JLang addSplashPotionTranslation(ResourceLocation resourceLocation, String name) {
+    public JLang addSplashPotionTranslation(Identifier resourceLocation, String name) {
         this.lang.put("item.minecraft.splash_potion.effect." + resourceLocation.getPath(), name);
         return this;
     }
 
     /**
      * Adds a translation for a lingering potion item, using the provided
-     * {@link ResourceLocation} to format the key.
-     * @param resourceLocation The {@link ResourceLocation} used to format the key
+     * {@link Identifier} to format the key.
+     * @param resourceLocation The {@link Identifier} used to format the key
      * @param name The translation
      * @return The current {@link JLang} instance
      */
-    public JLang addLingeringPotionTranslation(ResourceLocation resourceLocation, String name) {
+    public JLang addLingeringPotionTranslation(Identifier resourceLocation, String name) {
         this.lang.put("item.minecraft.lingering_potion.effect" + resourceLocation.getPath(), name);
         return this;
     }
 
     /**
      * Adds a translation for a tipped arrow item, using the provided
-     * {@link ResourceLocation} to format the key.
-     * @param resourceLocation The {@link ResourceLocation} used to format the key
+     * {@link Identifier} to format the key.
+     * @param resourceLocation The {@link Identifier} used to format the key
      * @param name The translation
      * @return The current {@link JLang} instance
      */
-    public JLang addTippedArrowTranslation(ResourceLocation resourceLocation, String name) {
+    public JLang addTippedArrowTranslation(Identifier resourceLocation, String name) {
         this.lang.put("item.minecraft.tipped_arrow.effect." + resourceLocation.getPath(), name);
         return this;
     }
 
     /**
-     * Adds a translation for a biome, using the provided {@link ResourceLocation}
+     * Adds a translation for a biome, using the provided {@link Identifier}
      * to format the key.
-     * @param resourceLocation The {@link ResourceLocation} used to format the
+     * @param resourceLocation The {@link Identifier} used to format the
      *                         key
      * @param name The translation
      * @return The current {@link JLang} instance
      */
-    public JLang addBiomeTranslation(ResourceLocation resourceLocation, String name) {
+    public JLang addBiomeTranslation(Identifier resourceLocation, String name) {
         return this.addObject("biome", resourceLocation, name);
     }
 

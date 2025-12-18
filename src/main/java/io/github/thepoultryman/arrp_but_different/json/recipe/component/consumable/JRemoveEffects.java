@@ -1,18 +1,18 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class JRemoveEffects extends JConsumeEffect {
-    private final List<ResourceLocation> effects = new ArrayList<>();
+    private final List<Identifier> effects = new ArrayList<>();
 
     public JRemoveEffects() {
         super("minecraft:remove_effects");
     }
 
-    public JRemoveEffects effect(ResourceLocation effect) {
+    public JRemoveEffects effect(Identifier effect) {
         this.effects.add(effect);
         return this;
     }

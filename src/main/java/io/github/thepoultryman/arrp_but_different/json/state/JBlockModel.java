@@ -1,19 +1,19 @@
 package io.github.thepoultryman.arrp_but_different.json.state;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class JBlockModel implements Cloneable {
-    private final ResourceLocation model;
+    private final Identifier model;
     private Integer x;
     private Integer y;
     private Boolean uvlock;
     private Integer weight;
 
     public JBlockModel(String model) {
-        this.model = ResourceLocation.withDefaultNamespace(model);
+        this.model = Identifier.withDefaultNamespace(model);
     }
 
-    public JBlockModel(ResourceLocation model) {
+    public JBlockModel(Identifier model) {
         this.model = model;
     }
 

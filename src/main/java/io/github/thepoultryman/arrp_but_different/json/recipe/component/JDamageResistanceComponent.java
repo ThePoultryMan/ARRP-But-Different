@@ -1,11 +1,11 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe.component;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class JDamageResistanceComponent extends AbstractJComponent {
-    private final ResourceLocation types;
+    private final Identifier types;
 
-    public JDamageResistanceComponent(ResourceLocation types) {
+    public JDamageResistanceComponent(Identifier types) {
         this.types = types;
     }
 }

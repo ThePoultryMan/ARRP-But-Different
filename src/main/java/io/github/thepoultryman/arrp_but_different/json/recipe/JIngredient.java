@@ -3,7 +3,7 @@ package io.github.thepoultryman.arrp_but_different.json.recipe;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class JIngredient {
         return this;
     }
 
-    public JIngredient tag(ResourceLocation tag) {
+    public JIngredient tag(Identifier tag) {
         return this.tag(tag.toString());
     }
 

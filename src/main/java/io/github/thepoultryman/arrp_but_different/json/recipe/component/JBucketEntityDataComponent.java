@@ -1,16 +1,16 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe.component;
 
 import com.google.gson.annotations.SerializedName;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class JBucketEntityDataComponent extends AbstractJComponent {
-    private final ResourceLocation id;
+    private final Identifier id;
     @SerializedName("HuntingCooldown")
     private Integer huntingCooldown = 0;
     @SerializedName("BucketVariantTag")
     private Integer bucketVariantTag = 0;
 
-    public JBucketEntityDataComponent(ResourceLocation id) {
+    public JBucketEntityDataComponent(Identifier id) {
         this.id = id;
     }
 

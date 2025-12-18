@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.DisplayInfo;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,14 +13,14 @@ import java.util.Map;
 
 public class JAdvancement {
     private DisplayInfo display;
-    private ResourceLocation parent;
+    private Identifier parent;
     private Map<String, Criterion<?>> criteria;
     private List<List<String>> requirements;
     private AdvancementRewards rewards;
     @SerializedName("sends_telemetry_event")
     private Boolean sendsTelemetryEvent;
 
-    public JAdvancement parent(ResourceLocation parent) {
+    public JAdvancement parent(Identifier parent) {
         this.parent = parent;
         return this;
     }

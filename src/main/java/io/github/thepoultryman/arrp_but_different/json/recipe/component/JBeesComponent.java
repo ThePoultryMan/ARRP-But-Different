@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -19,11 +19,11 @@ public class JBeesComponent extends AbstractJComponent {
     }
 
     public static class BeeData {
-        public ResourceLocation entityId;
+        public Identifier entityId;
         public int minimumTicksInHive = 0;
         public int ticksInHive = 0;
 
-        public BeeData entityId(ResourceLocation entityId) {
+        public BeeData entityId(Identifier entityId) {
             this.entityId = entityId;
             return this;
         }

@@ -1,15 +1,15 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe.banner;
 
 import com.google.gson.annotations.SerializedName;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class JBannerPatternObject {
     @SerializedName("asset_id")
-    private ResourceLocation assetId;
+    private Identifier assetId;
     @SerializedName("translation_key")
     private String translationKey;
 
-    public JBannerPatternObject assetId(ResourceLocation assetId) {
+    public JBannerPatternObject assetId(Identifier assetId) {
         this.assetId = assetId;
         return this;
     }

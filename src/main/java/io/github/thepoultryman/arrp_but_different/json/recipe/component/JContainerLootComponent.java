@@ -1,14 +1,14 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe.component;
 
 import com.google.gson.annotations.SerializedName;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class JContainerLootComponent extends AbstractJComponent {
     @SerializedName("loot_table")
-    private final ResourceLocation lootTable;
+    private final Identifier lootTable;
     private Integer seed;
 
-    public JContainerLootComponent(ResourceLocation lootTable) {
+    public JContainerLootComponent(Identifier lootTable) {
         this.lootTable = lootTable;
     }
 

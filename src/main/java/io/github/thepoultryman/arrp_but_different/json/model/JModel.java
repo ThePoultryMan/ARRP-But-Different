@@ -1,8 +1,10 @@
 package io.github.thepoultryman.arrp_but_different.json.model;
 
 import com.google.gson.annotations.SerializedName;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
+import io.github.thepoultryman.arrp_but_different.mixins.RenderTypeAccessor;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class JModel {
         return model;
     }
 
-    public static JModel modelKeepElements(ResourceLocation parent) {
+    public static JModel modelKeepElements(Identifier parent) {
         return modelKeepElements(parent.toString());
     }
 
@@ -84,17 +86,7 @@ public class JModel {
      * @return The current {@link JModel} instance.
      */
     public JModel renderType(@NotNull RenderType renderType) {
-        if (renderType.equals(RenderType.solid())) {
-            this.renderType = "minecraft:solid";
-        } else if (renderType.equals(RenderType.cutout())) {
-            this.renderType = "minecraft:cutout";
-        } else if (renderType.equals(RenderType.cutoutMipped())) {
-            this.renderType = "minecraft:cutout_mipped";
-//        } else if (renderType.equals(RenderType.transl())) {
-//            this.renderType = "minecraft:translucent";
-        } else if (renderType.equals(RenderType.tripwire())) {
-            this.renderType = "minecraft:tripwire";
-        }
+        this.renderType = "minecraft:" + ((RenderTypeAccessor) renderType).getName();
         return this;
     }
 

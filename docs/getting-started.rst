@@ -88,7 +88,7 @@ See the example below:
         public void onInitialize() {;
             ARRPEvent.BEFORE_USER.register((resourcePacks) -> {
                 // Creates the resource pack
-                RuntimeResourcePack pack = RuntimeResourcePack.create(ResourceLocation.fromNamespaceAndPath("mod_id", "example_pack"));
+                RuntimeResourcePack pack = RuntimeResourcePack.create(Identifier.fromNamespaceAndPath("mod_id", "example_pack"));
                 // Adds the resource pack to the list. If this is not done, your resource pack will never be used and will not load.
                 resourcePacks.add(pack);
             }));
@@ -111,7 +111,7 @@ See the example below:
         public void onInitialize() {;
             ARRPForNeoForge.ARRP_EVENT_BUS.register((ARRPNeoForgeEvent.BeforeUser) -> {
                 // Creates the resource pack
-                RuntimeResourcePack pack = RuntimeResourcePack.create(ResourceLocation.fromNamespaceAndPath("mod_id", "example_pack"));
+                RuntimeResourcePack pack = RuntimeResourcePack.create(Identifier.fromNamespaceAndPath("mod_id", "example_pack"));
                 // Adds the resource pack to the list. If this is not done, your resource pack will never be used and will not load.
                 event.addPack(pack);
             }));

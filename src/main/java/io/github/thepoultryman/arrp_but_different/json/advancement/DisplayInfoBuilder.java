@@ -13,11 +13,7 @@ public class DisplayInfoBuilder {
     private Component title;
     private Component description;
     private ItemStack icon;
-    //? if >=1.21.9 {
     private ClientAsset.ResourceTexture background;
-    //?} else {
-    /*private ClientAsset background;
-    *///?}
     private AdvancementType type;
     private boolean showToast;
     private boolean announceChat;
@@ -43,14 +39,7 @@ public class DisplayInfoBuilder {
         return this;
     }
 
-    public DisplayInfoBuilder background(
-            //? if >=1.21.9 {
-                ClientAsset.ResourceTexture
-            //?} else {
-                /*ClientAsset
-            *///?}
-            background
-    ) {
+    public DisplayInfoBuilder background(ClientAsset.ResourceTexture background) {
         this.background = background;
         return this;
     }

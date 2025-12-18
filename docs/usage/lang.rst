@@ -20,7 +20,7 @@ Example:
 .. code-block:: java
 
     ...
-    lang.addBlockTranslation(ResourceLocation.withDefaultNamespace("torch"), "Torch but it's different but it's not so it's the same.)
+    lang.addBlockTranslation(Identifier.withDefaultNamespace("torch"), "Torch but it's different but it's not so it's the same.)
             .addItemTranslation(Items.STICK, "It's still a stick");
 
 As you can see above, there are multiple ways of adding translations. The easiest method to add a
@@ -33,7 +33,7 @@ into the pack.
 .. code-block:: java
 
     ...
-    pack.addLang(ResourceLocation.fromNamespaceAndPath(MOD_ID, "en_us", lang);
+    pack.addLang(Identifier.fromNamespaceAndPath(MOD_ID, "en_us", lang);
 
 Now test that the translations appear in game, and you're done.
 
@@ -44,7 +44,7 @@ Now test that the translations appear in game, and you're done.
 
     .. code-block:: java
 
-        pack.addLang(ResourceLocation.fromNamespaceAndPath(MOD_ID, "en_us",
+        pack.addLang(Identifier.fromNamespaceAndPath(MOD_ID, "en_us",
             new JLang().addBlockTranslation(...)
                     .addItemTranslation(...)
         );

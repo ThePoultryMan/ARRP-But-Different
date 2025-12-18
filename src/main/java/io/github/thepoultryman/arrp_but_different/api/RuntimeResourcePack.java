@@ -9,9 +9,10 @@ import io.github.thepoultryman.arrp_but_different.json.loot.JLootTable;
 import io.github.thepoultryman.arrp_but_different.json.model.JModel;
 import io.github.thepoultryman.arrp_but_different.json.recipe.AbstractJRecipe;
 import io.github.thepoultryman.arrp_but_different.json.state.JState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param resourceLocation The ID for the resource pack.
      * @return {@link RuntimeResourcePack}
      */
-    static RuntimeResourcePack create(ResourceLocation resourceLocation) {
+    static RuntimeResourcePack create(Identifier resourceLocation) {
         return new RuntimeResourcePackImpl(resourceLocation);
     }
 
@@ -38,7 +39,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param inputStream The input stream of the original texture
      * @param pixel The pixel recolorer.
      */
-    void addRecoloredImage(ResourceLocation resourceLocation, InputStream inputStream, IntUnaryOperator pixel);
+    void addRecoloredImage(Identifier resourceLocation, InputStream inputStream, IntUnaryOperator pixel);
 
     /**
      * Adds a language file for the given language.
@@ -50,7 +51,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param lang The translation information.
      * @return TODO: Add return information.
      */
-    byte[] addLang(ResourceLocation resourceLocation, JLang lang);
+    byte[] addLang(Identifier resourceLocation, JLang lang);
 
     /**
      * Adds a language file for the given language.
@@ -60,7 +61,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param resourceLocation The namespace of your mod and the path of the language.
      * @param lang The translation information.
      */
-    void mergeLang(ResourceLocation resourceLocation, JLang lang);
+    void mergeLang(Identifier resourceLocation, JLang lang);
 
     /**
      * Adds a loot table.
@@ -68,9 +69,9 @@ public interface RuntimeResourcePack extends PackResources {
      * @param lootTable The loot table data.
      * @return TODO: Add return information.
      */
-    byte[] addLootTable(ResourceLocation resourceLocation, JLootTable lootTable);
+    byte[] addLootTable(Identifier resourceLocation, JLootTable lootTable);
 
-    byte[] addAdvancement(ResourceLocation resourceLocation, JAdvancement advancement);
+    byte[] addAdvancement(Identifier resourceLocation, JAdvancement advancement);
 
     /**
      * Adds a resource that is lazily evaluated.
@@ -78,7 +79,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param path The path to the resource.
      * @param data A function that is evaluated at a later time.
      */
-    void addLazyResource(PackType packType, ResourceLocation path, BiFunction<RuntimeResourcePack, ResourceLocation, byte[]> data);
+    void addLazyResource(PackType packType, Identifier path, BiFunction<RuntimeResourcePack, Identifier, byte[]> data);
 
     /**
      * Adds a raw resource.
@@ -87,7 +88,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param data The resource data
      * @return TODO: Add return information.
      */
-    byte[] addResource(PackType packType, ResourceLocation path, byte[] data);
+    byte[] addResource(PackType packType, Identifier path, byte[] data);
 
     /**
      * Adds a raw resource to the pack's root path.
@@ -103,7 +104,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param data The asset data
      * @return TODO: Add return information.
      */
-    byte[] addAsset(ResourceLocation path, byte[] data);
+    byte[] addAsset(Identifier path, byte[] data);
 
     /**
      * Adds a data resource, which should be serverside.
@@ -111,7 +112,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param data The data's data
      * @return TODO: Add return information.
      */
-    byte[] addData(ResourceLocation path, byte[] data);
+    byte[] addData(Identifier path, byte[] data);
 
     /**
      * Adds a model. Items should go into item/... and blocks should go in block/...
@@ -121,7 +122,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param model The model data.
      * @return TODO: Add return information.
      */
-    byte[] addModel(ResourceLocation path, JModel model);
+    byte[] addModel(Identifier path, JModel model);
 
     /**
      * Adds a blockstate file.
@@ -129,7 +130,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param state The blockstate data.
      * @return TODO: Add return information.
      */
-    byte[] addBlockSate(ResourceLocation path, JState state);
+    byte[] addBlockSate(Identifier path, JState state);
 
     /**
      * Adds a texture file.
@@ -139,7 +140,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param image The image
      * @return TODO: Add return information.
      */
-    byte[] addTexture(ResourceLocation path, BufferedImage image);
+    byte[] addTexture(Identifier path, BufferedImage image);
 
     /**
      * Adds an animation metadata file for a texture.
@@ -149,7 +150,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param animation The animation data.
      * @return TODO: Add return information.
      */
-    byte[] addAnimation(ResourceLocation path, JAnimation animation);
+    byte[] addAnimation(Identifier path, JAnimation animation);
 
     /**
      * Adds a tag.
@@ -159,7 +160,7 @@ public interface RuntimeResourcePack extends PackResources {
      * @param tag The tag data.
      * @return TODO: Add return information.
      */
-    byte[] addTag(ResourceLocation path, JTag tag);
+    byte[] addTag(Identifier path, JTag tag);
 
     /**
      * Adds a recipe.
@@ -169,7 +170,36 @@ public interface RuntimeResourcePack extends PackResources {
      * @param recipe The recipe data.
      * @return TODO: Add return information.
      */
-    byte[] addRecipe(ResourceLocation path, AbstractJRecipe recipe);
+    byte[] addRecipe(Identifier path, AbstractJRecipe recipe);
+
+    /**
+     * Adds an item modifier from an {@link ItemAttributeModifiers}
+     * <br />
+     * ".json" is automatically added to the path.
+     * @see #addItemModifier(Identifier, ItemAttributeModifiers.Builder)
+     * @param path The location of the item modifier
+     * @param modifiers The {@link ItemAttributeModifiers} that is serialized
+     *                  JSON.
+     * @return TODO: Add return information.
+     */
+    byte[] addItemModifier(Identifier path, ItemAttributeModifiers modifiers);
+
+    /**
+     * Adds an item modifier from an {@link ItemAttributeModifiers.Builder}.
+     * This method calls
+     * {@link #addItemModifier(Identifier, ItemAttributeModifiers)} after
+     * calling {@link ItemAttributeModifiers.Builder#build()} on the provided
+     * builder.
+     * <br />
+     * ".json" is automatically added to the path.
+     * @see #addItemModifier(Identifier, ItemAttributeModifiers)
+     * @param path The location of the item modifier
+     * @param modifiers The {@link ItemAttributeModifiers.Builder} that builds
+     *                  a {@link ItemAttributeModifiers} which is then passed
+     *                  to {@link RuntimeResourcePack::addItemModifier}
+     * @return TODO: Add return information.
+     */
+    byte[] addItemModifier(Identifier path, ItemAttributeModifiers.Builder modifiers);
 
     void load(Path path) throws IOException;
 

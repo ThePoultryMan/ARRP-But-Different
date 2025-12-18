@@ -1,5 +1,14 @@
 import net.fabricmc.loom.task.RemapJarTask
 
+// force newer version of loom to make it compatible with new minecraft versions
+buildscript {
+    configurations.all {
+        resolutionStrategy {
+            force("fabric-loom:fabric-loom.gradle.plugin:1.13-SNAPSHOT")
+        }
+    }
+}
+
 plugins {
     id("dev.isxander.modstitch.base") version "0.7.1-unstable"
     id("me.modmuss50.mod-publish-plugin") version("1.1.0")
@@ -32,14 +41,14 @@ modstitch {
 
     minecraftVersion = minecraft
 
-    // If parchment doesnt exist for a version yet you can safely
+    // If parchment doesn't exist for a version, yet you can safely
     // omit the "deps.parchment" property from your versioned gradle.properties
     parchment {
         prop("deps.parchment") { mappingsVersion = it }
     }
 
     // This metadata is used to fill out the information inside
-    // the metadata fil es found in the templates folder.
+    // the metadata files found in the templates folder.
     metadata {
         modId = "advanced_runtime_resource_packs_but_different"
         prop("mod.name") { modName = it }
@@ -85,8 +94,8 @@ modstitch {
     // Fabric Loom (Fabric)
     loom {
         // It's not recommended to store the Fabric Loader version in properties.
-        // Make sure its up to date.
-        fabricLoaderVersion = "0.16.14"
+        // Make sure it's up to date.
+        fabricLoaderVersion = "0.18.2"
 
         // Configure loom like normal in this block.
         configureLoom {}
@@ -114,10 +123,10 @@ modstitch {
 var constraint: String = name.split("-")[1]
 stonecutter {
     constants += arrayOf(
-        "fabric" to constraint.equals("fabric"),
-        "neoforge" to constraint.equals("neoforge"),
-        "forge" to constraint.equals("forge"),
-        "vanilla" to constraint.equals("vanilla")
+        "fabric" to (constraint == "fabric"),
+        "neoforge" to (constraint == "neoforge"),
+        "forge" to (constraint == "forge"),
+        "vanilla" to (constraint == "vanilla")
     )
 }
 

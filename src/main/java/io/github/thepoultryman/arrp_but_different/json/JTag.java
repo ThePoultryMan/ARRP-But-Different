@@ -1,6 +1,6 @@
 package io.github.thepoultryman.arrp_but_different.json;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class JTag {
      * @param entry The entry added to the tag.
      * @return The current {@link JTag} instance
      */
-    public JTag add(ResourceLocation entry) {
+    public JTag add(Identifier entry) {
         this.values.add(entry.toString());
         return this;
     }
@@ -33,7 +33,7 @@ public class JTag {
      * @param tag The tag added to the tag
      * @return The current {@link JTag} instance
      */
-    public JTag addTag(ResourceLocation tag) {
+    public JTag addTag(Identifier tag) {
         this.values.add("#" + tag.getNamespace() + ":" + tag.getPath());
         return this;
     }

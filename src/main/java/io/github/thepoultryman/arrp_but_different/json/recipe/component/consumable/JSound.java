@@ -4,15 +4,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.lang.reflect.Type;
 
 public class JSound {
-    private final ResourceLocation sound;
+    private final Identifier sound;
     private Integer range;
 
-    public JSound(ResourceLocation sound) {
+    public JSound(Identifier sound) {
         this.sound = sound;
     }
 

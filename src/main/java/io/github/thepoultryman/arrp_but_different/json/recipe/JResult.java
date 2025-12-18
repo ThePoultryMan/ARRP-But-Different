@@ -7,7 +7,7 @@ import io.github.thepoultryman.arrp_but_different.json.recipe.component.consumab
 import io.github.thepoultryman.arrp_but_different.json.recipe.component.variant.MobVariant;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.LockCode;
 import net.minecraft.world.item.Instrument;
 import net.minecraft.world.item.Rarity;
@@ -23,11 +23,11 @@ import java.util.List;
 import java.util.Map;
 
 public class JResult {
-    private ResourceLocation id;
+    private Identifier id;
     private int count;
     private final Map<String, AbstractJComponent> components = new HashMap<>();
 
-    public JResult id(ResourceLocation location) {
+    public JResult id(Identifier location) {
         this.id = location;
         return this;
     }
@@ -108,7 +108,7 @@ public class JResult {
         return this.component("minecraft:bees", component);
     }
 
-    public JResult blockEntityData(ResourceLocation resourceLocation) {
+    public JResult blockEntityData(Identifier resourceLocation) {
         return this.component("minecraft:block_entity_data", resourceLocation);
     }
 
@@ -172,7 +172,7 @@ public class JResult {
         return this.component("minecraft:damage", damage);
     }
 
-    public JResult damageResistance(ResourceLocation types) {
+    public JResult damageResistance(Identifier types) {
         return this.component("minecraft:damage_resistant", new JDamageResistanceComponent(types));
     }
 
@@ -200,8 +200,8 @@ public class JResult {
         return this.component("minecraft:enchantments", component);
     }
 
-    public JResult entityData(ResourceLocation id) {
-        return this.component("minecraft:entity_data", new JIdResourceLocationComponent(id));
+    public JResult entityData(Identifier id) {
+        return this.component("minecraft:entity_data", new JIdIdentifierComponent(id));
     }
 
     public JResult equippable(Equippable equippableComponent) {
@@ -232,7 +232,7 @@ public class JResult {
         return this.component("minecraft:intangible_projectile", new EmptyJComponent());
     }
 
-    public JResult itemModel(ResourceLocation modelLocation) {
+    public JResult itemModel(Identifier modelLocation) {
         return this.component("minecraft:item_model", modelLocation);
     }
 
@@ -240,7 +240,7 @@ public class JResult {
         return this.component("minecraft:item_name", new JCodecComponent<>(component, ComponentSerialization.CODEC));
     }
 
-    public JResult jukeboxPlayable(ResourceLocation resourceLocation) {
+    public JResult jukeboxPlayable(Identifier resourceLocation) {
         return this.component("minecraft:jukebox_playable", resourceLocation);
     }
 
@@ -284,7 +284,7 @@ public class JResult {
         return this.component("minecraft:max_stack_size", maxStackSize);
     }
 
-    public JResult noteBlockSound(ResourceLocation noteBlockSound) {
+    public JResult noteBlockSound(Identifier noteBlockSound) {
         return this.component("minecraft:note_block_sound", noteBlockSound);
     }
 
@@ -308,7 +308,7 @@ public class JResult {
         return this.component("minecraft:profile", new JCodecComponent<>(profile, ResolvableProfile.CODEC));
     }
 
-    public JResult providesBannerPatterns(ResourceLocation tag) {
+    public JResult providesBannerPatterns(Identifier tag) {
         return this.component("minecraft:provides_banner_pattern", "#" + tag.toString());
     }
 
@@ -320,7 +320,7 @@ public class JResult {
         return this.component("minecraft:rarity", new JCodecComponent<>(rarity, Rarity.CODEC));
     }
 
-    public JResult recipes(JListComponent<ResourceLocation> component) {
+    public JResult recipes(JListComponent<Identifier> component) {
         return this.component("minecraft:recipes", component);
     }
 
@@ -332,7 +332,7 @@ public class JResult {
         return this.component("minecraft:repair_cost", cost);
     }
 
-    public JResult storedEnchantments(JListComponent<ResourceLocation> enchantments) {
+    public JResult storedEnchantments(JListComponent<Identifier> enchantments) {
         return this.component("minecraft:stored_enchantments", enchantments);
     }
 
@@ -348,7 +348,7 @@ public class JResult {
         return this.component("minecraft:tool", new JToolComponent(tool));
     }
 
-    public JResult tooltip_style(ResourceLocation style) {
+    public JResult tooltip_style(Identifier style) {
         return this.component("minecraft:tooltip_style", style);
     }
 

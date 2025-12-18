@@ -1,7 +1,7 @@
 package io.github.thepoultryman.arrp_but_different.json.recipe.component.consumable;
 
 import com.google.gson.annotations.SerializedName;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class JApplyEffects extends JConsumeEffect {
     }
 
     public static class JEffect {
-        private final ResourceLocation id;
+        private final Identifier id;
         private Integer amplifier;
         private Integer duration;
         private Boolean ambient;
@@ -30,7 +30,7 @@ public class JApplyEffects extends JConsumeEffect {
         @SerializedName("hidden_effect")
         private JEffect hiddenEffect;
 
-        public JEffect(ResourceLocation id) {
+        public JEffect(Identifier id) {
             this.id = id;
         }
 

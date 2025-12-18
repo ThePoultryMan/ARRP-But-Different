@@ -21,15 +21,15 @@ import io.github.thepoultryman.arrp_but_different.json.state.JState;
 import io.github.thepoultryman.arrp_but_different.json.state.JVariant;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.critereon.DataComponentMatchers;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.criterion.DataComponentMatchers;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.core.component.DataComponentExactPredicate;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.ItemLore;
@@ -40,22 +40,22 @@ public class ARRPButTestingCommon {
     public static final String MOD_ID = "arrp_but_testing";
 
     public static RuntimeResourcePack beforeUserEvent() {
-        RuntimeResourcePack pack = RuntimeResourcePack.create(ResourceLocation.fromNamespaceAndPath(MOD_ID, "before_user"));
-        pack.addLang(ResourceLocation.fromNamespaceAndPath(MOD_ID, "en_us"),
-                new JLang().addBlockTranslation(ResourceLocation.withDefaultNamespace("torch"), "Torch but it's different but it's not so it's the same")
+        RuntimeResourcePack pack = RuntimeResourcePack.create(Identifier.fromNamespaceAndPath(MOD_ID, "before_user"));
+        pack.addLang(Identifier.fromNamespaceAndPath(MOD_ID, "en_us"),
+                new JLang().addBlockTranslation(Identifier.withDefaultNamespace("torch"), "Torch but it's different but it's not so it's the same")
                         .addItemTranslation(Items.STICK, "It's still a stick")
         );
-        pack.addBlockSate(ResourceLocation.withDefaultNamespace("acacia_door"),
+        pack.addBlockSate(Identifier.withDefaultNamespace("acacia_door"),
                 new JState().add(
                         new JVariant()
                                 .condition("facing", "east")
                                 .condition("half", "lower")
                                 .condition("hinge", "left")
                                 .condition("open", "false")
-                                .model(new JBlockModel(ResourceLocation.withDefaultNamespace("block/spruce_door_bottom_left")))
+                                .model(new JBlockModel(Identifier.withDefaultNamespace("block/spruce_door_bottom_left")))
                 )
         );
-        pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "pumpkin"),
+        pack.addRecipe(Identifier.fromNamespaceAndPath(MOD_ID, "pumpkin"),
                 new JShapedRecipe()
                         .row(0, "PPP")
                         .row(1, "P P")
@@ -65,12 +65,12 @@ public class ARRPButTestingCommon {
                         )
                         .result(
                                 new JResult()
-                                        .id(ResourceLocation.withDefaultNamespace("pumpkin"))
+                                        .id(Identifier.withDefaultNamespace("pumpkin"))
                                         .count(3)
                         )
         );
         pack.addRecipe(
-                ResourceLocation.fromNamespaceAndPath(MOD_ID, "golden_sword"),
+                Identifier.fromNamespaceAndPath(MOD_ID, "golden_sword"),
                 new JShapelessRecipe()
                         .ingredient(
                                 new JIngredient().entry("minecraft:stick")
@@ -82,7 +82,7 @@ public class ARRPButTestingCommon {
                         )
                         .result(
                                 new JResult()
-                                        .id(ResourceLocation.withDefaultNamespace("golden_sword"))
+                                        .id(Identifier.withDefaultNamespace("golden_sword"))
                                         .component("minecraft:damage", 3)
                                         .rarity(Rarity.RARE)
                         )
@@ -90,7 +90,7 @@ public class ARRPButTestingCommon {
         Component burntBreadName = Component.literal("Burnt Bread").setStyle(Style.EMPTY.applyFormat(ChatFormatting.BOLD));
         List<Component> burntBreadLore = List.of(Component.literal("A burnt piece of bread"), Component.literal("Does nothing"));
         pack.addRecipe(
-                ResourceLocation.fromNamespaceAndPath(MOD_ID, "burnt_bread"),
+                Identifier.fromNamespaceAndPath(MOD_ID, "burnt_bread"),
                 new JSmeltingRecipe(SmeltingTypes.BLASTING)
                         .ingredient(
                                 new JIngredient().entry("minecraft:bread")
@@ -98,12 +98,12 @@ public class ARRPButTestingCommon {
                         .cookingTime(30)
                         .result(
                                 new JResult()
-                                        .id(ResourceLocation.withDefaultNamespace("coal"))
+                                        .id(Identifier.withDefaultNamespace("coal"))
                                         .itemName(burntBreadName)
                                         .lore(burntBreadLore.getFirst())
                         )
         );
-        pack.addAdvancement(ResourceLocation.fromNamespaceAndPath(MOD_ID, "root"),
+        pack.addAdvancement(Identifier.fromNamespaceAndPath(MOD_ID, "root"),
                 new JAdvancement()
                         .display(new DisplayInfoBuilder()
                                 .icon(Items.BREAD)
@@ -135,7 +135,7 @@ public class ARRPButTestingCommon {
                                 )
                         )
         );
-        pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_furnace"),
+        pack.addRecipe(Identifier.fromNamespaceAndPath(MOD_ID, "bread_furnace"),
                 new JSmeltingRecipe(SmeltingTypes.SMELTING)
                         .cookingTime(100)
                         .experience(50)
@@ -143,10 +143,10 @@ public class ARRPButTestingCommon {
                                 new JIngredient().entry("minecraft:wheat")
                         )
                         .result(
-                                new JResult().id(ResourceLocation.withDefaultNamespace("bread"))
+                                new JResult().id(Identifier.withDefaultNamespace("bread"))
                         )
         );
-        pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_blast"),
+        pack.addRecipe(Identifier.fromNamespaceAndPath(MOD_ID, "bread_blast"),
                 new JSmeltingRecipe(SmeltingTypes.BLASTING)
                         .cookingTime(80)
                         .experience(500)
@@ -154,10 +154,10 @@ public class ARRPButTestingCommon {
                                 new JIngredient().entry("minecraft:wheat")
                         )
                         .result(
-                                new JResult().id(ResourceLocation.withDefaultNamespace("bread"))
+                                new JResult().id(Identifier.withDefaultNamespace("bread"))
                         )
         );
-        pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_smoker"),
+        pack.addRecipe(Identifier.fromNamespaceAndPath(MOD_ID, "bread_smoker"),
                 new JSmeltingRecipe(SmeltingTypes.SMOKING)
                         .cookingTime(50)
                         .experience(5000)
@@ -165,21 +165,21 @@ public class ARRPButTestingCommon {
                                 new JIngredient().entry("minecraft:wheat")
                         )
                         .result(
-                                new JResult().id(ResourceLocation.withDefaultNamespace("bread"))
+                                new JResult().id(Identifier.withDefaultNamespace("bread"))
                         )
         );
-        pack.addRecipe(ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_campfire"),
+        pack.addRecipe(Identifier.fromNamespaceAndPath(MOD_ID, "bread_campfire"),
                 new JSmeltingRecipe(SmeltingTypes.CAMPFIRE_COOKING)
                         .cookingTime(10)
                         .ingredient(
                                 new JIngredient().entry("minecraft:wheat")
                         )
                         .result(
-                                new JResult().id(ResourceLocation.withDefaultNamespace("bread"))
+                                new JResult().id(Identifier.withDefaultNamespace("bread"))
                         )
         );
         pack.addRecipe(
-                ResourceLocation.fromNamespaceAndPath(MOD_ID, "bread_trims"),
+                Identifier.fromNamespaceAndPath(MOD_ID, "bread_trims"),
                 new JSmithingTrimRecipe()
                         .trimmableArmor()
                         .template(new JIngredient().tag("minecraft:trim_templates"))
@@ -187,7 +187,7 @@ public class ARRPButTestingCommon {
         );
 
         // Custom Model Test
-        pack.addModel(ResourceLocation.fromNamespaceAndPath(MOD_ID, "block/test_model"),
+        pack.addModel(Identifier.fromNamespaceAndPath(MOD_ID, "block/test_model"),
                 new JModel()
                         .element(
                                 new JElement()
@@ -203,11 +203,11 @@ public class ARRPButTestingCommon {
                         )
         );
         // Replace cobblestone block state
-        pack.addBlockSate(ResourceLocation.withDefaultNamespace("cobblestone"),
+        pack.addBlockSate(Identifier.withDefaultNamespace("cobblestone"),
                 new JState()
-                        .add(new JVariant().model(new JBlockModel(ResourceLocation.fromNamespaceAndPath(MOD_ID, "block/test_model"))))
+                        .add(new JVariant().model(new JBlockModel(Identifier.fromNamespaceAndPath(MOD_ID, "block/test_model"))))
         );
-        pack.addTag(ResourceLocation.withDefaultNamespace("block/mineable/pickaxe"), new JTag().add(ResourceLocation.withDefaultNamespace("oak_log")));
+        pack.addTag(Identifier.withDefaultNamespace("block/mineable/pickaxe"), new JTag().add(Identifier.withDefaultNamespace("oak_log")));
 
         return pack;
     }
