@@ -48,3 +48,12 @@ For information on how to use ARRP But Different, refer to the [docs](https://ar
 
 For resource pack creators looking to add support for generated resources, refer to the [resource
 dumping page](https://arrp-but-different.readthedocs.io/en/latest/dumping-resources).
+
+## Special Thanks To:
+
+* [Ueaj Kerman](https://github.com/Ueaj-Kerman) for developing the
+  [original ARRP mod](https://github.com/Ueaj-Kerman/ARRP).
+* [Misode](https://github.com/misode/) & contributors for developing
+  [datapack generators](https://misode.github.io/).
+* The [Minecraft Wiki](https://minecraft.wiki) and its contributors for keeping track of all the
+  various formats used by data and resource packs.
