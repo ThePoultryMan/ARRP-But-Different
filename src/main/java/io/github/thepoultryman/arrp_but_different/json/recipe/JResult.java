@@ -201,7 +201,7 @@ public class JResult {
     }
 
     public JResult entityData(Identifier id) {
-        return this.component("minecraft:entity_data", new JIdIdentifierComponent(id));
+        return this.component("minecraft:entity_data", new JIdComponent(id));
     }
 
     public JResult equippable(Equippable equippableComponent) {

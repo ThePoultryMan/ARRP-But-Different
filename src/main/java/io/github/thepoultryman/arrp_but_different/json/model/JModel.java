@@ -2,8 +2,10 @@ package io.github.thepoultryman.arrp_but_different.json.model;
 
 import com.google.gson.annotations.SerializedName;
 import io.github.thepoultryman.arrp_but_different.mixins.RenderTypeAccessor;
+//? if >= 1.21.11 {
 import net.minecraft.client.renderer.rendertype.RenderType;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
+//? } else <= 1.21.6
+//import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 

@@ -98,7 +98,7 @@ public class RuntimeResourcePackImpl implements RuntimeResourcePack {
             .registerTypeAdapter(JWhen.class, new JWhen.Serializer())
             .registerTypeAdapter(JWritableBookContentComponent.class, new JWritableBookContentComponent.Serializer())
             .registerTypeAdapter(MutableComponent.class, new CodecSerializer<>(ComponentSerialization.CODEC))
-            .registerTypeAdapter(Identifier.class, new IdentifierSerializer())
+            .registerTypeAdapter(Identifier.class, new IdSerializer())
             .registerTypeAdapter(ItemAttributeModifiers.class, new CodecSerializer<>(ItemAttributeModifiers.CODEC))
             .setPrettyPrinting()
             .disableHtmlEscaping()

@@ -7,7 +7,7 @@ import net.minecraft.resources.Identifier;
 
 import java.lang.reflect.Type;
 
-public class IdentifierSerializer implements JsonSerializer<Identifier> {
+public class IdSerializer implements JsonSerializer<Identifier> {
     @Override
     public JsonElement serialize(Identifier resourceLocation, Type type, JsonSerializationContext jsonSerializationContext) {
         return jsonSerializationContext.serialize(resourceLocation.toString());

@@ -4,6 +4,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
+//? if >= 1.21.11 {
 import net.minecraft.world.entity.animal.chicken.ChickenVariant;
 import net.minecraft.world.entity.animal.cow.CowVariant;
 import net.minecraft.world.entity.animal.cow.MushroomCow;
@@ -13,13 +14,28 @@ import net.minecraft.world.entity.animal.feline.CatVariant;
 import net.minecraft.world.entity.animal.fish.Salmon;
 import net.minecraft.world.entity.animal.fish.TropicalFish;
 import net.minecraft.world.entity.animal.fox.Fox;
-import net.minecraft.world.entity.animal.frog.FrogVariant;
 import net.minecraft.world.entity.animal.parrot.Parrot;
 import net.minecraft.world.entity.animal.pig.PigVariant;
 import net.minecraft.world.entity.animal.rabbit.Rabbit;
+import net.minecraft.world.entity.npc.villager.VillagerType;
+//? } else {
+/*import net.minecraft.world.entity.animal.ChickenVariant;
+import net.minecraft.world.entity.animal.CowVariant;
+import net.minecraft.world.entity.animal.MushroomCow;
+import net.minecraft.world.entity.animal.CatVariant;
+import net.minecraft.world.entity.animal.Salmon;
+import net.minecraft.world.entity.animal.TropicalFish;
+import net.minecraft.world.entity.animal.Fox;
+import net.minecraft.world.entity.animal.Parrot;
+import net.minecraft.world.entity.animal.PigVariant;
+import net.minecraft.world.entity.animal.Rabbit;
+import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.entity.animal.horse.Variant;
+import net.minecraft.world.entity.npc.VillagerType;
+*///? }
+import net.minecraft.world.entity.animal.frog.FrogVariant;
 import net.minecraft.world.entity.animal.wolf.WolfSoundVariant;
 import net.minecraft.world.entity.animal.wolf.WolfVariant;
-import net.minecraft.world.entity.npc.villager.VillagerType;
 import net.minecraft.world.item.DyeColor;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,7 +49,7 @@ public record MobVariant(Identifier entity, String variantType, String value) {
     }
 
     public static MobVariant axolotl(Axolotl.Variant variant) {
-        return new MobVariant("axolotl", "variant", variant.getName());
+        return new MobVariant("axolotl", "variant", variant.getSerializedName());
     }
 
     public static MobVariant catCollar(DyeColor color) {
@@ -41,15 +57,21 @@ public record MobVariant(Identifier entity, String variantType, String value) {
     }
 
     public static MobVariant cat(ResourceKey<@NotNull CatVariant> variant) {
-        return new MobVariant("cat", "variant", variant.identifier());
+        //$ location_identifier
+        Identifier id = variant.identifier();
+        return new MobVariant("cat", "variant", id);
     }
 
     public static MobVariant chicken(ResourceKey<@NotNull ChickenVariant> variant) {
-        return new MobVariant("chicken", "variant", variant.identifier());
+        //$ location_identifier
+        Identifier id = variant.identifier();
+        return new MobVariant("chicken", "variant", id);
     }
 
     public static MobVariant cow(ResourceKey<@NotNull CowVariant> variant) {
-        return new MobVariant("cow", "variant", variant.identifier());
+        //$ location_identifier
+        Identifier id = variant.identifier();
+        return new MobVariant("cow", "variant", id);
     }
 
     public static MobVariant fox(Fox.Variant variant) {
@@ -57,7 +79,9 @@ public record MobVariant(Identifier entity, String variantType, String value) {
     }
 
     public static MobVariant frog(ResourceKey<@NotNull FrogVariant> variant) {
-        return new MobVariant("frog", "variant", variant.identifier());
+        //$ location_identifier
+        Identifier id = variant.identifier();
+        return new MobVariant("frog", "variant", id);
     }
 
     public static MobVariant horse(Variant variant) {
@@ -81,7 +105,9 @@ public record MobVariant(Identifier entity, String variantType, String value) {
     }
 
     public static MobVariant pig(ResourceKey<@NotNull PigVariant> variant) {
-        return new MobVariant("pig", "variant", variant.identifier());
+        //$ location_identifier
+        Identifier id = variant.identifier();
+        return new MobVariant("pig", "variant", id);
     }
 
     public static MobVariant rabbit(Rabbit.Variant variant) {
@@ -113,19 +139,25 @@ public record MobVariant(Identifier entity, String variantType, String value) {
     }
 
     public static MobVariant villager(ResourceKey<@NotNull VillagerType> variant) {
-        return new MobVariant("villager", "variant", variant.identifier());
+        //$ location_identifier
+        Identifier id = variant.identifier();
+        return new MobVariant("villager", "variant", id);
     }
 
     public static MobVariant wolfCollar(DyeColor color) {
         return new MobVariant("wolf", "collar", color.getName());
     }
 
-    public static MobVariant wolfSoundVariant(ResourceKey<@NotNull WolfSoundVariant> soundVariant) {
-        return new MobVariant("wolf", "sound_variant", soundVariant.identifier());
+    public static MobVariant wolfSoundVariant(ResourceKey<@NotNull WolfSoundVariant> variant) {
+        //$ location_identifier
+        Identifier id = variant.identifier();
+        return new MobVariant("wolf", "sound_variant", id);
     }
 
     public static MobVariant wolf(ResourceKey<@NotNull WolfVariant> variant) {
-        return new MobVariant("wolf", "variant", variant.identifier());
+        //$ location_identifier
+        Identifier id = variant.identifier();
+        return new MobVariant("wolf", "variant", id);
     }
 
     private static Identifier minecraftLocation(String key) {

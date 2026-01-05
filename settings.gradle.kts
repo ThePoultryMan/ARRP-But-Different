@@ -22,7 +22,7 @@ pluginManagement {
 }
 
 plugins {
-    id("dev.kikugie.stonecutter") version("0.7+")
+    id("dev.kikugie.stonecutter") version("0.8.2")
 }
 
 stonecutter {
@@ -36,7 +36,7 @@ stonecutter {
         }
 
         // Configure your targets here!
-        listOf("1.21.11").forEach {
+        listOf("1.21.6", "1.21.11").forEach {
             mc(it)
         }
 

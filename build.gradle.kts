@@ -1,16 +1,7 @@
 import net.fabricmc.loom.task.RemapJarTask
 
-// force newer version of loom to make it compatible with new minecraft versions
-buildscript {
-    configurations.all {
-        resolutionStrategy {
-            force("fabric-loom:fabric-loom.gradle.plugin:1.13-SNAPSHOT")
-        }
-    }
-}
-
 plugins {
-    id("dev.isxander.modstitch.base") version "0.7.1-unstable"
+    id("dev.isxander.modstitch.base") version "0.8.0"
     id("me.modmuss50.mod-publish-plugin") version("1.1.0")
 }
 
@@ -57,7 +48,7 @@ modstitch {
         modGroup = "io.github.thepoultryman"
         modAuthor = "ThePoultryMan"
 
-        fun <K, V> MapProperty<K, V>.populate(block: MapProperty<K, V>.() -> Unit) {
+        fun <K: Any, V: Any> MapProperty<K, V>.populate(block: MapProperty<K, V>.() -> Unit) {
             block()
         }
 
@@ -65,8 +56,11 @@ modstitch {
             // You can put any other replacement properties/metadata here that
             // modstitch doesn't initially support. Some examples below.
             put("mod_issue_tracker", "https://github.com/ThePoultryMan/ARRP-But-Different")
-            prop("deps.forge_config_api_port") {
-                put("forge_config_api_port_version", it)
+            prop("deps.forge_config_api_port_min") {
+                put("forge_config_api_port_min_version", it)
+            }
+            prop("deps.min_fabric_api_version") {
+                put("fabric_api_min_version", it)
             }
             put("min_minecraft_version", property("deps.minecraft_min") as String)
             put("minecraft_upper_bound", if (property("deps.minecraft")?.equals("latest") == true) {
@@ -95,7 +89,7 @@ modstitch {
     loom {
         // It's not recommended to store the Fabric Loader version in properties.
         // Make sure it's up to date.
-        fabricLoaderVersion = "0.18.2"
+        fabricLoaderVersion = "0.18.4"
 
         // Configure loom like normal in this block.
         configureLoom {}
@@ -122,12 +116,19 @@ modstitch {
 // See https://stonecutter.kikugie.dev/stonecutter/guide/comments#condition-constants
 var constraint: String = name.split("-")[1]
 stonecutter {
-    constants += arrayOf(
-        "fabric" to (constraint == "fabric"),
-        "neoforge" to (constraint == "neoforge"),
-        "forge" to (constraint == "forge"),
-        "vanilla" to (constraint == "vanilla")
-    )
+    constants.match(constraint, "fabric", "neoforge")
+
+    swaps["location_identifier"] = when {
+        eval(current.version, ">=1.21.11") -> "Identifier id = variant.identifier();"
+        else -> "ResourceLocation id = variant.location();"
+    }
+
+    replacements {
+        string {
+            direction = eval(current.version, ">=1.21.11")
+            replace("ResourceLocation", "Identifier")
+        }
+    }
 }
 
 repositories {
@@ -143,7 +144,7 @@ repositories {
 // use the modstitch.createProxyConfigurations(sourceSets["client"]) function.
 dependencies {
     if (modstitch.isLoom) {
-        modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
+        modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api_version")}")
         modstitchModApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${property("deps.forge_config_api_port")}")
     }
 }
