@@ -64,12 +64,12 @@ modstitch {
             }
             put("min_minecraft_version", property("deps.minecraft_min") as String)
             put("minecraft_upper_bound", if (property("deps.minecraft")?.equals("latest") == true) {
-                ""
+                if (modstitch.isLoom) "" else ")"
             } else {
                 if (modstitch.isLoom) {
                     " <=${minecraftVersion.get()}"
                 } else {
-                    minecraftVersion.get()
+                    "${minecraftVersion.get()}]"
                 }
             })
 

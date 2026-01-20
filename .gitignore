@@ -23,4 +23,5 @@ run
 runs
 run-data
 
-repo
+# dev env
+.envrc
